@@ -1,6 +1,6 @@
-pub fn part_01(input: String) -> i32 {
+pub fn part_01(input: String) -> u32 {
     let mut out = 0;
-    let mut count: i32;
+    let mut count: u32;
     let cards = input.lines();
     for card in cards {
         let mut card_numbers = card.split(":").last().unwrap().split("|");
@@ -24,13 +24,13 @@ pub fn part_01(input: String) -> i32 {
                 count += 1;
             }
         }
-        println!("{:?} {:?} {}", winning_numbers, my_numbers, count);
+        //println!("{:?} {:?} {}", winning_numbers, my_numbers, count);
         if count == 1 {
             out += 1;
             continue;
         }
         if count > 1 {
-            out += 2_i32.pow(count as u32 - 1);
+            out += 2_u32.pow(count as u32 - 1);
             continue;
         }
     }

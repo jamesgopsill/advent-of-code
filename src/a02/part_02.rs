@@ -1,51 +1,46 @@
 use regex::Regex;
 
-pub fn part_01(input: String) -> u32 {
+struct Game {
+    r: u32,
+    g: u32,
+    b: u32,
+}
+
+pub fn part_02(input: String) -> u32 {
     let mut out: u32 = 0;
+
     let lines = input.lines();
-    let gid_reg = Regex::new(r"Game\s(\d+)").unwrap();
+    //let gid_reg = Regex::new(r"Game\s(\d+)").unwrap();
     let balls_reg = Regex::new(r"(\d+)\s([brg])").unwrap();
+
     for line in lines {
-        dbg!("{}", line);
-        // Game Id
-        let game = gid_reg.captures(line).unwrap();
-        let gid = game[1].parse::<u32>().unwrap();
-        dbg!("ID: {}", gid);
-        // Ball Selection
-        let mut valid = true;
+        let mut game = Game { r: 0, g: 0, b: 0 };
         let caps = balls_reg.captures_iter(line);
         for cap in caps {
-            dbg!("{:?}", &cap);
             let number = cap[1].parse::<u32>().unwrap();
             let colour = &cap[2];
             match colour {
                 "r" => {
-                    if number > 12 {
-                        valid = false
+                    if number > game.r {
+                        game.r = number;
                     }
                 }
                 "g" => {
-                    if number > 13 {
-                        valid = false
+                    if number > game.g {
+                        game.g = number;
                     }
                 }
                 "b" => {
-                    if number > 14 {
-                        valid = false;
+                    if number > game.b {
+                        game.b = number;
                     }
                 }
                 _ => {
                     println!("Should not get here!")
                 }
             }
-            if !valid {
-                break;
-            };
         }
-        dbg!("{} {}", gid, valid);
-        if valid {
-            out += gid;
-        }
+        out += game.r * game.g * game.b;
     }
     out
 }
@@ -56,10 +51,10 @@ mod tests {
     use std::fs;
 
     #[test]
-    fn test_part_01() {
+    fn test_part_02() {
         let input = fs::read_to_string("src/a02/input_01.txt")
             .expect("Should have been able to read the file");
-        let result = part_01(input);
-        assert_eq!(result, 8);
+        let result = part_02(input);
+        assert_eq!(result, 2286);
     }
 }
