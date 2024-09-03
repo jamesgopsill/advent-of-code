@@ -2,17 +2,17 @@ use regex::Regex;
 
 #[derive(Clone, Debug)]
 struct MapRange {
-    from_lower: i32,
-    from_upper: i32,
-    to_lower: i32,
+    from_lower: u64,
+    from_upper: u64,
+    to_lower: u64,
 }
 
-pub fn part_01(input: String) -> i32 {
+pub fn part_01(input: String) -> u64 {
     let lines: Vec<&str> = input.lines().collect();
     let numbers_re = Regex::new(r"\d+").unwrap();
-    let seeds: Vec<i32> = numbers_re
+    let seeds: Vec<u64> = numbers_re
         .find_iter(lines[0])
-        .map(|f| f.as_str().parse::<i32>().unwrap())
+        .map(|f| f.as_str().parse::<u64>().unwrap())
         .collect();
     println!("Seeds: {:?}", seeds);
 
@@ -27,9 +27,9 @@ pub fn part_01(input: String) -> i32 {
             maps.push(map.clone());
             continue;
         }
-        let range: Vec<i32> = numbers_re
+        let range: Vec<u64> = numbers_re
             .find_iter(line)
-            .map(|f| f.as_str().parse::<i32>().unwrap())
+            .map(|f| f.as_str().parse::<u64>().unwrap())
             .collect();
         println!("{:?}", line);
         println!("{:?}", range);
@@ -44,7 +44,7 @@ pub fn part_01(input: String) -> i32 {
     maps.push(map.clone());
 
     //println!("{:?}", maps);
-    let mut loc: i32 = 999_999;
+    let mut loc: u64 = 999_999_999;
     for seed in seeds {
         let mut location = seed.clone();
         for map in &maps {
