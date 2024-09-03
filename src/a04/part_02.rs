@@ -38,7 +38,7 @@ pub fn part_02(input: String) -> u32 {
     while current_pile.len() > 0 {
         for card in &current_pile {
             count += 1;
-            let new_cards = card_map[*card].clone();
+            let new_cards = &card_map[*card];
             new_pile.extend(new_cards);
         }
         current_pile = new_pile.clone();
