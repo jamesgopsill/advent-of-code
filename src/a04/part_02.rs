@@ -1,3 +1,5 @@
+use std::mem::swap;
+
 pub fn part_02(input: String) -> u32 {
     let mut card_map: Vec<Vec<usize>> = vec![];
 
@@ -41,7 +43,7 @@ pub fn part_02(input: String) -> u32 {
             let new_cards = &card_map[*card];
             new_pile.extend(new_cards);
         }
-        current_pile = new_pile.clone();
+        swap(&mut current_pile, &mut new_pile);
         new_pile.clear();
     }
 
