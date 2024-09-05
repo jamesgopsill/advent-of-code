@@ -6,14 +6,16 @@ struct Game {
     b: u32,
 }
 
-pub fn part_02(input: String) -> u32 {
+pub fn part_02(input: String, debug: bool) -> u32 {
     let mut out: u32 = 0;
 
     let lines = input.lines();
-    //let gid_reg = Regex::new(r"Game\s(\d+)").unwrap();
     let balls_reg = Regex::new(r"(\d+)\s([brg])").unwrap();
 
     for line in lines {
+        if debug {
+            dbg!(line);
+        }
         let mut game = Game { r: 0, g: 0, b: 0 };
         let caps = balls_reg.captures_iter(line);
         for cap in caps {
@@ -54,7 +56,7 @@ mod tests {
     fn test_part_02() {
         let input = fs::read_to_string("src/a02/input_01.txt")
             .expect("Should have been able to read the file");
-        let result = part_02(input);
+        let result = part_02(input, true);
         assert_eq!(result, 2286);
     }
 }

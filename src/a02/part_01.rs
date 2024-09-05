@@ -1,21 +1,28 @@
 use regex::Regex;
 
-pub fn part_01(input: String) -> u32 {
+pub fn part_01(input: String, debug: bool) -> u32 {
     let mut out: u32 = 0;
     let lines = input.lines();
     let gid_reg = Regex::new(r"Game\s(\d+)").unwrap();
     let balls_reg = Regex::new(r"(\d+)\s([brg])").unwrap();
     for line in lines {
-        dbg!("{}", line);
+        if debug {
+            println!("---");
+            dbg!(line);
+        }
         // Game Id
         let game = gid_reg.captures(line).unwrap();
         let gid = game[1].parse::<u32>().unwrap();
-        dbg!("ID: {}", gid);
+        if debug {
+            dbg!(gid);
+        }
         // Ball Selection
         let mut valid = true;
         let caps = balls_reg.captures_iter(line);
         for cap in caps {
-            dbg!("{:?}", &cap);
+            if debug {
+                dbg!(&cap);
+            }
             let number = cap[1].parse::<u32>().unwrap();
             let colour = &cap[2];
             match colour {
@@ -42,7 +49,9 @@ pub fn part_01(input: String) -> u32 {
                 break;
             };
         }
-        dbg!("{} {}", gid, valid);
+        if debug {
+            dbg!(gid, valid);
+        }
         if valid {
             out += gid;
         }
@@ -59,7 +68,7 @@ mod tests {
     fn test_part_01() {
         let input = fs::read_to_string("src/a02/input_01.txt")
             .expect("Should have been able to read the file");
-        let result = part_01(input);
+        let result = part_01(input, true);
         assert_eq!(result, 8);
     }
 }

@@ -1,4 +1,4 @@
-pub fn part_01(input: String) -> u32 {
+pub fn part_01(input: String, debug: bool) -> u32 {
     let mut out = 0;
     let mut count: u32;
     let cards = input.lines();
@@ -24,7 +24,10 @@ pub fn part_01(input: String) -> u32 {
                 count += 1;
             }
         }
-        //println!("{:?} {:?} {}", winning_numbers, my_numbers, count);
+        if debug {
+            println!("---");
+            dbg!(winning_numbers, my_numbers, count);
+        }
         if count == 1 {
             out += 1;
             continue;
@@ -46,7 +49,7 @@ mod tests {
     fn test_part_01() {
         let input = fs::read_to_string("src/a04/input_01.txt")
             .expect("Should have been able to read the file");
-        let result = part_01(input);
+        let result = part_01(input, false);
         assert_eq!(result, 13);
     }
 }

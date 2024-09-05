@@ -1,6 +1,6 @@
 use std::mem::swap;
 
-pub fn part_02(input: String) -> u32 {
+pub fn part_02(input: String, debug: bool) -> u32 {
     let mut card_map: Vec<Vec<usize>> = vec![];
 
     let mut current_pile: Vec<usize> = vec![];
@@ -30,7 +30,10 @@ pub fn part_02(input: String) -> u32 {
                 winning_count += 1;
             }
         }
-        //println!("{:?} {:?} {}", winning_numbers, my_numbers, winning_count);
+        if debug {
+            println!("---");
+            dbg!(winning_numbers, my_numbers, winning_count);
+        }
         current_pile.push(i);
         let map: Vec<usize> = (i + 1..i + winning_count as usize + 1).collect();
         card_map.push(map);
@@ -59,7 +62,7 @@ mod tests {
     fn test_part_02() {
         let input = fs::read_to_string("src/a04/input_01.txt")
             .expect("Should have been able to read the file");
-        let result = part_02(input);
+        let result = part_02(input, true);
         assert_eq!(result, 30);
     }
 }
