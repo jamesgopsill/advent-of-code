@@ -8,6 +8,7 @@ pub mod a04;
 pub mod a05;
 pub mod a06;
 pub mod a07;
+pub mod a08;
 pub mod template;
 
 pub fn run_advent(puzzle_path: &str, fcn: fn(s: String, d: bool) -> u32, debug: bool) {

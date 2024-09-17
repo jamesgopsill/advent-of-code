@@ -6,7 +6,7 @@ const CARD_RANKS: [char; 13] = [
 
 #[derive(Debug)]
 struct Bet {
-    // hand: String,
+    hand: String,
     cards: Vec<usize>,
     bet: u32,
     hand_type: u32,
@@ -53,7 +53,7 @@ impl Bet {
             }
             if value == 2 {
                 twos += 1;
-                break;
+                continue;
             }
         }
         if threes == 1 && twos == 1 {
@@ -67,7 +67,7 @@ impl Bet {
         }
 
         Self {
-            // hand,
+            hand,
             cards,
             bet,
             hand_type,
@@ -83,7 +83,10 @@ pub fn part_01(input: String) -> u32 {
         let bet = Bet::new(line);
         bets.push(bet);
     }
-    println!("{:?}", bets);
+    println!("Unsorted");
+    for bet in &bets {
+        println!("{:?}", bet);
+    }
 
     // Sort (in ascending order) by cards and their appearance
     bets.sort_by(|a, b| a.cards[4].cmp(&b.cards[4]));
@@ -95,7 +98,10 @@ pub fn part_01(input: String) -> u32 {
     // Sort by the hand type.
     bets.sort_by(|a, b| a.hand_type.cmp(&b.hand_type));
 
-    println!("{:?}", bets);
+    println!("Sorted");
+    for bet in &bets {
+        println!("{:?}", bet);
+    }
 
     for (i, bet) in bets.iter().enumerate() {
         let winnings = (i + 1) as u32 * bet.bet;

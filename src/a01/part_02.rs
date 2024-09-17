@@ -48,7 +48,7 @@ mod tests {
     fn test_part_02() {
         let input = fs::read_to_string("src/a01/input_02.txt")
             .expect("Should have been able to read the file");
-        let result = part_02(input);
+        let result = part_02(input, true);
         assert_eq!(result, 281);
     }
 }
