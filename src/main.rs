@@ -86,6 +86,10 @@ fn main() {
 			let out = tasks::t08x02::invoke(input, args.debug);
 			println!("{out}");
 		}
+		"09x01" => {
+			let out = tasks::t09x01::invoke(input, args.debug);
+			println!("{out}");
+		}
 		_ => {
 			println!("Task not recognised")
 		}
