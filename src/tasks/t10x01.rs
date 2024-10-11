@@ -24,7 +24,7 @@ pub fn invoke(
 
 	while traveller.step() {
 		if debug {
-			println!("{}", traveller.current_tile);
+			println!("{:?}", traveller.current_tile);
 		}
 	}
 
