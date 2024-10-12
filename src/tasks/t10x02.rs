@@ -352,8 +352,7 @@ impl Elf {
 		//let n_rows = self.map.len();
 		//let n_cols = self.map[0].len();
 
-		let mut flag = false;
-		//let mut entered = false;
+		let mut flag: bool;
 
 		// These chars denote whether we are passing into
 		// or out of the enclosed pipe area as
