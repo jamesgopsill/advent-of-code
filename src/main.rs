@@ -94,6 +94,10 @@ fn main() {
 			let out = tasks::t10x01::invoke(input, args.debug);
 			println!("{out}");
 		}
+		"10x02" => {
+			let out = tasks::t10x02::invoke(input, args.debug);
+			println!("{out}");
+		}
 		_ => {
 			println!("Task not recognised")
 		}
