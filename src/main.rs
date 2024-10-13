@@ -78,6 +78,10 @@ fn main() {
 			let out = tasks::t07x01::invoke(input);
 			println!("{out}");
 		}
+		"07x02" => {
+			let out = tasks::t07x02::invoke(input);
+			println!("{out}");
+		}
 		"08x01" => {
 			let out = tasks::t08x01::invoke(input, args.debug);
 			println!("{out}");
