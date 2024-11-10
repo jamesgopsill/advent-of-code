@@ -46,11 +46,11 @@ pub fn invoke(
 mod tests {
 	use std::fs;
 
-	use crate::tasks::t01x02::invoke;
+	use super::invoke;
 
 	#[test]
 	fn test() {
-		let input = fs::read_to_string("test_data/01x02.txt")
+		let input = fs::read_to_string("test_data/2023/01x02.txt")
 			.expect("Should have been able to read the file");
 		let result = invoke(input, true);
 		assert_eq!(result, 281);

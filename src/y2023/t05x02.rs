@@ -9,13 +9,9 @@ struct MapRange {
 
 pub fn invoke(input: String) -> u64 {
 	let lines: Vec<&str> = input.lines().collect();
-	let numbers_re = Regex::new(r"\d+").unwrap();
-	let seeds: Vec<u64> = numbers_re
-		.find_iter(lines[0])
-		.map(|f| f.as_str().parse::<u64>().unwrap())
-		.collect();
-	println!("Seeds: {:?}", seeds);
 
+	// Create the maps
+	let numbers_re = Regex::new(r"\d+").unwrap();
 	let mut maps: Vec<Vec<MapRange>> = vec![];
 	let mut map: Vec<MapRange> = vec![];
 	for line in lines[2..].into_iter() {
@@ -43,21 +39,27 @@ pub fn invoke(input: String) -> u64 {
 	}
 	maps.push(map.clone());
 
-	//println!("{:?}", maps);
 	let mut loc: u64 = 999_999_999;
-	for seed in seeds {
-		let mut location = seed.clone();
-		for map in &maps {
-			for rng in map {
-				if rng.from_lower <= location && location <= rng.from_upper {
-					location = rng.to_lower + (location - rng.from_lower);
-					break;
+	let seed_ranges_re = Regex::new(r"(\d+)\s(\d+)").unwrap();
+	let captures = seed_ranges_re.captures_iter(lines[0]);
+	for cap in captures {
+		let initial_seed = cap[1].parse::<u64>().unwrap();
+		let range = cap[2].parse::<u64>().unwrap();
+		dbg!(initial_seed, range);
+		for seed in initial_seed..initial_seed + range {
+			let mut location = seed.clone();
+			for map in &maps {
+				for rng in map {
+					if rng.from_lower <= location && location <= rng.from_upper {
+						location = rng.to_lower + (location - rng.from_lower);
+						break;
+					}
 				}
 			}
-		}
-		println!("From: {}, To: {}", seed, location);
-		if location < loc {
-			loc = location
+			// println!("From: {}, To: {}", seed, location);
+			if location < loc {
+				loc = location
+			}
 		}
 	}
 
@@ -71,9 +73,9 @@ mod tests {
 
 	#[test]
 	fn test() {
-		let input = fs::read_to_string("test_data/05x01.txt")
+		let input = fs::read_to_string("test_data/2023/05x01.txt")
 			.expect("Should have been able to read the file");
 		let result = invoke(input);
-		assert_eq!(result, 35);
+		assert_eq!(result, 46);
 	}
 }

@@ -134,7 +134,7 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let input = fs::read_to_string("test_data/11x01.txt")
+		let input = fs::read_to_string("test_data/2023/11x01.txt")
 			.expect("Should have been able to read the file");
 		let result = invoke(input, 10, true);
 		assert_eq!(result, 1030);
@@ -142,7 +142,7 @@ mod tests {
 
 	#[test]
 	fn test_b() {
-		let input = fs::read_to_string("test_data/11x01.txt")
+		let input = fs::read_to_string("test_data/2023/11x01.txt")
 			.expect("Should have been able to read the file");
 		let result = invoke(input, 100, true);
 		assert_eq!(result, 8410);

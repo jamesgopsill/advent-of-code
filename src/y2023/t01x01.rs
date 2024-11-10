@@ -19,13 +19,13 @@ pub fn invoke(
 
 #[cfg(test)]
 mod tests {
-	use std::fs;
+	use std::{env::current_dir, fs};
 
-	use crate::tasks::t01x01::invoke;
+	use super::invoke;
 
 	#[test]
 	fn test() {
-		let input = fs::read_to_string("test_data/01x01.txt")
+		let input = fs::read_to_string("test_data/2023/01x01.txt")
 			.expect("Should have been able to read the file");
 		let result = invoke(input, true);
 		assert_eq!(result, 142);
