@@ -1,6 +1,6 @@
 pub fn invoke(
 	input: String,
-	debug: bool,
+	_debug: bool,
 ) -> u32 {
 	let lines: Vec<&str> = input.lines().collect();
 	let mut arrangements = 0;

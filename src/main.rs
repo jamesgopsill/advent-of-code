@@ -2,6 +2,7 @@ use std::{fs, path::PathBuf, process};
 
 use clap::Parser;
 
+mod y2015;
 mod y2023;
 
 #[derive(Parser, Debug)]
@@ -43,6 +44,9 @@ fn main() {
 	let task = format!("{:0>2}x{:0>2}", args.day, args.part);
 
 	match args.year {
+		2015 => {
+			y2015::invoke_task(task, puzzle_input, args.debug);
+		}
 		2023 => {
 			y2023::invoke_task(task, puzzle_input, args.debug);
 		}

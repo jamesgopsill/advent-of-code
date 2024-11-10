@@ -6,8 +6,8 @@ const CARD_RANKS: [char; 13] = [
 
 #[derive(Debug)]
 struct Bet {
-	hand: String,
-	modified_hand: String,
+	_hand: String,
+	_modified_hand: String,
 	cards: Vec<usize>,
 	bet: u32,
 	hand_type: u32,
@@ -90,8 +90,8 @@ impl Bet {
 		}
 
 		Self {
-			hand,
-			modified_hand,
+			_hand: hand,
+			_modified_hand: modified_hand,
 			cards,
 			bet,
 			hand_type,

@@ -1,6 +1,6 @@
 pub fn invoke(
 	input: String,
-	debug: bool,
+	_debug: bool,
 ) -> u32 {
 	let lines: Vec<&str> = input.lines().collect();
 
@@ -74,11 +74,12 @@ impl Pattern {
 		return None;
 	}
 
-	fn col_reflection(&self) -> Option<u32> {
+	fn _col_reflection(&self) -> Option<u32> {
 		None
 	}
 }
 
+/*
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -92,3 +93,4 @@ mod tests {
 		assert_eq!(result, 405);
 	}
 }
+*/

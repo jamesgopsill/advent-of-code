@@ -19,7 +19,7 @@ pub fn invoke(
 
 #[cfg(test)]
 mod tests {
-	use std::{env::current_dir, fs};
+	use std::fs;
 
 	use super::invoke;
 
