@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn convert_to_u32(value: &str) -> u32 {
+fn convert_to_u32(value: &str) -> u32 {
 	match value {
 		"nine" => return 9,
 		"eight" => return 8,
