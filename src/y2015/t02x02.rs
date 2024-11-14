@@ -26,7 +26,7 @@ impl Present {
 		let perimeters: [u32; 3] = [
 			2 * length + 2 * width,
 			2 * width + 2 * height,
-			2 * length * 2 * height,
+			2 * length + 2 * height,
 		];
 		let smallest = *perimeters.iter().min().unwrap();
 		Self {

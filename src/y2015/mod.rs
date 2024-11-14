@@ -10,6 +10,8 @@ mod t05x01;
 mod t05x02;
 mod t06x01;
 mod t06x02;
+mod t07x01;
+mod t07x02;
 
 pub fn invoke_task(
 	task: String,
@@ -63,6 +65,14 @@ pub fn invoke_task(
 		}
 		"06x02" => {
 			let out = t06x02::invoke(puzzle_input, debug);
+			println!("{out}");
+		}
+		"07x01" => {
+			let out = t07x01::invoke(puzzle_input, debug);
+			println!("{out}");
+		}
+		"07x02" => {
+			let out = t07x02::invoke(puzzle_input, debug);
 			println!("{out}");
 		}
 		_ => {
