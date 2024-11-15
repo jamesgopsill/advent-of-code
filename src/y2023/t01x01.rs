@@ -1,7 +1,4 @@
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut sum: u32 = 0;
 	let lines = input.lines();
 	for line in lines {
@@ -9,9 +6,9 @@ pub fn invoke(
 		let first = digits.first().unwrap();
 		let last = digits.last().unwrap();
 		let number = format!("{}{}", first, last).parse::<u32>().unwrap();
-		if debug {
-			dbg!(line, number);
-		}
+
+		dbg!(line, number);
+
 		sum += number;
 	}
 	sum
@@ -27,7 +24,7 @@ mod tests {
 	fn test() {
 		let input = fs::read_to_string("test_data/2023/01x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 142);
 	}
 }

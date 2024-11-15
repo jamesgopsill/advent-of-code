@@ -1,9 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut nice_count = 0;
 
 	let pairs = generate_pairs();

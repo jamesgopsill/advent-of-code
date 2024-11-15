@@ -1,9 +1,6 @@
 use std::mem::swap;
 
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut card_map: Vec<Vec<usize>> = vec![];
 
 	let mut current_pile: Vec<usize> = vec![];
@@ -33,10 +30,10 @@ pub fn invoke(
 				winning_count += 1;
 			}
 		}
-		if debug {
-			println!("---");
-			dbg!(winning_numbers, my_numbers, winning_count);
-		}
+
+		// println!("---");
+		// dbg!(winning_numbers, my_numbers, winning_count);
+
 		current_pile.push(i);
 		let map: Vec<usize> = (i + 1..i + winning_count as usize + 1).collect();
 		card_map.push(map);
@@ -65,7 +62,7 @@ mod tests {
 	fn test() {
 		let input = fs::read_to_string("test_data/2023/04x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 30);
 	}
 }

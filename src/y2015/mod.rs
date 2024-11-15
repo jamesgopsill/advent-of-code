@@ -16,83 +16,91 @@ mod t08x01;
 mod t08x02;
 mod t09x01;
 mod t09x02;
+mod t10x01;
 
 pub fn invoke_task(
 	task: String,
 	puzzle_input: String,
-	debug: bool,
 ) {
 	match task.as_str() {
 		"01x01" => {
-			let out = t01x01::invoke(puzzle_input, debug);
+			let out = t01x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"01x02" => {
-			let out = t01x02::invoke(puzzle_input, debug);
+			let out = t01x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"02x01" => {
-			let out = t02x01::invoke(puzzle_input, debug);
+			let out = t02x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"02x02" => {
-			let out = t02x02::invoke(puzzle_input, debug);
+			let out = t02x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"03x01" => {
-			let out = t03x01::invoke(puzzle_input, debug);
+			let out = t03x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"03x02" => {
-			let out = t03x02::invoke(puzzle_input, debug);
+			let out = t03x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"04x01" => {
-			let out = t04x01::invoke(puzzle_input, debug);
+			let out = t04x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"04x02" => {
-			let out = t04x02::invoke(puzzle_input, debug);
+			let out = t04x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"05x01" => {
-			let out = t05x01::invoke(puzzle_input, debug);
+			let out = t05x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"05x02" => {
-			let out = t05x02::invoke(puzzle_input, debug);
+			let out = t05x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"06x01" => {
-			let out = t06x01::invoke(puzzle_input, debug);
+			let out = t06x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"06x02" => {
-			let out = t06x02::invoke(puzzle_input, debug);
+			let out = t06x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"07x01" => {
-			let out = t07x01::invoke(puzzle_input, debug);
+			let out = t07x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"07x02" => {
-			let out = t07x02::invoke(puzzle_input, debug);
+			let out = t07x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"08x01" => {
-			let out = t08x01::invoke(puzzle_input, debug);
+			let out = t08x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"08x02" => {
-			let out = t08x02::invoke(puzzle_input, debug);
+			let out = t08x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"09x01" => {
-			let out = t09x01::invoke(puzzle_input, debug);
+			let out = t09x01::invoke(puzzle_input);
 			println!("{out}");
 		}
 		"09x02" => {
-			let out = t09x02::invoke(puzzle_input, debug);
+			let out = t09x02::invoke(puzzle_input);
+			println!("{out}");
+		}
+		"10x01" => {
+			let out = t10x01::invoke(puzzle_input, 40);
+			println!("{out}");
+		}
+		"10x02" => {
+			let out = t10x01::invoke(puzzle_input, 50);
 			println!("{out}");
 		}
 		_ => {

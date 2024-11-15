@@ -1,9 +1,6 @@
 use std::collections::HashSet;
 
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> usize {
+pub fn invoke(input: String) -> usize {
 	let mut locations_visited: HashSet<[i32; 2]> = HashSet::new();
 	let mut location: [i32; 2] = [0, 0];
 	locations_visited.insert(location.clone());
@@ -28,19 +25,19 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke(">".to_string(), true);
+		let result = invoke(">".to_string());
 		assert_eq!(result, 2);
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("^>v<".to_string(), true);
+		let result = invoke("^>v<".to_string());
 		assert_eq!(result, 4);
 	}
 
 	#[test]
 	fn test_c() {
-		let result = invoke("^v^v^v^v^v".to_string(), true);
+		let result = invoke("^v^v^v^v^v".to_string());
 		assert_eq!(result, 2);
 	}
 }

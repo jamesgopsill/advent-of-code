@@ -1,7 +1,4 @@
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> i32 {
+pub fn invoke(input: String) -> i32 {
 	let mut floor: i32 = 0;
 	for c in input.chars() {
 		match c {
@@ -19,19 +16,19 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("(())".to_string(), true);
+		let result = invoke("(())".to_string());
 		assert_eq!(result, 0);
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("()()".to_string(), true);
+		let result = invoke("()()".to_string());
 		assert_eq!(result, 0);
 	}
 
 	#[test]
 	fn test_c() {
-		let result = invoke("(((".to_string(), true);
+		let result = invoke("(((".to_string());
 		assert_eq!(result, 3);
 	}
 }

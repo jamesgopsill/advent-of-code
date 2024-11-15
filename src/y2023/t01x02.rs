@@ -15,10 +15,7 @@ fn convert_to_u32(value: &str) -> u32 {
 	}
 }
 
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut sum: u32 = 0;
 	let lines = input.lines();
 	let fn_re = Regex::new(r"[0-9]|one|two|three|four|five|six|seven|eight|nine").unwrap();
@@ -26,17 +23,13 @@ pub fn invoke(
 	for line in lines {
 		let first = fn_re.find(&line).unwrap().as_str();
 		let last = &ln_re.captures(&line).unwrap()[1];
-		if debug {
-			dbg!(first, last);
-		}
+		// dbg!(first, last);
 
 		let first = convert_to_u32(first);
 		let last = convert_to_u32(last);
 
 		let number = format!("{}{}", first, last).parse::<u32>().unwrap();
-		if debug {
-			dbg!(line, number);
-		}
+		// dbg!(line, number);
 		sum += number;
 	}
 	sum
@@ -52,7 +45,7 @@ mod tests {
 	fn test() {
 		let input = fs::read_to_string("test_data/2023/01x02.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 281);
 	}
 }

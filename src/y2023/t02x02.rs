@@ -6,19 +6,14 @@ struct Game {
 	b: u32,
 }
 
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut out: u32 = 0;
 
 	let lines = input.lines();
 	let balls_reg = Regex::new(r"(\d+)\s([brg])").unwrap();
 
 	for line in lines {
-		if debug {
-			dbg!(line);
-		}
+		//	dbg!(line);
 		let mut game = Game { r: 0, g: 0, b: 0 };
 		let caps = balls_reg.captures_iter(line);
 		for cap in caps {
@@ -59,7 +54,7 @@ mod tests {
 	fn test() {
 		let input = fs::read_to_string("test_data/2023/02x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 2286);
 	}
 }

@@ -1,7 +1,4 @@
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut wrapping_paper = 0;
 	let dimensions: Vec<&str> = input.lines().collect();
 	for d in dimensions {
@@ -52,13 +49,13 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("2x3x4".to_string(), true);
+		let result = invoke("2x3x4".to_string());
 		assert_eq!(result, 58);
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("1x1x10".to_string(), true);
+		let result = invoke("1x1x10".to_string());
 		assert_eq!(result, 43);
 	}
 }

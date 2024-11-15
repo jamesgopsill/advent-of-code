@@ -1,9 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut encoded_total: u32 = 0;
 	let mut original_total: u32 = 0;
 	let backslash = Regex::new(r"\\").unwrap();
@@ -41,7 +38,6 @@ mod tests {
 \"\\x27\"
 "
 			.to_string(),
-			true,
 		);
 		assert_eq!(result, 19);
 	}

@@ -2,15 +2,10 @@ use std::collections::HashMap;
 
 use regex::Regex;
 
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut lines = input.lines();
 	let instructions = lines.next().unwrap();
-	if debug {
-		dbg!(instructions);
-	}
+	// dbg!(instructions);
 	lines.next().unwrap();
 
 	let re = Regex::new(r"\w+").unwrap();
@@ -58,7 +53,7 @@ mod tests {
 	fn test_a() {
 		let input = fs::read_to_string("test_data/2023/08x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 2);
 	}
 
@@ -66,7 +61,7 @@ mod tests {
 	fn test_b() {
 		let input = fs::read_to_string("test_data/2023/08x02.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 6);
 	}
 }

@@ -1,7 +1,4 @@
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> usize {
+pub fn invoke(input: String) -> usize {
 	let mut floor: i32 = 0;
 	for (i, c) in input.chars().enumerate() {
 		match c {
@@ -22,13 +19,13 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke(")".to_string(), true);
+		let result = invoke(")".to_string());
 		assert_eq!(result, 1);
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("()())".to_string(), true);
+		let result = invoke("()())".to_string());
 		assert_eq!(result, 5);
 	}
 }

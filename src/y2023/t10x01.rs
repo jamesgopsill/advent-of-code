@@ -1,9 +1,6 @@
 use core::panic;
 
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let lines: Vec<&str> = input.lines().map(|v| v).collect();
 	let mut map: Vec<Vec<char>> = vec![];
 
@@ -18,14 +15,11 @@ pub fn invoke(
 
 	let mut traveller = Traveller::new(map);
 	traveller.find_start();
-	if debug {
-		println!("{:?}", traveller.current_tile);
-	}
+
+	println!("{:?}", traveller.current_tile);
 
 	while traveller.step() {
-		if debug {
-			println!("{:?}", traveller.current_tile);
-		}
+		println!("{:?}", traveller.current_tile);
 	}
 
 	let distance: u32 = traveller.past_tiles.len() as u32 + 1;
@@ -273,7 +267,7 @@ mod tests {
 	fn test_a() {
 		let input = fs::read_to_string("test_data/2023/10x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 4);
 	}
 
@@ -281,7 +275,7 @@ mod tests {
 	fn test_b() {
 		let input = fs::read_to_string("test_data/2023/10x02.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 8);
 	}
 }

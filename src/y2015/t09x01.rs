@@ -6,10 +6,7 @@ type Location = String;
 type Distance = u32;
 type RouteMap = HashMap<Location, HashMap<Location, Distance>>;
 
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let re = Regex::new(r"(\w+)\sto\s(\w+)\s=\s(\d+)").unwrap();
 	let mut route_map: RouteMap = HashMap::new();
 	// Create the route map
@@ -109,7 +106,6 @@ London to Belfast = 518
 Dublin to Belfast = 141
 "
 			.to_string(),
-			true,
 		);
 		assert_eq!(result, 605);
 	}

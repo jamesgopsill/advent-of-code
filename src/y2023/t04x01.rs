@@ -1,7 +1,4 @@
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut out = 0;
 	let mut count: u32;
 	let cards = input.lines();
@@ -27,10 +24,10 @@ pub fn invoke(
 				count += 1;
 			}
 		}
-		if debug {
-			println!("---");
-			dbg!(winning_numbers, my_numbers, count);
-		}
+
+		// println!("---");
+		// dbg!(winning_numbers, my_numbers, count);
+
 		if count == 1 {
 			out += 1;
 			continue;
@@ -52,7 +49,7 @@ mod tests {
 	fn test() {
 		let input = fs::read_to_string("test_data/2023/04x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, false);
+		let result = invoke(input);
 		assert_eq!(result, 13);
 	}
 }

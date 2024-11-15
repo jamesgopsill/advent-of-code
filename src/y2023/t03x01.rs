@@ -1,27 +1,18 @@
 use regex::Regex;
 
-pub fn invoke(
-	mut schematic: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(mut schematic: String) -> u32 {
 	let mut sum: i32 = 0;
 	let row_length = schematic.find("\n").unwrap() as i32;
-	if debug {
-		dbg!(row_length);
-	}
+	// dbg!(row_length);
 	schematic = schematic.replace("\n", "");
-	if debug {
-		dbg!(&schematic);
-	}
+	//dbg!(&schematic);
 	// Get the symbol positions.
 	let symbols_re = Regex::new(r"[^\d.]").unwrap();
 	let symbol_indices: Vec<i32> = symbols_re
 		.find_iter(&schematic)
 		.map(|f| f.start() as i32)
 		.collect();
-	if debug {
-		dbg!(&symbol_indices);
-	}
+	//dbg!(&symbol_indices);
 	// Identify the numbers and see if they are
 	// adjacent to a symbol
 	let numbers_re = Regex::new(r"\d+").unwrap();
@@ -29,14 +20,10 @@ pub fn invoke(
 	let mut neighbours: Vec<i32> = vec![];
 	let mut remainder: i32;
 	for number in numbers {
-		if debug {
-			println!("---");
-		}
+		//	println!("---");
 		neighbours.clear();
 		let num = number.as_str().parse::<i32>().unwrap();
-		if debug {
-			dbg!(num);
-		}
+		// dbg!(num);
 		let start_idx = number.start() as i32;
 		remainder = start_idx % row_length;
 		if remainder > 0 {
@@ -45,9 +32,7 @@ pub fn invoke(
 			neighbours.push(start_idx + row_length - 1);
 		}
 		let end_idx = number.end() as i32 - 1;
-		if debug {
-			dbg!(start_idx, end_idx);
-		}
+		// dbg!(start_idx, end_idx);
 		remainder = end_idx % row_length;
 		if remainder != 0 {
 			neighbours.push(end_idx + 1);
@@ -58,14 +43,10 @@ pub fn invoke(
 			neighbours.push(idx - row_length);
 			neighbours.push(idx + row_length);
 		}
-		if debug {
-			dbg!(&neighbours);
-		}
+		// dbg!(&neighbours);
 		for n in &neighbours {
 			if symbol_indices.contains(n) {
-				if debug {
-					println!("Neigbours a Symbol");
-				}
+				// println!("Neigbours a Symbol");
 				sum += num;
 				break;
 			}
@@ -84,7 +65,7 @@ mod tests {
 	fn test() {
 		let input = fs::read_to_string("test_data/2023/03x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 4361);
 	}
 }

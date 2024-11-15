@@ -1,7 +1,6 @@
 pub fn invoke(
 	input: String,
 	expansion: u64,
-	_debug: bool,
 ) -> u64 {
 	// Convert the image as a Vec<Vec<char>>
 	let lines: Vec<&str> = input.lines().collect();
@@ -136,7 +135,7 @@ mod tests {
 	fn test_a() {
 		let input = fs::read_to_string("test_data/2023/11x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, 10, true);
+		let result = invoke(input, 10);
 		assert_eq!(result, 1030);
 	}
 
@@ -144,7 +143,7 @@ mod tests {
 	fn test_b() {
 		let input = fs::read_to_string("test_data/2023/11x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, 100, true);
+		let result = invoke(input, 100);
 		assert_eq!(result, 8410);
 	}
 }

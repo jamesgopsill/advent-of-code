@@ -18,9 +18,6 @@ struct Args {
 
 	#[arg(short, long)]
 	file: PathBuf,
-
-	#[arg(long)]
-	debug: bool,
 }
 
 fn main() {
@@ -45,10 +42,10 @@ fn main() {
 
 	match args.year {
 		2015 => {
-			y2015::invoke_task(task, puzzle_input, args.debug);
+			y2015::invoke_task(task, puzzle_input);
 		}
 		2023 => {
-			y2023::invoke_task(task, puzzle_input, args.debug);
+			y2023::invoke_task(task, puzzle_input);
 		}
 		_ => {
 			println!("Task not recognised");

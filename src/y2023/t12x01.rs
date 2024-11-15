@@ -1,7 +1,4 @@
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let lines: Vec<&str> = input.lines().collect();
 	let mut arrangements = 0;
 	for line in lines {
@@ -86,7 +83,7 @@ mod tests {
 	fn test() {
 		let input = fs::read_to_string("test_data/2023/12x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 21);
 	}
 }

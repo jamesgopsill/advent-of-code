@@ -1,7 +1,4 @@
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let mut nice_count = 0;
 	for line in input.lines() {
 		if is_nice(line) {

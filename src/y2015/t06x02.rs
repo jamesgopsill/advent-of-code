@@ -1,9 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	// hitting default stack size limitations.
 	let row: Vec<u32> = (0..1_000).map(|_| 0).collect();
 	let mut lights: Vec<Vec<u32>> = (0..1_000).map(|_| row.clone()).collect();
@@ -58,13 +55,13 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("turn on 0,0 through 0,0".to_string(), true);
+		let result = invoke("turn on 0,0 through 0,0".to_string());
 		assert_eq!(result, 1);
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("toggle 0,0 through 999,999".to_string(), true);
+		let result = invoke("toggle 0,0 through 999,999".to_string());
 		assert_eq!(result, 2_000_000);
 	}
 }

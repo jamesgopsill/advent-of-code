@@ -1,7 +1,4 @@
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> i32 {
+pub fn invoke(input: String) -> i32 {
 	// Convert the image as a Vec<Vec<char>>
 	let lines: Vec<&str> = input.lines().collect();
 	let mut image: Vec<Vec<char>> = vec![];
@@ -15,18 +12,15 @@ pub fn invoke(
 
 	// Create the universe
 	let mut universe = Universe::new(image);
-	if debug {
-		universe.print_image();
-	}
+
+	universe.print_image();
+
 	universe.expand();
-	if debug {
-		universe.print_image();
-	}
+
+	universe.print_image();
 
 	universe.identify_galaxies();
-	if debug {
-		println!("{:?}", universe.galaxies);
-	}
+	println!("{:?}", universe.galaxies);
 
 	let mut sum = 0;
 	let n_galaxies = universe.galaxies.len();
@@ -128,7 +122,7 @@ mod tests {
 	fn test() {
 		let input = fs::read_to_string("test_data/2023/11x01.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 374);
 	}
 }

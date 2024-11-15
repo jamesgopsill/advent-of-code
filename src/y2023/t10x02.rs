@@ -1,10 +1,7 @@
 use core::panic;
 
 // TODO: Not FINISHED
-pub fn invoke(
-	input: String,
-	debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	let lines: Vec<&str> = input.lines().collect();
 	let mut map: Vec<Vec<char>> = vec![];
 
@@ -19,34 +16,30 @@ pub fn invoke(
 
 	let mut elf = Elf::new(map);
 	elf.find_start();
-	if debug {
-		println!("{:?}", elf.current_tile);
-	}
+
+	// println!("{:?}", elf.current_tile);
 
 	while elf.step() {}
 
 	// Remove all the noise and leaving just the path
 	// The elf is now a gardener
 	elf.keep_the_path();
-	if debug {
-		elf.print_map();
-		println!();
-	}
+
+	elf.print_map();
+	println!();
 
 	// Work out what type the S pipe was
 	// and replace it one the map
 	elf.determine_s();
-	if debug {
-		elf.print_map();
-		println!();
-	}
+
+	elf.print_map();
+	println!();
 
 	// Moving top-left to bottom right
 	// Classic enter exit the enclosing area of the pipe.
 	let sum = elf.sum_enclosing_tiles();
-	if debug {
-		elf.print_map();
-	}
+
+	elf.print_map();
 
 	// Return the result
 	sum
@@ -395,7 +388,7 @@ mod tests {
 	fn test_a() {
 		let input = fs::read_to_string("test_data/2023/10x03.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 4);
 	}
 
@@ -403,7 +396,7 @@ mod tests {
 	fn test_b() {
 		let input = fs::read_to_string("test_data/2023/10x04.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 8);
 	}
 
@@ -411,7 +404,7 @@ mod tests {
 	fn test_c() {
 		let input = fs::read_to_string("test_data/2023/10x05.txt")
 			.expect("Should have been able to read the file");
-		let result = invoke(input, true);
+		let result = invoke(input);
 		assert_eq!(result, 10);
 	}
 }

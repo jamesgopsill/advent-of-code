@@ -1,9 +1,6 @@
 use md5::{Digest, Md5};
 
-pub fn invoke(
-	input: String,
-	_debug: bool,
-) -> u32 {
+pub fn invoke(input: String) -> u32 {
 	for i in 0..9_999_999 {
 		let mut hasher = Md5::new();
 		let secret = format!("{}{}", input.trim(), i);
