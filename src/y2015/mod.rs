@@ -19,6 +19,7 @@ mod t09x02;
 mod t10x01;
 mod t11x01;
 mod t12x01;
+mod t12x02;
 
 pub fn invoke_task(
 	task: String,
@@ -115,6 +116,10 @@ pub fn invoke_task(
 		}
 		"12x01" => {
 			let out = t12x01::invoke(puzzle_input);
+			println!("{out}");
+		}
+		"12x02" => {
+			let out = t12x02::invoke(puzzle_input);
 			println!("{out}");
 		}
 		_ => {
