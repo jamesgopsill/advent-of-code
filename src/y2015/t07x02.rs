@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, sync::LazyLock};
 
 use regex::Regex;
 
@@ -47,6 +47,11 @@ impl Wire {
 	}
 }
 
+static ACTION_RE: LazyLock<Regex> = LazyLock::new(|| {
+	println!("Initializing Action Re");
+	Regex::new(r"(\w+)\s(AND|OR|LSHIFT|RSHIFT)\s(\w+)").unwrap()
+});
+
 fn compute_value(
 	key: String,
 	wires: &mut WireMap,
@@ -55,9 +60,8 @@ fn compute_value(
 	if wire.cached_value.is_some() {
 		return wire.cached_value.unwrap().clone();
 	}
-	let re = Regex::new(r"(\w+)\s(AND|OR|LSHIFT|RSHIFT)\s(\w+)").unwrap();
 
-	let caps = re.captures(wire.instruction.as_str());
+	let caps = ACTION_RE.captures(wire.instruction.as_str());
 	match caps {
 		Some(caps) => {
 			let left_value: u16;
