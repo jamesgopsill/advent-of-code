@@ -4,6 +4,7 @@ use clap::Parser;
 
 mod y2015;
 mod y2023;
+mod y2024;
 
 #[derive(Parser, Debug)]
 struct Args {
@@ -25,7 +26,7 @@ fn main() {
 	let args = Args::parse();
 	println!("{:?}", args);
 
-	if args.year > 2023 || args.year < 2015 {
+	if args.year > 2024 || args.year < 2015 {
 		println!("Year is out of range");
 		process::exit(1);
 	}
@@ -46,6 +47,9 @@ fn main() {
 		}
 		2023 => {
 			y2023::invoke_task(task, puzzle_input);
+		}
+		2024 => {
+			y2024::invoke_task(task, puzzle_input);
 		}
 		_ => {
 			println!("Task not recognised");
