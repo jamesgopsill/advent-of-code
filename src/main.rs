@@ -2,6 +2,7 @@ use std::{fs, path::PathBuf, process};
 
 use clap::Parser;
 
+mod bench;
 mod y2015;
 mod y2016;
 mod y2023;

@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> u32 {
 	let mut total: u32 = 0;
 	for report in input.lines() {
 		let mut levels: Vec<i32> = vec![];
@@ -61,7 +61,7 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"7 6 4 2 1
+			&"7 6 4 2 1
 1 2 7 8 9
 9 7 6 2 1
 1 3 2 4 5

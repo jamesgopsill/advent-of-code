@@ -1,6 +1,6 @@
 use std::iter::zip;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> u32 {
 	let mut a: Vec<u32> = vec![];
 	let mut b: Vec<u32> = vec![];
 	for line in input.lines() {
@@ -24,7 +24,7 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"3   4
+			&"3   4
 4   3
 2   5
 1   3

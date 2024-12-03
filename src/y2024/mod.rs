@@ -1,3 +1,5 @@
+use crate::bench::bench;
+
 mod t01x01;
 mod t01x02;
 mod t02x01;
@@ -11,28 +13,34 @@ pub fn invoke_task(
 ) {
 	match task.as_str() {
 		"01x01" => {
-			let out = t01x01::invoke(puzzle_input);
+			let out = t01x01::invoke(&puzzle_input);
 			println!("{out}");
+			bench(t01x01::invoke, &puzzle_input);
 		}
 		"01x02" => {
-			let out = t01x02::invoke(puzzle_input);
+			let out = t01x02::invoke(&puzzle_input);
 			println!("{out}");
+			bench(t01x02::invoke, &puzzle_input);
 		}
 		"02x01" => {
-			let out = t02x01::invoke(puzzle_input);
+			let out = t02x01::invoke(&puzzle_input);
 			println!("{out}");
+			bench(t02x01::invoke, &puzzle_input);
 		}
 		"02x02" => {
-			let out = t02x02::invoke(puzzle_input);
+			let out = t02x02::invoke(&puzzle_input);
 			println!("{out}");
+			bench(t02x02::invoke, &puzzle_input);
 		}
 		"03x01" => {
-			let out = t03x01::invoke(puzzle_input);
+			let out = t03x01::invoke(&puzzle_input);
 			println!("{out}");
+			bench(t03x01::invoke, &puzzle_input);
 		}
 		"03x02" => {
-			let out = t03x02::invoke(puzzle_input);
+			let out = t03x02::invoke(&puzzle_input);
 			println!("{out}");
+			bench(t03x02::invoke, &puzzle_input);
 		}
 		_ => {
 			println!("Task not recognised")
