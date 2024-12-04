@@ -5,6 +5,7 @@ use clap::Parser;
 mod bench;
 mod y2015;
 mod y2016;
+mod y2017;
 mod y2023;
 mod y2024;
 
@@ -49,6 +50,9 @@ fn main() {
 		}
 		2016 => {
 			y2016::invoke_task(task, puzzle_input);
+		}
+		2017 => {
+			y2017::invoke_task(task, puzzle_input);
 		}
 		2023 => {
 			y2023::invoke_task(task, puzzle_input);
