@@ -1,35 +1,31 @@
 pub fn invoke(input: String) -> u32 {
-	let mut ribbon = 0;
-	let dimensions: Vec<&str> = input.lines().collect();
-	for d in dimensions {
-		let present = Present::new(d);
-		ribbon += present.smallest_perimeter + present.volume;
+	let mut sum: u32 = 0;
+	for line in input.lines() {
+		let present = Present::new(line);
+		sum += present.volume + present.perimeters.iter().min().unwrap();
 	}
-	ribbon
+	sum
 }
 
 struct Present {
-	smallest_perimeter: u32,
+	perimeters: [u32; 3],
 	volume: u32,
 }
 
 impl Present {
-	fn new(dimensions: &str) -> Self {
-		let mut dimensions: Vec<&str> = dimensions.split("x").collect();
-		let length: u32 = dimensions.pop().unwrap().parse().unwrap();
-		let width: u32 = dimensions.pop().unwrap().parse().unwrap();
-		let height: u32 = dimensions.pop().unwrap().parse().unwrap();
-		let volume = length * width * height;
-		let perimeters: [u32; 3] = [
-			2 * length + 2 * width,
-			2 * width + 2 * height,
-			2 * length + 2 * height,
-		];
-		let smallest = *perimeters.iter().min().unwrap();
-		Self {
-			smallest_perimeter: smallest,
-			volume,
+	fn new(s: &str) -> Self {
+		let mut items = s.split("x");
+		let mut sides: [u32; 3] = [0; 3];
+		for i in 0..3 {
+			sides[i] = items.next().unwrap().parse::<u32>().unwrap();
 		}
+		let volume = sides[0] * sides[1] * sides[2];
+		let perimeters = [
+			2 * sides[0] + 2 * sides[1],
+			2 * sides[1] + 2 * sides[2],
+			2 * sides[2] + 2 * sides[0],
+		];
+		Self { perimeters, volume }
 	}
 }
 
@@ -39,13 +35,15 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("2x3x4".to_string());
+		let input = "2x3x4".to_string();
+		let result = invoke(input);
 		assert_eq!(result, 34);
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("1x1x10".to_string());
+		let input = "1x1x10".to_string();
+		let result = invoke(input);
 		assert_eq!(result, 14);
 	}
 }

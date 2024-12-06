@@ -1,22 +1,42 @@
 use std::collections::HashSet;
 
 pub fn invoke(input: String) -> usize {
-	let mut locations_visited: HashSet<[i32; 2]> = HashSet::new();
-	let mut location: [i32; 2] = [0, 0];
-	locations_visited.insert(location.clone());
-
+	let mut santa = Santa::new();
 	for c in input.chars() {
-		match c {
-			'<' => location[0] -= 1,
-			'>' => location[0] += 1,
-			'^' => location[1] -= 1,
-			'v' => location[1] += 1,
-			_ => {}
+		santa.step(c);
+	}
+	santa.unique_locations.len()
+}
+
+struct Santa {
+	current_location: [i32; 2],
+	unique_locations: HashSet<[i32; 2]>,
+}
+
+impl Santa {
+	fn new() -> Self {
+		let current_location = [0, 0];
+		let mut unique_locations = HashSet::new();
+		unique_locations.insert(current_location.clone());
+		Self {
+			current_location,
+			unique_locations,
 		}
-		locations_visited.insert(location.clone());
 	}
 
-	return locations_visited.len();
+	fn step(
+		&mut self,
+		direction: char,
+	) {
+		match direction {
+			'^' => self.current_location[1] += 1,
+			'>' => self.current_location[0] += 1,
+			'<' => self.current_location[0] -= 1,
+			'v' => self.current_location[1] -= 1,
+			_ => {}
+		}
+		self.unique_locations.insert(self.current_location.clone());
+	}
 }
 
 #[cfg(test)]

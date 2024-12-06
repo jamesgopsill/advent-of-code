@@ -1,39 +1,51 @@
 use std::collections::HashSet;
 
 pub fn invoke(input: String) -> usize {
-	let mut visited: HashSet<[i32; 2]> = HashSet::new();
-	let mut santa: [i32; 2] = [0, 0];
-	let mut robo_santa: [i32; 2] = [0, 0];
-	visited.insert(santa.clone());
-	visited.insert(robo_santa.clone());
-
+	let mut santa = Santa::new();
+	let mut robo_santa = Santa::new();
 	for (i, c) in input.chars().enumerate() {
-		let remainder = i % 2;
-		match remainder {
-			0 => {
-				match c {
-					'<' => santa[0] -= 1,
-					'>' => santa[0] += 1,
-					'^' => santa[1] -= 1,
-					'v' => santa[1] += 1,
-					_ => {}
-				}
-				visited.insert(santa.clone());
-			}
-			_ => {
-				match c {
-					'<' => robo_santa[0] -= 1,
-					'>' => robo_santa[0] += 1,
-					'^' => robo_santa[1] -= 1,
-					'v' => robo_santa[1] += 1,
-					_ => {}
-				};
-				visited.insert(robo_santa.clone());
-			}
+		if i % 2 == 0 {
+			santa.step(c);
+		} else {
+			robo_santa.step(c);
+		}
+	}
+	let houses: HashSet<_> = santa
+		.unique_locations
+		.union(&robo_santa.unique_locations)
+		.collect();
+	houses.len()
+}
+
+struct Santa {
+	current_location: [i32; 2],
+	unique_locations: HashSet<[i32; 2]>,
+}
+
+impl Santa {
+	fn new() -> Self {
+		let current_location = [0, 0];
+		let mut unique_locations = HashSet::new();
+		unique_locations.insert(current_location.clone());
+		Self {
+			current_location,
+			unique_locations,
 		}
 	}
 
-	return visited.len();
+	fn step(
+		&mut self,
+		direction: char,
+	) {
+		match direction {
+			'^' => self.current_location[1] += 1,
+			'>' => self.current_location[0] += 1,
+			'<' => self.current_location[0] -= 1,
+			'v' => self.current_location[1] -= 1,
+			_ => {}
+		}
+		self.unique_locations.insert(self.current_location.clone());
+	}
 }
 
 #[cfg(test)]
