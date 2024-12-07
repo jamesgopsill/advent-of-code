@@ -13,7 +13,7 @@ pub fn invoke(input: &String) -> u64 {
 		let mut next = numbers[1..].to_vec();
 		// reverse so we can pop.
 		next.reverse();
-		let values = calculate(initial, next);
+		let values = calculate(test, initial, next);
 		if values.contains(&test) {
 			// println!("Valid: {}", line);
 			ans += test;
@@ -23,6 +23,7 @@ pub fn invoke(input: &String) -> u64 {
 }
 
 fn calculate(
+	test: u64,
 	past: Vec<u64>,
 	mut numbers: Vec<u64>,
 ) -> Vec<u64> {
@@ -33,6 +34,11 @@ fn calculate(
 	let number = number.unwrap();
 	let mut next: Vec<u64> = vec![];
 	for p in past {
+		// Do not continue computing values beyond
+		// the test value.
+		if p > test {
+			continue;
+		}
 		// println!("{} {}", p, number);
 		// Ignore values that overflow.
 		let new_value = p.checked_mul(number);
@@ -44,13 +50,25 @@ fn calculate(
 			next.push(new_value.unwrap());
 		}
 		// concatenate
+		let new_value = concat(p, number) as u64;
+		next.push(new_value);
+		// Old 'slow' version
+		/*
 		let new_value = format!("{}{}", p, number);
 		let new_value = new_value.parse::<u64>();
 		if new_value.is_ok() {
 			next.push(new_value.unwrap());
 		}
+		*/
 	}
-	calculate(next, numbers)
+	calculate(test, next, numbers)
+}
+
+fn concat(
+	a: u64,
+	b: u64,
+) -> u128 {
+	a as u128 * 10u128.pow(b.ilog10() + 1) + b as u128
 }
 
 #[cfg(test)]
