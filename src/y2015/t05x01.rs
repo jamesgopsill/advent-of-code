@@ -32,8 +32,7 @@ fn is_nice(line: &str) -> bool {
 	}
 
 	let mut double_char = false;
-	for c in b'a'..=b'z' {
-		let c = c as char;
+	for c in 'a'..='z' {
 		let double = format!("{}{}", c, c);
 		if line.contains(double.as_str()) {
 			double_char = true;

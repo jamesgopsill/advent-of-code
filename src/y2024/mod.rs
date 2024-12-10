@@ -18,6 +18,8 @@ mod t08x01;
 mod t08x02;
 mod t09x01;
 mod t09x02;
+mod t10x01;
+mod t10x02;
 
 pub fn invoke_task(
 	task: String,
@@ -113,6 +115,16 @@ pub fn invoke_task(
 			let out = t09x02::invoke(&puzzle_input);
 			println!("{out}");
 			bench_u64(t09x02::invoke, &puzzle_input);
+		}
+		"10x01" => {
+			let out = t10x01::invoke(&puzzle_input);
+			println!("{out}");
+			bench_u32(t10x01::invoke, &puzzle_input);
+		}
+		"10x02" => {
+			let out = t10x02::invoke(&puzzle_input);
+			println!("{out}");
+			bench_u32(t10x02::invoke, &puzzle_input);
 		}
 		_ => {
 			println!("Task not recognised")
