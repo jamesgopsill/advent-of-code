@@ -1,4 +1,4 @@
-use crate::{bench::bench_u32, bench::bench_u64};
+use crate::bench::{bench_u32, bench_u64, bench_u64_val};
 
 mod t01x01;
 mod t01x02;
@@ -20,6 +20,8 @@ mod t09x01;
 mod t09x02;
 mod t10x01;
 mod t10x02;
+mod t11x01;
+mod t11x02;
 
 pub fn invoke_task(
 	task: String,
@@ -125,6 +127,16 @@ pub fn invoke_task(
 			let out = t10x02::invoke(&puzzle_input);
 			println!("{out}");
 			bench_u32(t10x02::invoke, &puzzle_input);
+		}
+		"11x01" => {
+			let out = t11x01::invoke(&puzzle_input, 25);
+			println!("{out}");
+			bench_u64_val(t11x01::invoke, &puzzle_input, 25);
+		}
+		"11x02" => {
+			let out = t11x02::invoke(&puzzle_input, 75);
+			println!("{out}");
+			bench_u64_val(t11x02::invoke, &puzzle_input, 75);
 		}
 		_ => {
 			println!("Task not recognised")
