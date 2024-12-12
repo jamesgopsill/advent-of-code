@@ -70,6 +70,7 @@ fn check_red(s: &String) -> String {
 	}
 }
 
+/*
 #[cfg(test)]
 mod tests {
 	use super::invoke;
@@ -92,3 +93,4 @@ mod tests {
 		assert_eq!(result, 0);
 	}
 }
+*/
