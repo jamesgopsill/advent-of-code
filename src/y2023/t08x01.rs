@@ -47,20 +47,31 @@ pub fn invoke(input: String) -> u32 {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use std::fs;
 
 	#[test]
 	fn test_a() {
-		let input = fs::read_to_string("test_data/2023/08x01.txt")
-			.expect("Should have been able to read the file");
+		let input = "RL
+
+AAA = (BBB, CCC)
+BBB = (DDD, EEE)
+CCC = (ZZZ, GGG)
+DDD = (DDD, DDD)
+EEE = (EEE, EEE)
+GGG = (GGG, GGG)
+ZZZ = (ZZZ, ZZZ)"
+			.to_string();
 		let result = invoke(input);
 		assert_eq!(result, 2);
 	}
 
 	#[test]
 	fn test_b() {
-		let input = fs::read_to_string("test_data/2023/08x02.txt")
-			.expect("Should have been able to read the file");
+		let input = "LLR
+
+AAA = (BBB, BBB)
+BBB = (AAA, ZZZ)
+ZZZ = (ZZZ, ZZZ)"
+			.to_string();
 		let result = invoke(input);
 		assert_eq!(result, 6);
 	}

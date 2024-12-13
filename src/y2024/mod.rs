@@ -155,12 +155,12 @@ pub fn invoke_task(
 		"13x01" => {
 			let out = t13x01::invoke(&puzzle_input);
 			println!("Ans: {out}");
-			// bench_u64(t13x01::invoke, &puzzle_input);
+			bench_u32(t13x01::invoke, &puzzle_input);
 		}
 		"13x02" => {
 			let out = t13x02::invoke(&puzzle_input);
 			println!("Ans: {out}");
-			// bench_u64(t13x02::invoke, &puzzle_input);
+			bench_u64(t13x02::invoke, &puzzle_input);
 		}
 		_ => {
 			println!("Task not recognised")

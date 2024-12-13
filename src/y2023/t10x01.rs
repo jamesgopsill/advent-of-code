@@ -261,20 +261,29 @@ impl Traveller {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use std::fs;
 
 	#[test]
 	fn test_a() {
-		let input = fs::read_to_string("test_data/2023/10x01.txt")
-			.expect("Should have been able to read the file");
+		let input = ".....
+.S-7.
+.|.|.
+.L-J.
+.....
+"
+		.to_string();
 		let result = invoke(input);
 		assert_eq!(result, 4);
 	}
 
 	#[test]
 	fn test_b() {
-		let input = fs::read_to_string("test_data/2023/10x02.txt")
-			.expect("Should have been able to read the file");
+		let input = "..F7.
+.FJ|.
+SJ.L7
+|F--J
+LJ...
+"
+		.to_string();
 		let result = invoke(input);
 		assert_eq!(result, 8);
 	}

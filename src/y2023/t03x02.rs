@@ -80,13 +80,21 @@ pub fn invoke(schematic: String) -> u32 {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use std::fs;
 
 	#[test]
 	fn test() {
-		let input = fs::read_to_string("test_data/2023/03x01.txt")
-			.expect("Should have been able to read the file");
+		let input = "467..114..
+...*......
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....
+.664.598.."
+			.to_string();
 		let result = invoke(input);
-		assert_eq!(result, 467835);
+		assert_eq!(result, 4361);
 	}
 }

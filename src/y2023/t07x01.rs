@@ -114,12 +114,15 @@ pub fn invoke(input: String) -> u32 {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use std::fs;
 
 	#[test]
 	fn test() {
-		let input = fs::read_to_string("test_data/2023/07x01.txt")
-			.expect("Should have been able to read the file");
+		let input = "32T3K 765
+T55J5 684
+KK677 28
+KTJJT 220
+QQQJA 483"
+			.to_string();
 		let result = invoke(input);
 		assert_eq!(result, 6440);
 	}

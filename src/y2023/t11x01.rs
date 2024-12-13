@@ -116,12 +116,21 @@ impl Universe {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use std::fs;
 
 	#[test]
 	fn test() {
-		let input = fs::read_to_string("test_data/2023/11x01.txt")
-			.expect("Should have been able to read the file");
+		let input = "...#......
+.......#..
+#.........
+..........
+......#...
+.#........
+.........#
+..........
+.......#..
+#...#.....
+"
+		.to_string();
 		let result = invoke(input);
 		assert_eq!(result, 374);
 	}
