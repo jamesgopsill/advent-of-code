@@ -7,15 +7,8 @@ My attempts at solving the [Advent of Code](https://adventofcode.com) challenges
 To run the examples against your puzzle data. Clone the repo and make a `puzzle_data` folder in the repo root. Add your puzzle data here and then call the right function against the puzzle data.
 
 ```
-cargo run -- -y 2015 -d 1 -p 1 -f puzzle_data/2015/01.txt
+cargo run --example [yyyy]x[dd]x[pp]
 ```
-
-- `-y` Year
-- `-d` Day
-- `-p` Part
-- `-f` Puzzle Data FilePath
-
-Use cargo test to check all the functions against the examples provided in the Advent of Code documentation.
 
 ```
 cargo test

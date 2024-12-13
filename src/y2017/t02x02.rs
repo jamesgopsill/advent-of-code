@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut sum: u32 = 0;
 	for line in input.lines() {
 		let items = line.split_whitespace().collect::<Vec<_>>();
@@ -22,7 +22,7 @@ pub fn invoke(input: &String) -> u32 {
 			}
 		}
 	}
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -36,6 +36,6 @@ mod tests {
 3 8 6 5"
 			.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 9);
+		assert_eq!(result, "9");
 	}
 }

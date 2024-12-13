@@ -1,6 +1,6 @@
 use std::{collections::HashSet, mem::swap};
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut map: Vec<Vec<u32>> = vec![];
 	for lines in input.lines() {
 		let mut row: Vec<u32> = vec![];
@@ -37,7 +37,7 @@ pub fn invoke(input: &String) -> u32 {
 		// break;
 	}
 
-	ans
+	ans.to_string()
 }
 
 struct Trail<'a> {
@@ -110,7 +110,7 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 2);
+		assert_eq!(result, "2");
 	}
 
 	#[test]
@@ -125,7 +125,7 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 4);
+		assert_eq!(result, "4");
 	}
 
 	#[test]
@@ -140,7 +140,7 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 3);
+		assert_eq!(result, "3");
 	}
 
 	#[test]
@@ -156,6 +156,6 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 36);
+		assert_eq!(result, "36");
 	}
 }

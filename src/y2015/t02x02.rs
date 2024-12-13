@@ -1,10 +1,10 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut sum: u32 = 0;
 	for line in input.lines() {
 		let present = Present::new(line);
 		sum += present.volume + present.perimeters.iter().min().unwrap();
 	}
-	sum
+	sum.to_string()
 }
 
 struct Present {
@@ -36,14 +36,14 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let input = "2x3x4".to_string();
-		let result = invoke(input);
-		assert_eq!(result, 34);
+		let result = invoke(&input);
+		assert_eq!(result, "34");
 	}
 
 	#[test]
 	fn test_b() {
 		let input = "1x1x10".to_string();
-		let result = invoke(input);
-		assert_eq!(result, 14);
+		let result = invoke(&input);
+		assert_eq!(result, "14");
 	}
 }

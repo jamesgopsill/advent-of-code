@@ -1,9 +1,9 @@
 use itertools::Itertools;
 
 pub fn invoke(
-	input: String,
+	input: &String,
 	liters: u32,
-) -> u32 {
+) -> String {
 	let mut valid_combinations: u32 = 0;
 	let mut containers: Vec<u32> = vec![];
 	for line in input.lines() {
@@ -18,7 +18,7 @@ pub fn invoke(
 			valid_combinations += 1;
 		}
 	}
-	valid_combinations
+	valid_combinations.to_string()
 }
 
 #[cfg(test)]
@@ -33,7 +33,7 @@ mod tests {
 5
 5"
 		.to_string();
-		let result = invoke(input, 25);
-		assert_eq!(result, 4);
+		let result = invoke(&input, 25);
+		assert_eq!(result, "4");
 	}
 }

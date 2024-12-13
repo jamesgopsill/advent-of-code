@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> i32 {
+pub fn invoke(input: &String) -> String {
 	let mut sum: i32 = 0;
 	let lines = input.lines();
 	for line in lines {
@@ -36,7 +36,7 @@ pub fn invoke(input: String) -> i32 {
 
 		sum += line_sum;
 	}
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -49,7 +49,7 @@ mod tests {
 1 3 6 10 15 21
 10 13 16 21 30 45"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 114);
+		let result = invoke(&input);
+		assert_eq!(result, "114");
 	}
 }

@@ -1,6 +1,6 @@
 use std::mem::swap;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut card_map: Vec<Vec<usize>> = vec![];
 
 	let mut current_pile: Vec<usize> = vec![];
@@ -50,7 +50,7 @@ pub fn invoke(input: String) -> u32 {
 		new_pile.clear();
 	}
 
-	return count;
+	return count.to_string();
 }
 
 #[cfg(test)]
@@ -66,7 +66,7 @@ Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
 Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
 Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 30);
+		let result = invoke(&input);
+		assert_eq!(result, "30");
 	}
 }

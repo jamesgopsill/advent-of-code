@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let re = Regex::new(r"do\(\)|mul\(([\d]{1,3}),([\d]{1,3})\)|don\'t\(\)").unwrap();
 	let instructions = re.captures_iter(input.as_str());
 	let mut sum: u32 = 0;
@@ -20,7 +20,7 @@ pub fn invoke(input: &String) -> u32 {
 			}
 		}
 	}
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -33,6 +33,6 @@ mod tests {
 			&"xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))"
 				.to_string(),
 		);
-		assert_eq!(result, 48);
+		assert_eq!(result, "48");
 	}
 }

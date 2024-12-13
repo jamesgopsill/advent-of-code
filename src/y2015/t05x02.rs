@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut nice_count = 0;
 
 	let pairs = generate_pairs();
@@ -12,7 +12,7 @@ pub fn invoke(input: String) -> u32 {
 		}
 	}
 
-	nice_count
+	nice_count.to_string()
 }
 
 fn generate_pairs() -> Vec<String> {

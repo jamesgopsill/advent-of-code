@@ -1,7 +1,7 @@
 pub fn invoke(
-	input: String,
+	input: &String,
 	expansion: u64,
-) -> u64 {
+) -> String {
 	// Convert the image as a Vec<Vec<char>>
 	let lines: Vec<&str> = input.lines().collect();
 	let mut image: Vec<Vec<char>> = vec![];
@@ -69,7 +69,7 @@ pub fn invoke(
 		}
 	}
 
-	sum
+	sum.to_string()
 }
 
 struct Universe {
@@ -144,8 +144,8 @@ mod tests {
 #...#.....
 "
 		.to_string();
-		let result = invoke(input, 10);
-		assert_eq!(result, 1030);
+		let result = invoke(&input, 10);
+		assert_eq!(result, "1030");
 	}
 
 	#[test]
@@ -162,7 +162,7 @@ mod tests {
 #...#.....
 "
 		.to_string();
-		let result = invoke(input, 100);
-		assert_eq!(result, 8410);
+		let result = invoke(&input, 100);
+		assert_eq!(result, "8410");
 	}
 }

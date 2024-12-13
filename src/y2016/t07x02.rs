@@ -3,7 +3,7 @@ use std::collections::HashSet;
 use itertools::Itertools;
 use regex::Regex;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	// Create all the aba, aca patterns re
 	// due to no overlapping check limit of regex.
 	let mut aba_patterns: Vec<Regex> = vec![];
@@ -46,7 +46,7 @@ pub fn invoke(input: &String) -> u32 {
 			}
 		}
 	}
-	ans
+	ans.to_string()
 }
 
 #[cfg(test)]
@@ -61,6 +61,6 @@ aaa[kek]eke
 zazbz[bzb]cdb"
 			.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 3);
+		assert_eq!(result, "3");
 	}
 }

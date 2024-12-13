@@ -2,7 +2,7 @@ use itertools::Itertools;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
-pub fn invoke(_: String) -> u32 {
+pub fn invoke(_: &String) -> String {
 	let mut players: Vec<Character> = vec![];
 	for weapon in Weapon::iter() {
 		for armor in Armor::iter() {
@@ -43,7 +43,7 @@ pub fn invoke(_: String) -> u32 {
 	}
 	println!("Most Expensive Fight: £{}", cost);
 
-	0
+	0.to_string()
 }
 
 fn fight(
@@ -233,7 +233,7 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("".to_string());
-		assert_eq!(result, 1);
+		let result = invoke(&"".to_string());
+		assert_eq!(result, "1");
 	}
 }

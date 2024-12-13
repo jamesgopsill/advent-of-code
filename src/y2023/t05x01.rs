@@ -7,7 +7,7 @@ struct MapRange {
 	to_lower: u64,
 }
 
-pub fn invoke(input: String) -> u64 {
+pub fn invoke(input: &String) -> String {
 	let lines: Vec<&str> = input.lines().collect();
 	let numbers_re = Regex::new(r"\d+").unwrap();
 	let seeds: Vec<u64> = numbers_re
@@ -61,7 +61,7 @@ pub fn invoke(input: String) -> u64 {
 		}
 	}
 
-	loc
+	loc.to_string()
 }
 
 #[cfg(test)]
@@ -104,7 +104,7 @@ humidity-to-location map:
 60 56 37
 56 93 4"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 35);
+		let result = invoke(&input);
+		assert_eq!(result, "35");
 	}
 }

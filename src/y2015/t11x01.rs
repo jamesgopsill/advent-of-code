@@ -3,9 +3,10 @@ use std::sync::LazyLock;
 use regex::Regex;
 
 pub fn invoke(
-	input: String,
-	n: u32,
+	input: &String,
+	n: u64,
 ) -> String {
+	let n = n as u32;
 	// reverse the string to ease the iteration
 	let mut password = input.trim().to_string();
 	// Placing an arbitrary limit to exit
@@ -152,37 +153,3 @@ mod tests {
 		assert_eq!(result, false);
 	}
 }
-
-/*
-for i in (0..password.len()).rev() {
-	if i == password.len() - 1 {
-		let c = password.chars().nth(i).unwrap();
-		if c == 'z' {
-			password.replace_range(i..(i + 1), "a");
-		} else {
-			let mut byte = c as u8;
-			byte += 1;
-			let new_c = byte as char;
-			let new_c = format!("{}", new_c);
-			password.replace_range(i..(i + 1), new_c.as_str());
-		}
-	} else {
-		let preceding_char = password.chars().nth(i + 1).unwrap();
-		if preceding_char == 'a' {
-			let c = password.chars().nth(i).unwrap();
-			if c == 'z' {
-				password.replace_range(i..(i + 1), "a");
-			}
-			else {
-
-				let mut byte = c as u8;
-				byte += 1;
-				let new_c = byte as char;
-				let new_c = format!("{}", new_c);
-				password.replace_range(i..(i + 1), new_c.as_str());
-			}
-
-		}
-	}
-}
-*/

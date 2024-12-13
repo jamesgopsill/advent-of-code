@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let lines: Vec<&str> = input.lines().collect();
 	let mut arrangements = 0;
 	for line in lines {
@@ -71,7 +71,7 @@ pub fn invoke(input: String) -> u32 {
 		// println!("{:?}", row_arrangements);
 		arrangements += row_arrangements
 	}
-	arrangements
+	arrangements.to_string()
 }
 
 #[cfg(test)]
@@ -88,7 +88,7 @@ mod tests {
 ?###???????? 3,2,1
 "
 		.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 21);
+		let result = invoke(&input);
+		assert_eq!(result, "21");
 	}
 }

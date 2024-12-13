@@ -1,7 +1,7 @@
 use regex::Regex;
 
-pub fn invoke(input: String) -> i32 {
-	let mut sum: i32 = 1;
+pub fn invoke(input: &String) -> String {
+	let mut sum: u32 = 1;
 	let numbers_re = Regex::new(r"\d+").unwrap();
 	let lines: Vec<&str> = input.lines().collect();
 	let times: Vec<i32> = numbers_re
@@ -13,7 +13,7 @@ pub fn invoke(input: String) -> i32 {
 		.map(|f| f.as_str().parse::<i32>().unwrap())
 		.collect();
 	let n_races = times.len();
-	let mut wins: i32;
+	let mut wins: u32;
 	let mut dist: i32;
 	for i in 0..n_races {
 		let t = times[i];
@@ -28,7 +28,7 @@ pub fn invoke(input: String) -> i32 {
 		println!("{} {}", i, wins);
 		sum *= wins;
 	}
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -40,7 +40,7 @@ mod tests {
 		let input = "Time:      7  15   30
 Distance:  9  40  200"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 288);
+		let result = invoke(&input);
+		assert_eq!(result, "288");
 	}
 }

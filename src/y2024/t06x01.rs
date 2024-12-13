@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut map: Vec<Vec<char>> = vec![];
 	for line in input.lines() {
 		let mut row: Vec<char> = vec![];
@@ -12,7 +12,7 @@ pub fn invoke(input: &String) -> u32 {
 
 	let mut guard = Guard::new(map);
 	guard.walk();
-	guard.visited.len() as u32
+	guard.visited.len().to_string()
 }
 
 #[derive(Debug)]
@@ -143,6 +143,6 @@ mod tests {
 "
 			.to_string(),
 		);
-		assert_eq!(result, 41);
+		assert_eq!(result, "41");
 	}
 }

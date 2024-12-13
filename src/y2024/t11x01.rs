@@ -1,7 +1,7 @@
 pub fn invoke(
 	input: &String,
 	blink: u64,
-) -> u64 {
+) -> String {
 	let mut stones: Vec<u64> = input
 		.split_whitespace()
 		.into_iter()
@@ -27,7 +27,7 @@ pub fn invoke(
 		stones = new_stones;
 	}
 
-	stones.len() as u64
+	stones.len().to_string()
 }
 
 #[cfg(test)]
@@ -38,13 +38,13 @@ mod tests {
 	fn test_a() {
 		let input = "0 1 10 99 999".to_string();
 		let result = invoke(&input, 1);
-		assert_eq!(result, 7);
+		assert_eq!(result, "7");
 	}
 
 	#[test]
 	fn test_b() {
 		let input = "125 17".to_string();
 		let result = invoke(&input, 6);
-		assert_eq!(result, 22);
+		assert_eq!(result, "22");
 	}
 }

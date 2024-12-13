@@ -2,7 +2,7 @@ use regex::Regex;
 
 // Classic
 // Part 1: Brute Force It. Part 2. I know what's coming.
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let re = Regex::new(
 		r"Button\sA:\sX\+(\d+),\sY\+(\d+)\nButton\sB\:\sX\+(\d+),\sY\+(\d+)\nPrize:\sX=(\d+),\sY=(\d+)",
 	)
@@ -36,7 +36,7 @@ pub fn invoke(input: &String) -> u32 {
 			total += min;
 		}
 	}
-	total
+	total.to_string()
 }
 
 #[cfg(test)]
@@ -62,6 +62,6 @@ Button B: X+27, Y+71
 Prize: X=18641, Y=10279"
 			.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 480);
+		assert_eq!(result, "480");
 	}
 }

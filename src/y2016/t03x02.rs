@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut col_1: Vec<u32> = vec![];
 	let mut col_2: Vec<u32> = vec![];
 	let mut col_3: Vec<u32> = vec![];
@@ -21,5 +21,5 @@ pub fn invoke(input: String) -> u32 {
 			valid += 1;
 		}
 	}
-	valid
+	valid.to_string()
 }

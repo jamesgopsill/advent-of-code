@@ -1,6 +1,6 @@
 use std::collections::{HashMap, HashSet};
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut char_map: HashMap<char, Vec<[i32; 2]>> = HashMap::new();
 	let mut row_max: i32 = 0;
 	let mut col_max: i32 = 0;
@@ -55,7 +55,7 @@ pub fn invoke(input: &String) -> u32 {
 		}
 	}
 
-	on_map
+	on_map.to_string()
 }
 
 #[cfg(test)]
@@ -77,7 +77,7 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 2);
+		assert_eq!(result, "2");
 	}
 
 	#[test]
@@ -97,6 +97,6 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 14);
+		assert_eq!(result, "14");
 	}
 }

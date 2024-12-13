@@ -1,10 +1,10 @@
 use regex::Regex;
 
-pub fn invoke(mut schematic: String) -> u32 {
+pub fn invoke(schematic: &String) -> String {
 	let mut sum: i32 = 0;
 	let row_length = schematic.find("\n").unwrap() as i32;
 	// dbg!(row_length);
-	schematic = schematic.replace("\n", "");
+	let schematic = schematic.replace("\n", "");
 	//dbg!(&schematic);
 	// Get the symbol positions.
 	let symbols_re = Regex::new(r"[^\d.]").unwrap();
@@ -53,7 +53,7 @@ pub fn invoke(mut schematic: String) -> u32 {
 		}
 	}
 
-	sum as u32
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -73,7 +73,7 @@ mod tests {
 ...$.*....
 .664.598.."
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 4361);
+		let result = invoke(&input);
+		assert_eq!(result, "4361");
 	}
 }

@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(input: String) -> u64 {
+pub fn invoke(input: &String) -> String {
 	let numbers_re = Regex::new(r"[\d\s]+").unwrap();
 	let lines: Vec<&str> = input.lines().collect();
 	let time = numbers_re
@@ -31,7 +31,7 @@ pub fn invoke(input: String) -> u64 {
 	}
 
 	println!("{}", wins);
-	wins
+	wins.to_string()
 }
 
 #[cfg(test)]
@@ -43,7 +43,7 @@ mod tests {
 		let input = "Time:      7  15   30
 Distance:  9  40  200"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 288);
+		let result = invoke(&input);
+		assert_eq!(result, "288");
 	}
 }

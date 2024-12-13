@@ -1,6 +1,6 @@
 use itertools::Itertools;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut total: u32 = 0;
 	for report in input.lines() {
 		let mut levels: Vec<i32> = vec![];
@@ -28,7 +28,7 @@ pub fn invoke(input: &String) -> u32 {
 			}
 		}
 	}
-	total
+	total.to_string()
 }
 
 fn is_safe(levels: &Vec<i32>) -> bool {
@@ -70,6 +70,6 @@ mod tests {
 "
 			.to_string(),
 		);
-		assert_eq!(result, 4);
+		assert_eq!(result, "4");
 	}
 }

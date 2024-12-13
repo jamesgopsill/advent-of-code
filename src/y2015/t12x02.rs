@@ -3,7 +3,7 @@ use std::sync::LazyLock;
 use regex::Regex;
 
 // TODO: arrays red catching me out I think.
-pub fn invoke(input: String) -> i32 {
+pub fn invoke(input: &String) -> String {
 	//let mut sum: i32 = 0;
 	let curlies_re = Regex::new(r#"\{[\w\"\[\]:,-]+\}"#).unwrap();
 	let squares_re = Regex::new(r#"\[[\w\"\[\],-]+\]"#).unwrap();
@@ -48,9 +48,7 @@ pub fn invoke(input: String) -> i32 {
 		}
 	}
 	println!("Reduced Json: {}", json);
-	json.trim().parse::<i32>().unwrap()
-	//println!("{}", json);
-	//sum
+	json.trim().to_string()
 }
 
 static RED_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"red").unwrap());

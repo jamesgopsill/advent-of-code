@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut literal_chars: u32 = 0;
 	let mut memory_chars: u32 = 0;
 	let backslash = Regex::new(r"\\\\").unwrap();
@@ -25,7 +25,7 @@ pub fn invoke(input: String) -> u32 {
 		memory_chars += mem_chars;
 		literal_chars += lit_chars;
 	}
-	memory_chars - literal_chars
+	(memory_chars - literal_chars).to_string()
 }
 
 #[cfg(test)]
@@ -35,13 +35,13 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"\"\"
+			&"\"\"
 \"abc\"
 \"aaa\\\"aaa\"
 \"\\x27\"
 "
 			.to_string(),
 		);
-		assert_eq!(result, 12);
+		assert_eq!(result, "12");
 	}
 }

@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use itertools::Itertools;
 
-pub fn invoke(input: String) -> usize {
+pub fn invoke(input: &String) -> String {
 	let mut lines: Vec<&str> = input.lines().collect();
 	let mut replacements: HashMap<&str, Vec<&str>> = HashMap::new();
 	// Create the list of changes
@@ -39,7 +39,7 @@ pub fn invoke(input: String) -> usize {
 	println!("{:?}", molecules.len());
 	let molecules = molecules.iter().unique().collect::<Vec<&String>>();
 	println!("{:?}", molecules.len());
-	molecules.len()
+	molecules.len().to_string()
 }
 
 #[cfg(test)]
@@ -49,7 +49,7 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"H => HO
+			&"H => HO
 H => OH
 O => HH
 
@@ -57,6 +57,6 @@ HOH
 "
 			.to_string(),
 		);
-		assert_eq!(result, 4);
+		assert_eq!(result, "4");
 	}
 }

@@ -7,7 +7,7 @@ type WireMap = HashMap<String, Wire>;
 // TODO: cache the result for repeated looks down the wires.
 // Puzzle seems to run for a long time.
 // Caching now fails the unit test.
-pub fn invoke(input: String) -> u16 {
+pub fn invoke(input: &String) -> String {
 	let mut wires: WireMap = HashMap::new();
 	for line in input.lines() {
 		let (left, right) = line.split_once("->").unwrap();
@@ -15,7 +15,8 @@ pub fn invoke(input: String) -> u16 {
 		let left = left.trim();
 		wires.insert(right.to_string(), Wire::new(left.to_string()));
 	}
-	compute_value("a".to_string(), &mut wires)
+	let r = compute_value("a".to_string(), &mut wires);
+	r.to_string()
 }
 
 #[derive(Debug, Clone)]
@@ -152,7 +153,7 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"123 -> x
+			&"123 -> x
 456 -> y
 x AND y -> d
 x OR y -> e
@@ -163,6 +164,6 @@ NOT y -> i
 i -> a"
 				.to_string(),
 		);
-		assert_eq!(result, 65079);
+		assert_eq!(result, "65079");
 	}
 }

@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let re = Regex::new(r"([a-z\-]+)(\d+)\[([a-z]+)").unwrap();
 	for line in input.lines() {
 		let cap = re.captures(line).unwrap();
@@ -29,7 +29,7 @@ pub fn invoke(input: String) -> u32 {
 			decrypt_name(code, number);
 		}
 	}
-	0
+	0.to_string()
 }
 
 fn decrypt_name(
@@ -58,7 +58,7 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let _ = decrypt_name("qzmt-zixmtkozy-ivhz-", "343");
+		let _ = decrypt_name(&"qzmt-zixmtkozy-ivhz-", "343");
 		assert_eq!(true, true);
 	}
 }

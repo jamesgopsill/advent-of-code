@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut sum: u32 = 0;
 	let lines = input.lines();
 	for line in lines {
@@ -11,7 +11,7 @@ pub fn invoke(input: String) -> u32 {
 
 		sum += number;
 	}
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -25,7 +25,7 @@ pqr3stu8vwx
 a1b2c3d4e5f
 treb7uchet"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 142);
+		let result = invoke(&input);
+		assert_eq!(result, "142");
 	}
 }

@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut lights = [[false; 1_000]; 1_000];
 	let action_re = Regex::new(r"turn on|toggle|turn off").unwrap();
 	let coords_re = Regex::new(r"\d+,\d+").unwrap();
@@ -39,7 +39,7 @@ pub fn invoke(input: String) -> u32 {
 		}
 	}
 
-	count
+	count.to_string()
 }
 
 fn parse_coords(s: &str) -> [usize; 2] {
@@ -56,19 +56,19 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("turn on 0,0 through 999,999".to_string());
-		assert_eq!(result, 1_000_000);
+		let result = invoke(&"turn on 0,0 through 999,999".to_string());
+		assert_eq!(result, "1_000_000");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("toggle 0,0 through 999,0".to_string());
-		assert_eq!(result, 1_000);
+		let result = invoke(&"toggle 0,0 through 999,0".to_string());
+		assert_eq!(result, "1_000");
 	}
 
 	#[test]
 	fn test_c() {
-		let result = invoke("turn off 499,499 through 500,500".to_string());
-		assert_eq!(result, 0);
+		let result = invoke(&"turn off 499,499 through 500,500".to_string());
+		assert_eq!(result, "0");
 	}
 }

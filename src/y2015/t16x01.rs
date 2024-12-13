@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use regex::Regex;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut tape: HashMap<&str, u32> = HashMap::new();
 	tape.insert("children", 3);
 	tape.insert("cats", 7);
@@ -34,5 +34,5 @@ pub fn invoke(input: String) -> u32 {
 			break;
 		}
 	}
-	aunt
+	aunt.to_string()
 }

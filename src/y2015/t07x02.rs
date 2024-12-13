@@ -7,7 +7,7 @@ type WireMap = HashMap<String, Wire>;
 // TODO: cache the result for repeated looks down the wires.
 // Puzzle seems to run for a long time.
 // Caching now fails the unit test.
-pub fn invoke(input: String) -> u16 {
+pub fn invoke(input: &String) -> String {
 	let mut wires: WireMap = HashMap::new();
 	for line in input.lines() {
 		let (left, right) = line.split_once("->").unwrap();
@@ -22,7 +22,7 @@ pub fn invoke(input: String) -> u16 {
 			wire.instruction = ans.to_string();
 		}
 	}
-	compute_value("a".to_string(), &mut wires)
+	compute_value("a".to_string(), &mut wires).to_string()
 }
 
 #[derive(Debug, Clone)]

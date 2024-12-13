@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> usize {
+pub fn invoke(input: &String) -> String {
 	let mut floor: i32 = 0;
 	for (i, c) in input.chars().enumerate() {
 		match c {
@@ -7,10 +7,10 @@ pub fn invoke(input: String) -> usize {
 			_ => {}
 		}
 		if floor == -1 {
-			return i + 1;
+			return (i + 1).to_string();
 		}
 	}
-	0
+	0.to_string()
 }
 
 #[cfg(test)]
@@ -19,13 +19,13 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke(")".to_string());
-		assert_eq!(result, 1);
+		let result = invoke(&")".to_string());
+		assert_eq!(result, "1");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("()())".to_string());
-		assert_eq!(result, 5);
+		let result = invoke(&"()())".to_string());
+		assert_eq!(result, "5");
 	}
 }

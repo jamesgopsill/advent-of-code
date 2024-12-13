@@ -1,4 +1,4 @@
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut a: Vec<u32> = vec![];
 	let mut b: Vec<u32> = vec![];
 
@@ -18,7 +18,7 @@ pub fn invoke(input: &String) -> u32 {
 		}
 		similarity += x * count;
 	}
-	similarity
+	similarity.to_string()
 }
 
 #[cfg(test)]
@@ -37,6 +37,6 @@ mod tests {
 "
 			.to_string(),
 		);
-		assert_eq!(result, 31);
+		assert_eq!(result, "31");
 	}
 }

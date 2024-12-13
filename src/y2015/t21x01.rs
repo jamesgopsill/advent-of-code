@@ -2,7 +2,7 @@ use itertools::Itertools;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
-pub fn invoke(_: String) -> u32 {
+pub fn invoke(_: &String) -> String {
 	let mut boss = Boss::new(8, 1, 104);
 
 	let mut player = Player::new(Weapon::Shortsword, 100);
@@ -74,7 +74,7 @@ pub fn invoke(_: String) -> u32 {
 
 	*/
 
-	0
+	0.to_string()
 }
 
 fn fight(
@@ -318,7 +318,7 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("".to_string());
-		assert_eq!(result, 0);
+		let result = invoke(&"".to_string());
+		assert_eq!(result, "0");
 	}
 }

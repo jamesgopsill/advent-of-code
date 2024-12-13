@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut out: u32 = 0;
 	let lines = input.lines();
 	let gid_reg = Regex::new(r"Game\s(\d+)").unwrap();
@@ -50,7 +50,7 @@ pub fn invoke(input: String) -> u32 {
 			out += gid;
 		}
 	}
-	out
+	out.to_string()
 }
 
 #[cfg(test)]
@@ -65,7 +65,7 @@ Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 8);
+		let result = invoke(&input);
+		assert_eq!(result, "8");
 	}
 }

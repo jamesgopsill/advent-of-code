@@ -1,6 +1,6 @@
 use std::mem::swap;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut map: Vec<Vec<u32>> = vec![];
 	for lines in input.lines() {
 		let mut row: Vec<u32> = vec![];
@@ -37,7 +37,7 @@ pub fn invoke(input: &String) -> u32 {
 		// break;
 	}
 
-	ans
+	ans.to_string()
 }
 
 struct Trail<'a> {
@@ -108,7 +108,7 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 3);
+		assert_eq!(result, "3");
 	}
 
 	#[test]
@@ -123,7 +123,7 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 13);
+		assert_eq!(result, "13");
 	}
 
 	#[test]
@@ -137,7 +137,7 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 227);
+		assert_eq!(result, "227");
 	}
 
 	#[test]
@@ -153,6 +153,6 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 81);
+		assert_eq!(result, "81");
 	}
 }

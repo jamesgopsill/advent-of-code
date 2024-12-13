@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> i32 {
+pub fn invoke(input: &String) -> String {
 	let mut floor: i32 = 0;
 	for c in input.chars() {
 		match c {
@@ -7,7 +7,7 @@ pub fn invoke(input: String) -> i32 {
 			_ => {}
 		}
 	}
-	floor
+	floor.to_string()
 }
 
 #[cfg(test)]
@@ -16,19 +16,19 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("(())".to_string());
-		assert_eq!(result, 0);
+		let result = invoke(&"(())".to_string());
+		assert_eq!(result, "0");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("()()".to_string());
-		assert_eq!(result, 0);
+		let result = invoke(&"()()".to_string());
+		assert_eq!(result, "0");
 	}
 
 	#[test]
 	fn test_c() {
-		let result = invoke("(((".to_string());
-		assert_eq!(result, 3);
+		let result = invoke(&"(((".to_string());
+		assert_eq!(result, "3");
 	}
 }

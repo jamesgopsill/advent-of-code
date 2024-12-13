@@ -1,9 +1,9 @@
 use std::mem::swap;
 
 pub fn invoke(
-	input: String,
+	input: &String,
 	iterations: usize,
-) -> u32 {
+) -> String {
 	let lines: Vec<&str> = input.lines().collect();
 	let n = lines.len();
 	// Create a larger map with the outer values
@@ -66,7 +66,7 @@ pub fn invoke(
 			sum += val;
 		}
 	}
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -76,7 +76,7 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			".#.#.#
+			&".#.#.#
 ...##.
 #....#
 ..#...
@@ -85,6 +85,6 @@ mod tests {
 				.to_string(),
 			4,
 		);
-		assert_eq!(result, 4);
+		assert_eq!(result, "4");
 	}
 }

@@ -1,11 +1,11 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut nice_count = 0;
 	for line in input.lines() {
 		if is_nice(line) {
 			nice_count += 1;
 		}
 	}
-	nice_count
+	nice_count.to_string()
 }
 
 fn is_nice(line: &str) -> bool {

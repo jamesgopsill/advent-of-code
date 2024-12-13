@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let lines: Vec<&str> = input.lines().collect();
 
 	// create the patterns
@@ -29,7 +29,7 @@ pub fn invoke(input: String) -> u32 {
 		}
 	}
 
-	0
+	0.to_string()
 }
 
 #[derive(Debug)]

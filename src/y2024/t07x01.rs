@@ -1,4 +1,4 @@
-pub fn invoke(input: &String) -> u64 {
+pub fn invoke(input: &String) -> String {
 	let mut ans: u64 = 0;
 	for line in input.lines() {
 		let (test, numbers) = line.split_once(":").unwrap();
@@ -19,7 +19,7 @@ pub fn invoke(input: &String) -> u64 {
 			ans += test;
 		}
 	}
-	ans
+	ans.to_string()
 }
 
 fn calculate(
@@ -66,6 +66,6 @@ mod tests {
 "
 			.to_string(),
 		);
-		assert_eq!(result, 3749);
+		assert_eq!(result, "3749");
 	}
 }

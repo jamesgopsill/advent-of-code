@@ -1,4 +1,4 @@
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut total: u32 = 0;
 	for report in input.lines() {
 		let mut levels: Vec<i32> = vec![];
@@ -26,7 +26,7 @@ pub fn invoke(input: &String) -> u32 {
 			total += 1;
 		}
 	}
-	total
+	total.to_string()
 }
 
 #[cfg(test)]
@@ -45,6 +45,6 @@ mod tests {
 "
 			.to_string(),
 		);
-		assert_eq!(result, 2);
+		assert_eq!(result, "2");
 	}
 }

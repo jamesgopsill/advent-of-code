@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use regex::Regex;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut lines = input.lines();
 	let instructions = lines.next().unwrap();
 	// dbg!(instructions);
@@ -41,7 +41,7 @@ pub fn invoke(input: String) -> u32 {
 		}
 	}
 
-	steps
+	steps.to_string()
 }
 
 #[cfg(test)]
@@ -60,8 +60,8 @@ EEE = (EEE, EEE)
 GGG = (GGG, GGG)
 ZZZ = (ZZZ, ZZZ)"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 2);
+		let result = invoke(&input);
+		assert_eq!(result, "2");
 	}
 
 	#[test]
@@ -72,7 +72,7 @@ AAA = (BBB, BBB)
 BBB = (AAA, ZZZ)
 ZZZ = (ZZZ, ZZZ)"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 6);
+		let result = invoke(&input);
+		assert_eq!(result, "6");
 	}
 }

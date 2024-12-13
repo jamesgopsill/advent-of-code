@@ -1,7 +1,7 @@
 use itertools::Itertools;
 use regex::Regex;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut pattern = "".to_string();
 	for p in ('a'..='z').permutations(2) {
 		pattern.push(p[0]);
@@ -25,7 +25,7 @@ pub fn invoke(input: &String) -> u32 {
 			ans += 1;
 		}
 	}
-	ans
+	ans.to_string()
 }
 
 #[cfg(test)]
@@ -40,6 +40,6 @@ aaaa[qwer]tyui
 ioxxoj[asdfgh]zxcvbn"
 			.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 2);
+		assert_eq!(result, "2");
 	}
 }

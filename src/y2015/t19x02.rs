@@ -4,7 +4,7 @@ use std::{
 };
 
 // Too computationally intensive.
-pub fn invoke(input: String) -> usize {
+pub fn invoke(input: &String) -> String {
 	let mut lines: Vec<&str> = input.lines().collect();
 	let mut many_to_one: HashMap<&str, &str> = HashMap::new();
 	// Create the list of changes
@@ -54,7 +54,7 @@ pub fn invoke(input: String) -> usize {
 		swap(&mut molecules_a, &mut molecules_b);
 		molecules_b.clear();
 	}
-	n
+	n.to_string()
 }
 
 #[cfg(test)]
@@ -64,7 +64,7 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"e => H
+			&"e => H
 e => O
 H => HO
 H => OH
@@ -74,6 +74,6 @@ HOH
 "
 			.to_string(),
 		);
-		assert_eq!(result, 3);
+		assert_eq!(result, "3");
 	}
 }

@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> String {
+pub fn invoke(input: &String) -> String {
 	let lines = input.lines();
 	let mut p = PinPad::new();
 	let mut passcode: String = String::new();
@@ -137,7 +137,7 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"ULL
+			&"ULL
 RRDDD
 LURDL
 UUUUD

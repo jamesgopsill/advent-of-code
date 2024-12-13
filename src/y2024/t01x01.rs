@@ -1,6 +1,6 @@
 use std::iter::zip;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut a: Vec<u32> = vec![];
 	let mut b: Vec<u32> = vec![];
 	for line in input.lines() {
@@ -14,7 +14,7 @@ pub fn invoke(input: &String) -> u32 {
 	for (x, y) in zip(a, b) {
 		distance += x.abs_diff(y)
 	}
-	distance
+	distance.to_string()
 }
 
 #[cfg(test)]
@@ -33,6 +33,6 @@ mod tests {
 "
 			.to_string(),
 		);
-		assert_eq!(result, 11);
+		assert_eq!(result, "11");
 	}
 }

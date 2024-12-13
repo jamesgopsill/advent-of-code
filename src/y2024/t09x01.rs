@@ -1,4 +1,4 @@
-pub fn invoke(input: &String) -> u64 {
+pub fn invoke(input: &String) -> String {
 	let mut disk: Vec<i32> = vec![];
 	let mut file_id: i32 = 0;
 	for (i, val) in input.trim().chars().enumerate() {
@@ -54,7 +54,7 @@ pub fn invoke(input: &String) -> u64 {
 		}
 		checksum += i as u64 * *val as u64;
 	}
-	checksum
+	checksum.to_string()
 }
 
 #[cfg(test)]
@@ -65,13 +65,13 @@ mod tests {
 	fn test_a() {
 		let input = "12345".to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 60);
+		assert_eq!(result, "60");
 	}
 
 	#[test]
 	fn test_b() {
 		let input = "2333133121414131402".to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 1928);
+		assert_eq!(result, "1928");
 	}
 }

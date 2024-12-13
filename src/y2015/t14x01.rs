@@ -1,9 +1,9 @@
 use regex::Regex;
 
 pub fn invoke(
-	input: String,
+	input: &String,
 	seconds: u32,
-) -> u32 {
+) -> String {
 	let re = Regex::new(r"(\d+)[a-z\s/]+(\d+)[a-z\s,]+(\d+)").unwrap();
 	let captures = re.captures_iter(input.trim());
 	let mut max_distance: u32 = 0;
@@ -44,7 +44,7 @@ pub fn invoke(
 			max_distance = distance;
 		}
 	}
-	max_distance
+	max_distance.to_string()
 }
 
 enum Action {
@@ -59,12 +59,12 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
+			&"Comet can fly 14 km/s for 10 seconds, but then must rest for 127 seconds.
 Dancer can fly 16 km/s for 11 seconds, but then must rest for 162 seconds.
 "
 			.to_string(),
 			1_000,
 		);
-		assert_eq!(result, 1120);
+		assert_eq!(result, "1120");
 	}
 }

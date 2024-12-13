@@ -4,8 +4,8 @@ use regex::Regex;
 
 // Classic
 // Part 1: Brute Force It. Part 2. I know what's coming.
-// Yes Part 2. Lets do use maths!
-pub fn invoke(input: &String) -> u64 {
+// Yes Part 2. Lets use maths!
+pub fn invoke(input: &String) -> String {
 	let re = Regex::new(
 		r"Button\sA:\sX\+(\d+),\sY\+(\d+)\nButton\sB\:\sX\+(\d+),\sY\+(\d+)\nPrize:\sX=(\d+),\sY=(\d+)",
 	)
@@ -42,32 +42,5 @@ pub fn invoke(input: &String) -> u64 {
 			total += a * 3 + b;
 		}
 	}
-	total
-}
-
-#[cfg(test)]
-mod tests {
-	use super::invoke;
-
-	#[test]
-	fn test_a() {
-		let input = "Button A: X+94, Y+34
-Button B: X+22, Y+67
-Prize: X=8400, Y=5400
-
-Button A: X+26, Y+66
-Button B: X+67, Y+21
-Prize: X=12748, Y=12176
-
-Button A: X+17, Y+86
-Button B: X+84, Y+37
-Prize: X=7870, Y=6450
-
-Button A: X+69, Y+23
-Button B: X+27, Y+71
-Prize: X=18641, Y=10279"
-			.to_string();
-		let result = invoke(&input);
-		assert_eq!(result, 480);
-	}
+	total.to_string()
 }

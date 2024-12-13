@@ -6,7 +6,7 @@ type Location = String;
 type Distance = u32;
 type RouteMap = HashMap<Location, HashMap<Location, Distance>>;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let re = Regex::new(r"(\w+)\sto\s(\w+)\s=\s(\d+)").unwrap();
 	let mut route_map: RouteMap = HashMap::new();
 	// Create the route map
@@ -53,7 +53,7 @@ pub fn invoke(input: String) -> u32 {
 			min_dist = dist;
 		}
 	}
-	min_dist
+	min_dist.to_string()
 }
 
 fn traverse(
@@ -101,12 +101,12 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(
-			"London to Dublin = 464
+			&"London to Dublin = 464
 London to Belfast = 518
 Dublin to Belfast = 141
 "
 			.to_string(),
 		);
-		assert_eq!(result, 605);
+		assert_eq!(result, "605");
 	}
 }

@@ -1,11 +1,11 @@
-pub fn invoke(input: String) -> i32 {
+pub fn invoke(input: &String) -> String {
 	let moves = input.split(",");
 	let mut elf = Elf::new();
 	for m in moves {
 		elf.walk(m.trim());
 	}
 	println!("{} {}", elf.x, elf.y);
-	elf.distance()
+	elf.distance().to_string()
 }
 
 enum Direction {
@@ -96,19 +96,19 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("R2, L3".to_string());
-		assert_eq!(result, 5);
+		let result = invoke(&"R2, L3".to_string());
+		assert_eq!(result, "5");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("R2, R2, R2".to_string());
-		assert_eq!(result, 2);
+		let result = invoke(&"R2, R2, R2".to_string());
+		assert_eq!(result, "2");
 	}
 
 	#[test]
 	fn test_c() {
-		let result = invoke("R5, L5, R5, R3".to_string());
-		assert_eq!(result, 12);
+		let result = invoke(&"R5, L5, R5, R3".to_string());
+		assert_eq!(result, "12");
 	}
 }

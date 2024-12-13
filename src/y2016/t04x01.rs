@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let re = Regex::new(r"([a-z\-]+)(\d+)\[([a-z]+)").unwrap();
 	let mut sum: u32 = 0;
 	for line in input.lines() {
@@ -30,7 +30,7 @@ pub fn invoke(input: String) -> u32 {
 			sum += number.parse::<u32>().unwrap();
 		}
 	}
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -44,7 +44,7 @@ a-b-c-d-e-f-g-h-987[abcde]
 not-a-real-room-404[oarel]
 totally-real-room-200[decoy]"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 1514);
+		let result = invoke(&input);
+		assert_eq!(result, "1514");
 	}
 }

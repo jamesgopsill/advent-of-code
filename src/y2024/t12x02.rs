@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut garden: Vec<Vec<char>> = vec![];
 	let mut plots: Vec<Vec<u32>> = vec![];
 
@@ -216,7 +216,7 @@ pub fn invoke(input: &String) -> u32 {
 		//println!("---");
 		total_price += count * sides;
 	}
-	total_price
+	total_price.to_string()
 }
 
 #[cfg(test)]
@@ -233,7 +233,7 @@ EEEC
 "
 			.to_string(),
 		);
-		assert_eq!(result, 80);
+		assert_eq!(result, "80");
 	}
 
 	#[test]
@@ -247,7 +247,7 @@ OOOOO
 "
 			.to_string(),
 		);
-		assert_eq!(result, 436);
+		assert_eq!(result, "436");
 	}
 
 	#[test]
@@ -261,7 +261,7 @@ EEEEE
 "
 			.to_string(),
 		);
-		assert_eq!(result, 236);
+		assert_eq!(result, "236");
 	}
 
 	// TODO: solve the crossing over.
@@ -277,6 +277,6 @@ AAAAAA
 "
 			.to_string(),
 		);
-		assert_eq!(result, 368);
+		assert_eq!(result, "368");
 	}
 }

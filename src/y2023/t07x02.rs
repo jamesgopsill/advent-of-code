@@ -99,7 +99,7 @@ impl Bet {
 	}
 }
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut sum: u32 = 0;
 	let mut bets: Vec<Bet> = vec![];
 	let lines = input.lines();
@@ -133,7 +133,7 @@ pub fn invoke(input: String) -> u32 {
 		sum += winnings;
 	}
 
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -148,7 +148,7 @@ KK677 28
 KTJJT 220
 QQQJA 483"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 6440);
+		let result = invoke(&input);
+		assert_eq!(result, "6440");
 	}
 }

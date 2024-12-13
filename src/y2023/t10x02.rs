@@ -1,7 +1,7 @@
 use core::panic;
 
 // TODO: Not FINISHED
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let lines: Vec<&str> = input.lines().collect();
 	let mut map: Vec<Vec<char>> = vec![];
 
@@ -42,7 +42,7 @@ pub fn invoke(input: String) -> u32 {
 	elf.print_map();
 
 	// Return the result
-	sum
+	sum.to_string()
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -396,8 +396,8 @@ mod tests {
 ...........
 "
 		.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 4);
+		let result = invoke(&input);
+		assert_eq!(result, "4");
 	}
 
 	#[test]
@@ -414,8 +414,8 @@ L--J.L7...LJS7F-7L7.
 ....L---J.LJ.LJLJ...
 "
 		.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 8);
+		let result = invoke(&input);
+		assert_eq!(result, "8");
 	}
 
 	#[test]
@@ -432,7 +432,7 @@ L.L7LFJ|||||FJL7||LJ
 L7JLJL-JLJLJL--JLJ.L
 "
 		.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 10);
+		let result = invoke(&input);
+		assert_eq!(result, "10");
 	}
 }

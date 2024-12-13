@@ -1,4 +1,4 @@
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut map: Vec<Vec<char>> = vec![];
 	for line in input.lines() {
 		let mut row: Vec<char> = vec![];
@@ -88,7 +88,7 @@ pub fn invoke(input: &String) -> u32 {
 			}
 		}
 	}
-	count
+	count.to_string()
 }
 
 #[cfg(test)]
@@ -111,6 +111,6 @@ MXMXAXMASX
 "
 			.to_string(),
 		);
-		assert_eq!(result, 18);
+		assert_eq!(result, "18");
 	}
 }

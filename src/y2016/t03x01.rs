@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut valid: u32 = 0;
 	for line in input.lines() {
 		let mut items = line.split_whitespace();
@@ -10,7 +10,7 @@ pub fn invoke(input: String) -> u32 {
 			valid += 1;
 		}
 	}
-	valid
+	valid.to_string()
 }
 
 #[cfg(test)]
@@ -19,7 +19,7 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("5 10 25".to_string());
-		assert_eq!(result, 0);
+		let result = invoke(&"5 10 25".to_string());
+		assert_eq!(result, "0");
 	}
 }

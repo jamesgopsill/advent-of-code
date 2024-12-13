@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> i32 {
+pub fn invoke(input: &String) -> String {
 	let moves = input.split(",");
 	let mut elf = Elf::new();
 	let mut visited: Vec<String> = vec![];
@@ -14,13 +14,13 @@ pub fn invoke(input: String) -> i32 {
 			if visited.contains(&v) {
 				// visited twice
 				println!("Visited {} twice", v);
-				return elf.distance();
+				return elf.distance().to_string();
 			}
 			visited.push(v);
 		}
 	}
 	println!("Did not visit a place twice!");
-	return 0;
+	return 0.to_string();
 }
 
 enum Direction {
@@ -93,7 +93,7 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("R8, R4, R4, R8".to_string());
-		assert_eq!(result, 4);
+		let result = invoke(&"R8, R4, R4, R8".to_string());
+		assert_eq!(result, "4");
 	}
 }

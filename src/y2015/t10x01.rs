@@ -1,7 +1,7 @@
 pub fn invoke(
-	input: String,
-	times: u32,
-) -> u32 {
+	input: &String,
+	times: u64,
+) -> String {
 	// Rust regex does not support backreferencing -> (\w)\1+
 	// https://stackoverflow.com/questions/12258622/regular-expression-to-check-for-repeating-characters#12258829
 	// Could use another package but I think we could group this ourselves.
@@ -39,7 +39,7 @@ pub fn invoke(
 		sequence = new_sequence
 	}
 	// println!("{}", sequence);
-	sequence.len() as u32
+	sequence.len().to_string()
 }
 
 #[cfg(test)]
@@ -48,31 +48,31 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("1".to_string(), 1);
-		assert_eq!(result, 2);
+		let result = invoke(&"1".to_string(), 1);
+		assert_eq!(result, "2");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("11".to_string(), 1);
-		assert_eq!(result, 2);
+		let result = invoke(&"11".to_string(), 1);
+		assert_eq!(result, "2");
 	}
 
 	#[test]
 	fn test_c() {
-		let result = invoke("21".to_string(), 1);
-		assert_eq!(result, 4);
+		let result = invoke(&"21".to_string(), 1);
+		assert_eq!(result, "4");
 	}
 
 	#[test]
 	fn test_d() {
-		let result = invoke("1211".to_string(), 1);
-		assert_eq!(result, 6);
+		let result = invoke(&"1211".to_string(), 1);
+		assert_eq!(result, "6");
 	}
 
 	#[test]
 	fn test_e() {
-		let result = invoke("111221".to_string(), 1);
-		assert_eq!(result, 6);
+		let result = invoke(&"111221".to_string(), 1);
+		assert_eq!(result, "6");
 	}
 }

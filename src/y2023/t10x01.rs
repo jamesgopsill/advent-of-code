@@ -1,6 +1,6 @@
 use core::panic;
 
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let lines: Vec<&str> = input.lines().map(|v| v).collect();
 	let mut map: Vec<Vec<char>> = vec![];
 
@@ -23,7 +23,7 @@ pub fn invoke(input: String) -> u32 {
 	}
 
 	let distance: u32 = traveller.past_tiles.len() as u32 + 1;
-	distance / 2
+	(distance / 2).to_string()
 }
 
 #[derive(Debug, PartialEq, Clone)]
@@ -271,8 +271,8 @@ mod tests {
 .....
 "
 		.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 4);
+		let result = invoke(&input);
+		assert_eq!(result, "4");
 	}
 
 	#[test]
@@ -284,7 +284,7 @@ SJ.L7
 LJ...
 "
 		.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 8);
+		let result = invoke(&input);
+		assert_eq!(result, "8");
 	}
 }

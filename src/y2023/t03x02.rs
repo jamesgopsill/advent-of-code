@@ -2,7 +2,7 @@ use std::{collections::HashMap, vec};
 
 use regex::Regex;
 
-pub fn invoke(schematic: String) -> u32 {
+pub fn invoke(schematic: &String) -> String {
 	let row_length = schematic.find("\n").unwrap() as i32;
 
 	// dbg!(row_length);
@@ -74,7 +74,7 @@ pub fn invoke(schematic: String) -> u32 {
 		}
 	}
 
-	sum as u32
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -94,7 +94,7 @@ mod tests {
 ...$.*....
 .664.598.."
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 4361);
+		let result = invoke(&input);
+		assert_eq!(result, "4361");
 	}
 }

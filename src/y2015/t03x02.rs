@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-pub fn invoke(input: String) -> usize {
+pub fn invoke(input: &String) -> String {
 	let mut santa = Santa::new();
 	let mut robo_santa = Santa::new();
 	for (i, c) in input.chars().enumerate() {
@@ -14,7 +14,7 @@ pub fn invoke(input: String) -> usize {
 		.unique_locations
 		.union(&robo_santa.unique_locations)
 		.collect();
-	houses.len()
+	houses.len().to_string()
 }
 
 struct Santa {
@@ -54,19 +54,19 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke("^v".to_string());
-		assert_eq!(result, 3);
+		let result = invoke(&"^v".to_string());
+		assert_eq!(result, "3");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("^>v<".to_string());
-		assert_eq!(result, 3);
+		let result = invoke(&"^>v<".to_string());
+		assert_eq!(result, "3");
 	}
 
 	#[test]
 	fn test_c() {
-		let result = invoke("^v^v^v^v^v".to_string());
-		assert_eq!(result, 11);
+		let result = invoke(&"^v^v^v^v^v".to_string());
+		assert_eq!(result, "11");
 	}
 }

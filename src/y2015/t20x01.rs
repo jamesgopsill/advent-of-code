@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let presents = input.trim().parse::<u32>().unwrap();
 	println!("{}", presents);
 
@@ -17,7 +17,7 @@ pub fn invoke(input: String) -> u32 {
 			}
 		}
 		if house_presents == presents {
-			return house_number;
+			return house_number.to_string();
 		}
 		if house_presents > presents {
 			println!("Too high");
@@ -57,5 +57,5 @@ pub fn invoke(input: String) -> u32 {
 	}
 	println!("{} {}", mid, mid_presents);
 
-	0
+	0.to_string()
 }

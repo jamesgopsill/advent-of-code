@@ -1,4 +1,4 @@
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut garden: Vec<Vec<char>> = vec![];
 	let mut plots: Vec<Vec<u32>> = vec![];
 
@@ -96,7 +96,7 @@ pub fn invoke(input: &String) -> u32 {
 		// println!("{} {} {}", count, faces, count * faces);
 		total_price += count * faces;
 	}
-	total_price
+	total_price.to_string()
 }
 
 #[cfg(test)]
@@ -113,7 +113,7 @@ EEEC
 "
 			.to_string(),
 		);
-		assert_eq!(result, 140);
+		assert_eq!(result, "140");
 	}
 
 	#[test]
@@ -127,7 +127,7 @@ OOOOO
 "
 			.to_string(),
 		);
-		assert_eq!(result, 772);
+		assert_eq!(result, "772");
 	}
 
 	#[test]
@@ -146,6 +146,6 @@ MMMISSJEEE
 "
 			.to_string(),
 		);
-		assert_eq!(result, 1930);
+		assert_eq!(result, "1930");
 	}
 }

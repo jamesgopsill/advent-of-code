@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use regex::Regex;
 
 // TODO: too slow. Got to be efficient.
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut lines = input.lines();
 	let instructions = lines.next().unwrap();
 	// dbg!(instructions);
@@ -67,7 +67,7 @@ pub fn invoke(input: String) -> u32 {
 		}
 	}
 
-	steps
+	steps.to_string()
 }
 
 #[cfg(test)]
@@ -87,7 +87,7 @@ mod tests {
 22Z = (22B, 22B)
 XXX = (XXX, XXX)"
 			.to_string();
-		let result = invoke(input);
-		assert_eq!(result, 6);
+		let result = invoke(&input);
+		assert_eq!(result, "6");
 	}
 }

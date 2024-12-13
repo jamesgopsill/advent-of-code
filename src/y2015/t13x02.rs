@@ -3,7 +3,7 @@ use std::collections::HashMap;
 
 use regex::Regex;
 
-pub fn invoke(input: String) -> i32 {
+pub fn invoke(input: &String) -> String {
 	let input = input.trim();
 	// let guests: Vec<String> = vec![];
 	let re = Regex::new(r"(\w+)[\w\s]+(gain|lose)\s(\d+)[\w\s]+([A-Z]\w+)").unwrap();
@@ -57,5 +57,5 @@ pub fn invoke(input: String) -> i32 {
 			max_happiness = happiness;
 		}
 	}
-	max_happiness
+	max_happiness.to_string()
 }

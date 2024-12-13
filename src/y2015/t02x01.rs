@@ -1,4 +1,4 @@
-pub fn invoke(input: String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut sum: u32 = 0;
 	for line in input.lines() {
 		let present = Present::new(line);
@@ -6,7 +6,7 @@ pub fn invoke(input: String) -> u32 {
 		let smallest_area = present.areas.iter().min().unwrap();
 		sum += surface_area + smallest_area
 	}
-	sum
+	sum.to_string()
 }
 
 struct Present {
@@ -40,14 +40,14 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let input = "2x3x4".to_string();
-		let result = invoke(input);
-		assert_eq!(result, 58);
+		let result = invoke(&input);
+		assert_eq!(result, "58");
 	}
 
 	#[test]
 	fn test_b() {
 		let input = "1x1x10".to_string();
-		let result = invoke(input);
-		assert_eq!(result, 43);
+		let result = invoke(&input);
+		assert_eq!(result, "43");
 	}
 }

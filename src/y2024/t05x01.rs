@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-pub fn invoke(input: &String) -> u32 {
+pub fn invoke(input: &String) -> String {
 	let mut rules: HashMap<u32, Vec<u32>> = HashMap::new();
 	let mut pages: Vec<Vec<u32>> = vec![];
 
@@ -47,7 +47,7 @@ pub fn invoke(input: &String) -> u32 {
 			sum += page[middle];
 		}
 	}
-	sum
+	sum.to_string()
 }
 
 #[cfg(test)]
@@ -87,6 +87,6 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, 143);
+		assert_eq!(result, "143");
 	}
 }

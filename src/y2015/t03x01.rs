@@ -1,11 +1,11 @@
 use std::collections::HashSet;
 
-pub fn invoke(input: String) -> usize {
+pub fn invoke(input: &String) -> String {
 	let mut santa = Santa::new();
 	for c in input.chars() {
 		santa.step(c);
 	}
-	santa.unique_locations.len()
+	santa.unique_locations.len().to_string()
 }
 
 struct Santa {
@@ -45,19 +45,19 @@ mod tests {
 
 	#[test]
 	fn test_a() {
-		let result = invoke(">".to_string());
-		assert_eq!(result, 2);
+		let result = invoke(&">".to_string());
+		assert_eq!(result, "2");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("^>v<".to_string());
-		assert_eq!(result, 4);
+		let result = invoke(&"^>v<".to_string());
+		assert_eq!(result, "4");
 	}
 
 	#[test]
 	fn test_c() {
-		let result = invoke("^v^v^v^v^v".to_string());
-		assert_eq!(result, 2);
+		let result = invoke(&"^v^v^v^v^v".to_string());
+		assert_eq!(result, "2");
 	}
 }
