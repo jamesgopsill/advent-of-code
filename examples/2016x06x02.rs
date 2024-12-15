@@ -1,4 +1,4 @@
-use advent::{bench::bench, y2023::t06x02::invoke};
+use advent::{bench::bench, y2016::t06x02::invoke};
 use std::fs;
 
 fn main() {
