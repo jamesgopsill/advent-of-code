@@ -57,13 +57,13 @@ mod tests {
 	#[test]
 	fn test_a() {
 		let result = invoke(&"turn on 0,0 through 999,999".to_string());
-		assert_eq!(result, "1_000_000");
+		assert_eq!(result, "1000000");
 	}
 
 	#[test]
 	fn test_b() {
 		let result = invoke(&"toggle 0,0 through 999,0".to_string());
-		assert_eq!(result, "1_000");
+		assert_eq!(result, "1000");
 	}
 
 	#[test]
