@@ -1,5 +1,6 @@
 use std::{u64, vec};
 
+// Not working on main puzzle.
 pub fn invoke(input: &String) -> String {
 	let mut m: Vec<Vec<(char, u64)>> = vec![];
 	for row in input.lines() {
@@ -39,21 +40,67 @@ pub fn invoke(input: &String) -> String {
 		deer.extend(next_deer);
 	}
 
-	// map.print_scores();
+	map.print_scores();
 
-	let mut ans: u64 = 0;
+	// Best path
+	//
+
+	let mut deer: Vec<Reindeer> = vec![];
 	for i in 0..row_max {
 		for j in 0..col_max {
 			let (obs, score) = map.get(i, j);
 			match obs {
 				'E' => {
-					println!("{} {}", obs, score);
-					ans = score;
+					// set the deers off to avoid the issue in test_b
+					if map.0[i - 1][j].1 == score - 1 {
+						let r = Reindeer::new(i - 1, j, Facing::North, score - 1);
+						map.set_char(i - 1, j, 'O');
+						deer.push(r);
+					}
+					if map.0[i + 1][j].1 == score - 1 {
+						let r = Reindeer::new(i + 1, j, Facing::North, score - 1);
+						map.set_char(i + 1, j, 'O');
+						deer.push(r);
+					}
+					if map.0[i][j + 1].1 == score - 1 {
+						let r = Reindeer::new(i, j + 1, Facing::North, score - 1);
+						map.set_char(i, j + 1, 'O');
+						deer.push(r);
+					}
+					if map.0[i][j - 1].1 == score - 1 {
+						let r = Reindeer::new(i, j - 1, Facing::North, score - 1);
+						map.set_char(i, j - 1, 'O');
+						deer.push(r);
+					}
 				}
 				_ => {}
 			}
 		}
 	}
+
+	while deer.len() > 0 {
+		let mut next_deer: Vec<Reindeer> = vec![];
+		while let Some(d) = deer.pop() {
+			let nd = d.prev(&mut map);
+			next_deer.extend(nd)
+		}
+		// println!("Next Deer: {}", next_deer.len());
+		deer.extend(next_deer);
+	}
+
+	map.print();
+
+	let mut ans: u32 = 2; // S & E
+	for i in 0..row_max {
+		for j in 0..col_max {
+			let (obs, _score) = map.get(i, j);
+			match obs {
+				'O' => ans += 1,
+				_ => {}
+			}
+		}
+	}
+
 	ans.to_string()
 }
 
@@ -87,6 +134,15 @@ impl Map {
 		score: u64,
 	) {
 		self.0[row][col].1 = score
+	}
+
+	fn set_char(
+		&mut self,
+		row: usize,
+		col: usize,
+		c: char,
+	) {
+		self.0[row][col].0 = c
 	}
 
 	fn print(&self) {
@@ -197,6 +253,57 @@ impl Reindeer {
 		}
 		deer
 	}
+
+	fn prev(
+		&self,
+		map: &mut Map,
+	) -> Vec<Reindeer> {
+		// row, col, facing, score
+		let mut moves: Vec<(usize, usize, Facing, u64)> = vec![];
+		if let Some(s) = self.score.checked_sub(1) {
+			moves.push((self.row - 1, self.col, Facing::North, s));
+			moves.push((self.row, self.col + 1, Facing::North, s));
+			moves.push((self.row + 1, self.col, Facing::North, s));
+			moves.push((self.row, self.col - 1, Facing::North, s));
+		}
+		if let Some(s) = self.score.checked_sub(1001) {
+			moves.push((self.row - 1, self.col, Facing::North, s));
+			moves.push((self.row, self.col + 1, Facing::North, s));
+			moves.push((self.row + 1, self.col, Facing::North, s));
+			moves.push((self.row, self.col - 1, Facing::North, s));
+		}
+		if let Some(s) = self.score.checked_sub(2001) {
+			moves.push((self.row - 1, self.col, Facing::North, s));
+			moves.push((self.row, self.col + 1, Facing::North, s));
+			moves.push((self.row + 1, self.col, Facing::North, s));
+			moves.push((self.row, self.col - 1, Facing::North, s));
+		}
+		if let Some(s) = self.score.checked_add(999) {
+			moves.push((self.row - 1, self.col, Facing::North, s));
+			moves.push((self.row, self.col + 1, Facing::North, s));
+			moves.push((self.row + 1, self.col, Facing::North, s));
+			moves.push((self.row, self.col - 1, Facing::North, s));
+		}
+
+		let mut deer: Vec<Self> = vec![];
+		println!("----");
+		for (row, col, facing, score) in moves {
+			let (c, s) = map.get(row, col);
+			println!("{} {} {:?}", score, s, score.checked_sub(s));
+			match c {
+				'.' => {
+					// Then we're on a critical path.
+					if score == s {
+						map.set_char(row, col, 'O');
+						let r = Reindeer::new(row, col, facing, score);
+						deer.push(r);
+					}
+				}
+				_ => {}
+			}
+		}
+		deer
+	}
 }
 
 #[cfg(test)]
@@ -223,7 +330,7 @@ mod tests {
 "
 		.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, "7036");
+		assert_eq!(result, "45");
 	}
 
 	#[test]
@@ -247,6 +354,6 @@ mod tests {
 #################"
 			.to_string();
 		let result = invoke(&input);
-		assert_eq!(result, "11048");
+		assert_eq!(result, "64");
 	}
 }
