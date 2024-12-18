@@ -1,4 +1,4 @@
-use rayon::prelude::*;
+//use rayon::prelude::*;
 
 // Knowing there is a better way but lets try brute. :D
 pub fn invoke(_input: &String) -> String {
