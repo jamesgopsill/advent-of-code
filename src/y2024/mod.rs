@@ -35,6 +35,3 @@ pub mod t18x01;
 pub mod t18x02;
 pub mod t19x01;
 pub mod t19x02;
-pub mod t20x01;
-pub mod t22x01;
-pub mod t22x02;

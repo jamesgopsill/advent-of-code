@@ -1,16 +1,16 @@
 //use rayon::prelude::*;
 
 // Knowing there is a better way but lets try brute. :D
-pub fn invoke(input: &String) -> String {
-	let mut lines = input.lines();
-	let program = lines.nth(4).unwrap().split(":").last().unwrap();
-	let program = program
-		.split(",")
-		.collect::<Vec<&str>>()
-		.iter()
-		.map(|f| f.trim().parse::<u32>().unwrap())
-		.collect::<Vec<u32>>();
-	let mut computer = Computer::new(0, 0, 0, program);
+pub fn invoke(_input: &String) -> String {
+	//let mut lines = input.lines();
+	//let program = lines.nth(4).unwrap().split(":").last().unwrap();
+	//let program = program
+	//.split(",")
+	//.collect::<Vec<&str>>()
+	//.iter()
+	//.map(|f| f.trim().parse::<u32>().unwrap())
+	//.collect::<Vec<u32>>();
+	//let mut computer = Computer::new(0, 0, 0, program);
 	/*
 
 	(0..u32::MAX).into_par_iter().for_each(|i| {
@@ -24,9 +24,8 @@ pub fn invoke(input: &String) -> String {
 			println!("{}", i.to_string());
 		}
 	});
-	*/
 
-	for i in 117400..117500 {
+	for i in 0..u32::MAX {
 		if i % 100_000 == 0 {
 			println!("{}", i);
 		}
@@ -37,6 +36,7 @@ pub fn invoke(input: &String) -> String {
 			return i.to_string();
 		}
 	}
+	*/
 	"".to_string()
 }
 
