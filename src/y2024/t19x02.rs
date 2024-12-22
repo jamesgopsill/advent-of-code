@@ -1,4 +1,6 @@
-// Not Working. Will take forever at the moment.
+use std::collections::HashMap;
+
+// Time to cache in
 pub fn invoke(input: &String) -> String {
 	let mut lines = input.lines();
 	// Get the stripes
@@ -35,19 +37,24 @@ pub fn invoke(input: &String) -> String {
 		println!("Towel: {}", t);
 		let valid = depth_first_search(t, &filtered_stripes, 0);
 		if valid {
-			println!("Possible");
+			// println!("Possible");
 			possible.push(t);
 		} else {
-			println!("Impossible");
+			// println!("Impossible");
 		}
 	}
 
 	// now some up all the combinations for that towel
-	let mut count: u32 = 0;
+	// Implement a cache to prevent repeat competitions
+	// for strings we have already tried.
+	let mut count: u64 = 0;
+	let mut cache: HashMap<&str, u64> = HashMap::new();
 	for t in possible {
 		println!("Towel: {}", t);
-		dfs_count(t, &stripes, 0, &mut count);
-		println!("{}", count);
+		let c = dfs_count(t, &stripes, &mut cache);
+		println!("{}", c);
+		println!("Cache: {}", cache.len());
+		count += c;
 	}
 	count.to_string()
 }
@@ -72,19 +79,26 @@ fn depth_first_search(
 	false
 }
 
-fn dfs_count(
-	towel: &str,
+fn dfs_count<'a>(
+	towel: &'a str,
 	stripes: &[&str],
-	i: usize,
-	count: &mut u32,
-) {
-	if i == towel.len() {
-		*count += 1;
-		return;
+	cache: &mut HashMap<&'a str, u64>,
+) -> u64 {
+	if towel.len() == 0 {
+		return 1;
 	}
-	for s in stripes.iter() {
-		if towel[i..].starts_with(s) {
-			dfs_count(towel, stripes, i + s.len(), count);
+	let cache_value = cache.get(&towel);
+	match cache_value {
+		Some(val) => return *val,
+		None => {
+			let mut count = 0;
+			for s in stripes {
+				if towel.starts_with(s) {
+					count += dfs_count(&towel[s.len()..], stripes, cache);
+				}
+			}
+			cache.insert(towel, count);
+			return count;
 		}
 	}
 }

@@ -1,0 +1,226 @@
+pub fn invoke(
+	input: &String,
+	saving: i32,
+) -> String {
+	let mut map: Vec<Vec<char>> = vec![];
+	let mut start_row = 0;
+	let mut start_col = 0;
+	for (i, line) in input.lines().enumerate() {
+		let mut row: Vec<char> = vec![];
+		for (j, c) in line.chars().enumerate() {
+			row.push(c);
+			match c {
+				'S' => {
+					start_row = i;
+					start_col = j;
+				}
+				_ => {}
+			}
+		}
+		map.push(row)
+	}
+
+	// No cheat.
+	let mut no_cheat = Historian::new(start_row, start_col, [0, 0]);
+	while no_cheat.finished == false {
+		no_cheat = no_cheat.step(&map)[0].clone();
+	}
+	println!("No Cheat Time: {}", no_cheat.time);
+
+	let h = Historian::new(start_row, start_col, [12, 13 + 1]);
+	let mut historians: Vec<Historian> = vec![h];
+	while historians.len() > 0 {
+		let mut new_hist: Vec<Historian> = vec![];
+		for h in historians.iter() {
+			let next_hist = h.step(&map);
+			for nh in next_hist {
+				if nh.finished {
+					println!("Historian finished");
+					println!("{:?}", nh);
+				} else {
+					new_hist.push(nh);
+				}
+			}
+		}
+		historians.clear();
+		historians.extend(new_hist);
+	}
+
+	/*
+
+	// With cheats.
+	let mut finished_historians: Vec<Historian> = vec![];
+	for cheat in 1..no_cheat.time {
+		let h = Historian::new(start_row, start_col, [cheat, cheat + 1]);
+		let mut historians: Vec<Historian> = vec![h];
+		while historians.len() > 0 {
+			let mut new_hist: Vec<Historian> = vec![];
+			for h in historians.iter() {
+				let next_hist = h.step(&map);
+				for nh in next_hist {
+					if nh.finished {
+						//println!("Historian finished");
+						finished_historians.push(nh);
+					} else {
+						new_hist.push(nh);
+					}
+				}
+			}
+			historians.clear();
+			historians.extend(new_hist);
+		}
+	}
+
+	let mut cheat_count: u32 = 0;
+	for ch in finished_historians.iter() {
+		let saved = no_cheat.time - ch.time;
+		println!("{}", saved);
+		if saved <= saving {
+			cheat_count += 1;
+		}
+	}
+
+	cheat_count.to_string()
+	*/
+
+	"".to_string()
+}
+
+#[derive(Clone, Debug)]
+struct Historian {
+	row: usize,
+	col: usize,
+	cheat_at: [i32; 2],
+	time: i32,
+	finished: bool,
+	visited: Vec<(usize, usize)>,
+}
+
+impl Historian {
+	fn new(
+		row: usize,
+		col: usize,
+		cheat_at: [i32; 2],
+	) -> Self {
+		Self {
+			row,
+			col,
+			cheat_at,
+			time: 0,
+			finished: false,
+			visited: vec![(row, col)],
+		}
+	}
+
+	fn check_new_location(
+		&self,
+		row: usize,
+		col: usize,
+		map: &Vec<Vec<char>>,
+	) -> Option<Historian> {
+		let map_row = map.get(row);
+		if map_row.is_none() {
+			return None;
+		}
+		let map_row = map_row.unwrap();
+		let val = map_row.get(col);
+		if val.is_none() {
+			return None;
+		}
+		let val = val.unwrap();
+
+		if self.visited.contains(&(row, col)) {
+			return None;
+		}
+
+		let time = self.time + 1;
+
+		let mut h = self.clone();
+		h.row = row;
+		h.col = col;
+		h.time = time;
+		h.visited.push((h.row, h.col));
+
+		if self.cheat_at.contains(&h.time) {
+			match val {
+				'E' => {
+					h.finished = true;
+					return Some(h);
+				}
+				_ => return Some(h),
+			}
+		}
+
+		match val {
+			'.' => return Some(h),
+			'E' => {
+				h.finished = true;
+				return Some(h);
+			}
+			_ => return None,
+		}
+	}
+
+	fn step(
+		&self,
+		map: &Vec<Vec<char>>,
+	) -> Vec<Historian> {
+		let mut historians: Vec<Historian> = vec![];
+
+		// top
+		if self.row != 0 {
+			if let Some(h) = self.check_new_location(self.row - 1, self.col, map) {
+				historians.push(h)
+			}
+		}
+
+		// right
+		if self.col != map[0].len() - 1 {
+			if let Some(h) = self.check_new_location(self.row, self.col + 1, map) {
+				historians.push(h)
+			}
+		}
+
+		// bottom
+		if self.row != map.len() {
+			if let Some(h) = self.check_new_location(self.row + 1, self.col, map) {
+				historians.push(h)
+			}
+		}
+
+		// left
+		if self.col != 0 {
+			if let Some(h) = self.check_new_location(self.row, self.col - 1, map) {
+				historians.push(h)
+			}
+		}
+		historians
+	}
+}
+
+#[cfg(test)]
+mod tests {
+	use super::invoke;
+
+	#[test]
+	fn test_a() {
+		let input = "###############
+#...#...#.....#
+#.#.#.#.#.###.#
+#S#...#.#.#...#
+#######.#.#.###
+#######.#.#...#
+#######.#.###.#
+###..E#...#...#
+###.#######.###
+#...###...#...#
+#.#####.#.###.#
+#.#...#.#.#...#
+#.#.#.#.#.#.###
+#...#...#...###
+###############"
+			.to_string();
+		let result = invoke(&input, 2);
+		assert_eq!(result, "14");
+	}
+}
