@@ -1,5 +1,6 @@
 /target
 /puzzle_data
 /tmp
+*.txt
 # For 2024x14x02
 /images
