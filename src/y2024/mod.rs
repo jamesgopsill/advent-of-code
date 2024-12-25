@@ -40,3 +40,4 @@ pub mod t22x01;
 pub mod t22x02;
 pub mod t23x01;
 pub mod t24x01;
+pub mod t25x01;
