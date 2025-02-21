@@ -1,0 +1,10 @@
+[package]
+name = "y2016"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+utils = { path = "../utils" }
+md-5 = "0.10.6"
+regex = "1.10.6"
+itertools = "0.13.0"
