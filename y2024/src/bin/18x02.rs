@@ -1,7 +1,5 @@
-use std::u32;
-
+#![allow(dead_code)]
 use std::fs;
-use utils::bench;
 
 fn main() {
 	let input = fs::read_to_string("puzzle_data/2024/18.txt").unwrap();
@@ -28,7 +26,7 @@ fn invoke(
 	for i in (0..lines.len()).rev() {
 		map.reset();
 		for (j, (x, y)) in bytes.iter().enumerate() {
-			map.set(y.clone(), x.clone(), u32::MAX);
+			map.set(*y, *x, u32::MAX);
 			if i == j {
 				break;
 			}
@@ -38,7 +36,7 @@ fn invoke(
 
 		let h = Historian::new(0, 0);
 		let mut historians: Vec<Historian> = vec![h];
-		while historians.len() > 0 {
+		while historians.is_empty() {
 			let mut next_historians: Vec<Historian> = vec![];
 			for h in historians.iter() {
 				next_historians.extend(h.walk(&mut map));
@@ -121,7 +119,7 @@ impl Map {
 					print!(".")
 				}
 			}
-			println!("");
+			println!();
 		}
 	}
 
@@ -136,7 +134,7 @@ impl Map {
 					print!("({})", c);
 				}
 			}
-			println!("");
+			println!();
 		}
 	}
 }

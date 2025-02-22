@@ -10,7 +10,7 @@ fn main() {
 }
 
 fn invoke(input: &str) -> String {
-	let lines: Vec<&str> = input.lines().map(|v| v).collect();
+	let lines: Vec<&str> = input.lines().collect();
 	let mut map: Vec<Vec<char>> = vec![];
 
 	// Step 1. Create the map
@@ -71,7 +71,7 @@ impl Traveller {
 		for (row, chars) in self.map.iter().enumerate() {
 			for (col, char) in chars.iter().enumerate() {
 				if *char == 'S' {
-					self.current_tile = Tile::new(row, col, char.clone());
+					self.current_tile = Tile::new(row, col, *char);
 				}
 			}
 		}
@@ -130,7 +130,7 @@ impl Traveller {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'-' => {
 				if let Some(t) = self.tile_left() {
@@ -147,7 +147,7 @@ impl Traveller {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'L' => {
 				if let Some(t) = self.tile_right() {
@@ -164,7 +164,7 @@ impl Traveller {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'J' => {
 				if let Some(t) = self.tile_above() {
@@ -181,7 +181,7 @@ impl Traveller {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'7' => {
 				if let Some(t) = self.tile_left() {
@@ -198,7 +198,7 @@ impl Traveller {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'F' => {
 				if let Some(t) = self.tile_right() {
@@ -215,7 +215,7 @@ impl Traveller {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'.' => {
 				panic!("No pipe here");
@@ -268,7 +268,7 @@ impl Traveller {
 }
 
 #[cfg(test)]
-mod tests_1001 {
+mod tests {
 	use super::*;
 
 	#[test]

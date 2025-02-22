@@ -58,7 +58,7 @@ fn is_nice(line: &str) -> bool {
 }
 
 #[cfg(test)]
-mod tests_0501 {
+mod tests {
 	use super::is_nice;
 
 	#[test]

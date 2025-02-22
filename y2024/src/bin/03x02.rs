@@ -21,20 +21,18 @@ fn invoke(input: &str) -> String {
 			enabled = false
 		} else if i.contains("do") {
 			enabled = true
-		} else {
-			if enabled {
-				let a = instruction.get(1).unwrap().as_str().parse::<u32>().unwrap();
-				let b = instruction.get(2).unwrap().as_str().parse::<u32>().unwrap();
-				// println!("{} * {}", a, b);
-				sum += a * b;
-			}
+		} else if enabled {
+			let a = instruction.get(1).unwrap().as_str().parse::<u32>().unwrap();
+			let b = instruction.get(2).unwrap().as_str().parse::<u32>().unwrap();
+			// println!("{} * {}", a, b);
+			sum += a * b;
 		}
 	}
 	sum.to_string()
 }
 
 #[cfg(test)]
-mod tests_03x02 {
+mod tests {
 	use super::invoke;
 
 	#[test]

@@ -77,7 +77,7 @@ fn invoke(
 }
 
 #[cfg(test)]
-mod tests_1801 {
+mod tests {
 	use super::invoke;
 
 	#[test]

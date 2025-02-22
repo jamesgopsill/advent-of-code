@@ -74,7 +74,7 @@ enum Action {
 }
 
 #[cfg(test)]
-mod tests_1402 {
+mod tests {
 	use super::invoke;
 
 	#[test]

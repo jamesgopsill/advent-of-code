@@ -101,7 +101,7 @@ impl Elf {
 }
 
 #[cfg(test)]
-mod tests_0101 {
+mod tests {
 	use super::invoke;
 
 	#[test]

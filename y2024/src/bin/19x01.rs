@@ -19,7 +19,8 @@ fn invoke(input: &str) -> String {
 		.iter()
 		.map(|f| f.trim())
 		.collect::<Vec<&str>>();
-	stripes.sort_by(|a, b| b.len().cmp(&a.len()));
+	//stripes.sort_by(|a, b| b.len().cmp(&a.len()));
+	stripes.sort_by_key(|a| a.len());
 	println!("{:?}", stripes);
 
 	// Filter the stripes for combinations of other stripes
@@ -75,7 +76,7 @@ fn depth_first_search(
 }
 
 #[cfg(test)]
-mod tests_19x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

@@ -58,7 +58,7 @@ impl Guard {
 	fn new(map: Vec<Vec<char>>) -> Self {
 		let position = find_starting_position(&map);
 		let mut visited: HashSet<[usize; 2]> = HashSet::new();
-		visited.insert(position.clone());
+		visited.insert(position);
 		Self {
 			map,
 			position,
@@ -125,31 +125,29 @@ impl Guard {
 					}
 				}
 			}
-			self.visited.insert(self.position.clone());
+			self.visited.insert(self.position);
 		}
-		return true;
+		true
 	}
 }
 
-fn find_starting_position(map: &Vec<Vec<char>>) -> [usize; 2] {
+fn find_starting_position(map: &[Vec<char>]) -> [usize; 2] {
 	let mut position: [usize; 2] = [0; 2];
 	for (i, row) in map.iter().enumerate() {
 		for (j, c) in row.iter().enumerate() {
-			match c {
-				'^' => {
-					position[0] = i;
-					position[1] = j;
-					return position;
-				}
-				_ => {}
+			if *c != '^' {
+				continue;
 			}
+			position[0] = i;
+			position[1] = j;
+			return position;
 		}
 	}
 	position
 }
 
 #[cfg(test)]
-mod tests_06x02 {
+mod tests {
 	use super::invoke;
 
 	#[test]

@@ -20,9 +20,8 @@ fn invoke(input: &str) -> String {
 		for row in lines.iter() {
 			let chars = row.chars().collect::<Vec<char>>();
 			for (i, c) in chars.iter().enumerate() {
-				match c {
-					'#' => vals[i] += 1,
-					_ => {}
+				if *c == '#' {
+					vals[i] += 1
 				}
 			}
 		}
@@ -60,7 +59,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_24x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

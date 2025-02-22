@@ -12,50 +12,46 @@ fn invoke(input: &str) -> String {
 	let mut sum: u32 = 0;
 	for line in input.lines() {
 		let present = Present::new(line);
-		let surface_area = present.surface_area();
-		let smallest_area = present.areas.iter().min().unwrap();
-		sum += surface_area + smallest_area
+		sum += present.volume + present.perimeters.iter().min().unwrap();
 	}
 	sum.to_string()
 }
 
 struct Present {
-	areas: [u32; 3],
+	perimeters: [u32; 3],
+	volume: u32,
 }
 
 impl Present {
 	fn new(s: &str) -> Self {
 		let mut items = s.split("x");
 		let mut sides: [u32; 3] = [0; 3];
-		for side in &mut sides {
+		for side in sides.as_mut() {
 			*side = items.next().unwrap().parse::<u32>().unwrap();
 		}
-		let areas = [
-			sides[0] * sides[1],
-			sides[1] * sides[2],
-			sides[2] * sides[0],
+		let volume = sides[0] * sides[1] * sides[2];
+		let perimeters = [
+			2 * sides[0] + 2 * sides[1],
+			2 * sides[1] + 2 * sides[2],
+			2 * sides[2] + 2 * sides[0],
 		];
-		Self { areas }
-	}
-
-	fn surface_area(&self) -> u32 {
-		self.areas[0] * 2 + self.areas[1] * 2 + self.areas[2] * 2
+		Self { perimeters, volume }
 	}
 }
 
 #[cfg(test)]
-mod tests_0201 {
+mod tests {
 	use super::invoke;
 
 	#[test]
 	fn test_a() {
 		let result = invoke("2x3x4");
-		assert_eq!(result, "58");
+		assert_eq!(result, "34");
 	}
 
 	#[test]
 	fn test_b() {
 		let result = invoke("1x1x10");
-		assert_eq!(result, "43");
+		assert_eq!(result, "14");
 	}
 }

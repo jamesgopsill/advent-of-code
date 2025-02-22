@@ -106,13 +106,13 @@ impl Computer {
 				let denominator = 2_u32.pow(combo_operand);
 				self.a = numerator / denominator;
 			}
-			1 => self.b = self.b ^ literal_operand,
+			1 => self.b ^= literal_operand, //= self.b ^ literal_operand,
 			2 => self.b = combo_operand % 8,
 			3 => match self.a {
 				0 => {}
 				_ => self.pointer = literal_operand as usize,
 			},
-			4 => self.b = self.b ^ self.c,
+			4 => self.b ^= self.c, // = self.b ^ self.c,
 			5 => self.out.push(combo_operand % 8),
 			6 => {
 				let numerator = self.a;
@@ -130,7 +130,7 @@ impl Computer {
 }
 
 #[cfg(test)]
-mod tests_17x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

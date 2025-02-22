@@ -22,14 +22,12 @@ fn invoke(input: &str) -> String {
 		let winning_numbers: Vec<i32> = card_numbers
 			.next()
 			.unwrap()
-			.trim()
 			.split_whitespace()
 			.map(|f| f.parse::<i32>().unwrap())
 			.collect();
 		let my_numbers: Vec<i32> = card_numbers
 			.next()
 			.unwrap()
-			.trim()
 			.split_whitespace()
 			.map(|f| f.parse::<i32>().unwrap())
 			.collect();
@@ -49,7 +47,7 @@ fn invoke(input: &str) -> String {
 	}
 
 	let mut count: u32 = 0;
-	while current_pile.len() > 0 {
+	while current_pile.is_empty() {
 		for card in &current_pile {
 			count += 1;
 			let new_cards = &card_map[*card];

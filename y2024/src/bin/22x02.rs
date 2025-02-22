@@ -1,6 +1,6 @@
-use std::collections::HashMap;
-
+#![allow(dead_code)]
 use rayon::iter::{IntoParallelRefIterator, ParallelIterator};
+use std::collections::HashMap;
 
 //use std::fs;
 //use utils::bench;
@@ -24,7 +24,7 @@ fn invoke(
 		let mut secret_number = line.parse::<u64>().unwrap();
 		let mut price_list: Vec<(i8, i8)> = vec![];
 		for _i in 0..n {
-			let previous_number = secret_number.clone();
+			let previous_number = secret_number;
 			// Cache
 			if let Some(val) = cache.get(&previous_number) {
 				//println!("Using cache");
@@ -35,17 +35,17 @@ fn invoke(
 			}
 			// Step One
 			let a = secret_number * 64;
-			secret_number = secret_number ^ a;
-			secret_number = secret_number % 16_777_216;
-			// Step Two
+			secret_number ^= a; //= secret_number ^ a;
+			secret_number %= 16_777_216; //= secret_number % 16_777_216;
+								// Step Two
 			let b = secret_number / 32;
-			secret_number = secret_number ^ b;
-			secret_number = secret_number % 16_777_216;
-			// Step Three
+			secret_number ^= b; // = secret_number ^ b;
+			secret_number %= 16_777_216; //= secret_number % 16_777_216;
+								// Step Three
 			let c = secret_number * 2048;
-			secret_number = secret_number ^ c;
-			secret_number = secret_number % 16_777_216;
-			// get the last digit
+			secret_number ^= c; //= secret_number ^ c;
+			secret_number %= 16_777_216; //= secret_number % 16_777_216;
+								// get the last digit
 			let digit = last_digit(secret_number.to_string());
 			price_list.push((digit, 0));
 			// Add to cache
@@ -67,10 +67,10 @@ fn invoke(
 	println!("-- Diff Done --");
 
 	let mut combinations: Vec<(i8, i8, i8, i8)> = vec![];
-	for i in -9..9 as i8 {
-		for j in -9..9 as i8 {
-			for k in -9..9 as i8 {
-				for l in -9..9 as i8 {
+	for i in -9..9 {
+		for j in -9..9 {
+			for k in -9..9 {
+				for l in -9..9 {
 					combinations.push((i, j, k, l));
 				}
 			}
@@ -109,7 +109,7 @@ fn last_digit(s: String) -> i8 {
 }
 
 #[cfg(test)]
-mod tests_22x02 {
+mod tests {
 	use super::invoke;
 
 	#[test]
@@ -118,7 +118,7 @@ mod tests_22x02 {
 2
 3
 2024";
-		let result = invoke(&input, 2_000);
+		let result = invoke(input, 2_000);
 		assert_eq!(result, "23");
 	}
 }

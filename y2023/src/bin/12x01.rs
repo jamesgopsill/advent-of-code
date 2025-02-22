@@ -74,7 +74,7 @@ fn invoke(input: &str) -> String {
 				}
 			}
 			// println!("{:?} {:?} {:?}", damaged_map, combination, flag);
-			if flag == true {
+			if flag {
 				row_arrangements += 1;
 			}
 		}
@@ -85,7 +85,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_1201 {
+mod tests {
 	use super::*;
 
 	#[test]

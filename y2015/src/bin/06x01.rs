@@ -10,9 +10,7 @@ fn main() {
 }
 
 fn invoke(input: &str) -> String {
-	// hitting default stack size limitations.
-	let row: Vec<u32> = (0..1_000).map(|_| 0).collect();
-	let mut lights: Vec<Vec<u32>> = (0..1_000).map(|_| row.clone()).collect();
+	let mut lights = [[false; 1_000]; 1_000];
 	let action_re = Regex::new(r"turn on|toggle|turn off").unwrap();
 	let coords_re = Regex::new(r"\d+,\d+").unwrap();
 
@@ -26,13 +24,12 @@ fn invoke(input: &str) -> String {
 		for x in from[0]..=to[0] {
 			for y in from[1]..=to[1] {
 				match action {
-					"turn on" => lights[x][y] += 1,
-					"turn off" => {
-						if lights[x][y] != 0 {
-							lights[x][y] -= 1
-						}
-					}
-					"toggle" => lights[x][y] += 2,
+					"turn on" => lights[x][y] = true,
+					"turn off" => lights[x][y] = false,
+					"toggle" => match lights[x][y] {
+						true => lights[x][y] = false,
+						false => lights[x][y] = true,
+					},
 					_ => {
 						println!("Unknown action")
 					}
@@ -41,14 +38,16 @@ fn invoke(input: &str) -> String {
 		}
 	}
 
-	let mut total_brightness: u32 = 0;
+	let mut count: u32 = 0;
 	for row in lights.iter() {
 		for bulb in row {
-			total_brightness += bulb;
+			if *bulb {
+				count += 1
+			}
 		}
 	}
 
-	total_brightness.to_string()
+	count.to_string()
 }
 
 fn parse_coords(s: &str) -> [usize; 2] {
@@ -60,18 +59,24 @@ fn parse_coords(s: &str) -> [usize; 2] {
 }
 
 #[cfg(test)]
-mod tests_0602 {
+mod tests {
 	use super::invoke;
 
 	#[test]
 	fn test_a() {
-		let result = invoke("turn on 0,0 through 0,0");
-		assert_eq!(result, "1");
+		let result = invoke("turn on 0,0 through 999,999");
+		assert_eq!(result, "1000000");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("toggle 0,0 through 999,999");
-		assert_eq!(result, "2000000");
+		let result = invoke("toggle 0,0 through 999,0");
+		assert_eq!(result, "1000");
+	}
+
+	#[test]
+	fn test_c() {
+		let result = invoke("turn off 499,499 through 500,500");
+		assert_eq!(result, "0");
 	}
 }

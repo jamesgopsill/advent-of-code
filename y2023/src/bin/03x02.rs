@@ -86,7 +86,7 @@ fn invoke(schematic: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_0302 {
+mod tests {
 	use super::*;
 
 	#[test]

@@ -15,7 +15,7 @@ fn invoke(input: &str) -> String {
 	let mut patterns: Vec<Pattern> = vec![];
 	let mut tmp: Vec<String> = vec![];
 	for line in lines {
-		if line.len() > 0 {
+		if line.is_empty() {
 			tmp.push(line.to_string());
 		} else {
 			let pattern = Pattern::new(tmp.clone());
@@ -78,7 +78,7 @@ impl Pattern {
 				return Some(i as u32);
 			}
 		}
-		return None;
+		None
 	}
 
 	fn _col_reflection(&self) -> Option<u32> {

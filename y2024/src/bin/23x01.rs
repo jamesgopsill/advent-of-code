@@ -50,7 +50,6 @@ fn traverse<'a>(
 	match chain.len() {
 		4.. => {
 			println!("Should not get here");
-			return;
 		}
 		3 => {
 			// println!("3 combo: {:?}", chain);
@@ -99,7 +98,7 @@ fn traverse<'a>(
 }
 
 #[cfg(test)]
-mod tests_23x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

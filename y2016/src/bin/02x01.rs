@@ -66,7 +66,7 @@ impl PinPad {
 }
 
 #[cfg(test)]
-mod tests_0201 {
+mod tests {
 	use super::invoke;
 
 	#[test]

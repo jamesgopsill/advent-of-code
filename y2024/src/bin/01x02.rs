@@ -32,7 +32,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_01x02 {
+mod tests {
 	use super::invoke;
 
 	#[test]

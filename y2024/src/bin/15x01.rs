@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use std::fs;
 use utils::bench;
 
@@ -17,7 +18,7 @@ fn invoke(input: &str) -> String {
 			map.add_row(row);
 			continue;
 		}
-		if line.len() > 0 {
+		if line.is_empty() {
 			let row: Vec<char> = line.chars().collect();
 			instructions.extend(row);
 		}
@@ -26,9 +27,8 @@ fn invoke(input: &str) -> String {
 	let mut robot: [usize; 2] = [0, 0];
 	for (y, row) in map.0.iter().enumerate() {
 		for (x, c) in row.iter().enumerate() {
-			match c {
-				'@' => robot = [x, y],
-				_ => {}
+			if *c == '@' {
+				robot = [x, y]
 			}
 		}
 	}
@@ -47,7 +47,7 @@ fn invoke(input: &str) -> String {
 				let col = map.get_col_ref(rx);
 				let mut replace: Vec<(usize, usize, char)> = vec![(rx, ry, '.')];
 				for y in (1..=ry).rev() {
-					replace.push((rx, y - 1, col[y].clone()));
+					replace.push((rx, y - 1, *col[y]));
 					match col[y] {
 						'.' => {
 							replace.pop();
@@ -68,7 +68,7 @@ fn invoke(input: &str) -> String {
 				// println!("{:?}", col);
 				let mut replace: Vec<(usize, usize, char)> = vec![(rx, ry, '.')];
 				for y in ry..y_max {
-					replace.push((rx, y + 1, col[y].clone()));
+					replace.push((rx, y + 1, *col[y]));
 					match col[y] {
 						'.' => {
 							replace.pop();
@@ -89,7 +89,7 @@ fn invoke(input: &str) -> String {
 				// println!("{:?}", row);
 				let mut replace: Vec<(usize, usize, char)> = vec![(rx, ry, '.')];
 				for x in rx..x_max {
-					replace.push((x + 1, ry, row[x].clone()));
+					replace.push((x + 1, ry, *row[x]));
 					match row[x] {
 						'.' => {
 							replace.pop();
@@ -109,7 +109,7 @@ fn invoke(input: &str) -> String {
 				let row = map.get_row_ref(ry);
 				let mut replace: Vec<(usize, usize, char)> = vec![(rx, ry, '.')];
 				for x in (1..=rx).rev() {
-					replace.push((x - 1, ry, row[x].clone()));
+					replace.push((x - 1, ry, *row[x]));
 					match row[x] {
 						'.' => {
 							replace.pop();
@@ -134,9 +134,8 @@ fn invoke(input: &str) -> String {
 	let mut ans: u32 = 0;
 	for (y, row) in map.0.iter().enumerate() {
 		for (x, c) in row.iter().enumerate() {
-			match c {
-				'O' => ans += (100 * y as u32) + x as u32,
-				_ => {}
+			if *c == 'O' {
+				ans += (100 * y as u32) + x as u32
 			}
 		}
 	}
@@ -229,7 +228,7 @@ impl CharMat2 {
 }
 
 #[cfg(test)]
-mod tests_15x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

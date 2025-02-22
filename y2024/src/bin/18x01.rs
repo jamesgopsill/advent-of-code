@@ -1,7 +1,4 @@
-use std::u32;
-
 use std::fs;
-use utils::bench;
 
 fn main() {
 	let input = fs::read_to_string("puzzle_data/2024/18.txt").unwrap();
@@ -100,7 +97,7 @@ impl Map {
 					print!(".")
 				}
 			}
-			println!("");
+			println!();
 		}
 	}
 
@@ -115,7 +112,7 @@ impl Map {
 					print!("({})", c);
 				}
 			}
-			println!("");
+			println!();
 		}
 	}
 }
@@ -200,7 +197,7 @@ impl Historian {
 }
 
 #[cfg(test)]
-mod tests_18x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

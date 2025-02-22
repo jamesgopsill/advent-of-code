@@ -46,19 +46,19 @@ fn calculate(
 		// println!("{} {}", p, number);
 		// Ignore values that overflow.
 		let new_value = p.checked_mul(number);
-		if new_value.is_some() {
-			next.push(new_value.unwrap());
+		if let Some(v) = new_value {
+			next.push(v);
 		}
 		let new_value = p.checked_add(number);
-		if new_value.is_some() {
-			next.push(new_value.unwrap());
+		if let Some(v) = new_value {
+			next.push(v);
 		}
 	}
 	calculate(next, numbers)
 }
 
 #[cfg(test)]
-mod tests_07x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

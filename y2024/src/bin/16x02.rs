@@ -1,4 +1,4 @@
-use std::{u64, vec};
+use std::vec;
 
 // Not working on main puzzle.
 use std::fs;
@@ -29,18 +29,15 @@ fn invoke(input: &str) -> String {
 	for i in 0..row_max {
 		for j in 0..col_max {
 			let (obs, _score) = map.get(i, j);
-			match obs {
-				'S' => {
-					let r = Reindeer::new(i, j, Facing::East, 0);
-					deer.push(r);
-					map.0[i][j].1 = 0;
-				}
-				_ => {}
+			if obs == 'S' {
+				let r = Reindeer::new(i, j, Facing::East, 0);
+				deer.push(r);
+				map.0[i][j].1 = 0;
 			}
 		}
 	}
 
-	while deer.len() > 0 {
+	while deer.is_empty() {
 		let mut next_deer: Vec<Reindeer> = vec![];
 		while let Some(d) = deer.pop() {
 			let nd = d.next(&mut map);
@@ -59,36 +56,34 @@ fn invoke(input: &str) -> String {
 	for i in 0..row_max {
 		for j in 0..col_max {
 			let (obs, score) = map.get(i, j);
-			match obs {
-				'E' => {
-					// set the deers off to avoid the issue in test_b
-					if map.0[i - 1][j].1 == score - 1 {
-						let r = Reindeer::new(i - 1, j, Facing::North, score - 1);
-						map.set_char(i - 1, j, 'O');
-						deer.push(r);
-					}
-					if map.0[i + 1][j].1 == score - 1 {
-						let r = Reindeer::new(i + 1, j, Facing::North, score - 1);
-						map.set_char(i + 1, j, 'O');
-						deer.push(r);
-					}
-					if map.0[i][j + 1].1 == score - 1 {
-						let r = Reindeer::new(i, j + 1, Facing::North, score - 1);
-						map.set_char(i, j + 1, 'O');
-						deer.push(r);
-					}
-					if map.0[i][j - 1].1 == score - 1 {
-						let r = Reindeer::new(i, j - 1, Facing::North, score - 1);
-						map.set_char(i, j - 1, 'O');
-						deer.push(r);
-					}
-				}
-				_ => {}
+			if obs != 'E' {
+				continue;
+			}
+
+			if map.0[i - 1][j].1 == score - 1 {
+				let r = Reindeer::new(i - 1, j, Facing::North, score - 1);
+				map.set_char(i - 1, j, 'O');
+				deer.push(r);
+			}
+			if map.0[i + 1][j].1 == score - 1 {
+				let r = Reindeer::new(i + 1, j, Facing::North, score - 1);
+				map.set_char(i + 1, j, 'O');
+				deer.push(r);
+			}
+			if map.0[i][j + 1].1 == score - 1 {
+				let r = Reindeer::new(i, j + 1, Facing::North, score - 1);
+				map.set_char(i, j + 1, 'O');
+				deer.push(r);
+			}
+			if map.0[i][j - 1].1 == score - 1 {
+				let r = Reindeer::new(i, j - 1, Facing::North, score - 1);
+				map.set_char(i, j - 1, 'O');
+				deer.push(r);
 			}
 		}
 	}
 
-	while deer.len() > 0 {
+	while deer.is_empty() {
 		let mut next_deer: Vec<Reindeer> = vec![];
 		while let Some(d) = deer.pop() {
 			let nd = d.prev(&mut map);
@@ -104,9 +99,8 @@ fn invoke(input: &str) -> String {
 	for i in 0..row_max {
 		for j in 0..col_max {
 			let (obs, _score) = map.get(i, j);
-			match obs {
-				'O' => ans += 1,
-				_ => {}
+			if obs == 'O' {
+				ans += 1;
 			}
 		}
 	}
@@ -160,7 +154,7 @@ impl Map {
 			for c in row {
 				print!("{}", c.0);
 			}
-			println!("");
+			println!();
 		}
 	}
 
@@ -173,7 +167,7 @@ impl Map {
 					print!("({})", c.1);
 				}
 			}
-			println!("");
+			println!();
 		}
 	}
 }
@@ -300,16 +294,10 @@ impl Reindeer {
 		for (row, col, facing, score) in moves {
 			let (c, s) = map.get(row, col);
 			println!("{} {} {:?}", score, s, score.checked_sub(s));
-			match c {
-				'.' => {
-					// Then we're on a critical path.
-					if score == s {
-						map.set_char(row, col, 'O');
-						let r = Reindeer::new(row, col, facing, score);
-						deer.push(r);
-					}
-				}
-				_ => {}
+			if c == '.' && score == s {
+				map.set_char(row, col, 'O');
+				let r = Reindeer::new(row, col, facing, score);
+				deer.push(r);
 			}
 		}
 		deer

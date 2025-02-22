@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use regex::Regex;
 use std::fs;
 
@@ -75,7 +76,7 @@ fn invoke(
 }
 
 fn print_map(
-	robots: &Vec<Robot>,
+	robots: &[Robot],
 	x_max: i32,
 	y_max: i32,
 ) {
@@ -137,7 +138,7 @@ impl Robot {
 }
 
 #[cfg(test)]
-mod tests_14x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

@@ -10,35 +10,32 @@ fn main() {
 
 fn invoke(input: &str) -> String {
 	let mut floor: i32 = 0;
-	for c in input.chars() {
+	for (i, c) in input.chars().enumerate() {
 		match c {
 			'(' => floor += 1,
 			')' => floor -= 1,
 			_ => {}
 		}
+		if floor == -1 {
+			return (i + 1).to_string();
+		}
 	}
-	floor.to_string()
+	0.to_string()
 }
 
 #[cfg(test)]
-mod tests_0101 {
+mod tests {
 	use super::invoke;
 
 	#[test]
 	fn test_a() {
-		let result = invoke("(())");
-		assert_eq!(result, "0");
+		let result = invoke(")");
+		assert_eq!(result, "1");
 	}
 
 	#[test]
 	fn test_b() {
-		let result = invoke("()()");
-		assert_eq!(result, "0");
-	}
-
-	#[test]
-	fn test_c() {
-		let result = invoke("(((");
-		assert_eq!(result, "3");
+		let result = invoke("()())");
+		assert_eq!(result, "5");
 	}
 }

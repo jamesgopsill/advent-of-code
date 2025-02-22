@@ -63,7 +63,7 @@ fn decompressed_length(incoming: Vec<char>) -> u64 {
 }
 
 #[cfg(test)]
-mod tests_0902 {
+mod tests {
 	use super::invoke;
 
 	#[test]

@@ -136,7 +136,7 @@ impl Display {
 }
 
 #[cfg(test)]
-mod tests_0801 {
+mod tests {
 	use super::invoke;
 
 	#[test]

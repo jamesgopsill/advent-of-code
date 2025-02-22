@@ -22,50 +22,49 @@ fn invoke(input: &str) -> String {
 	let col_count = map[0].len();
 	for i in 1..row_count - 1 {
 		for j in 1..col_count - 1 {
-			match map[i][j] {
-				'A' => {
-					// M M
-					//  A
-					// S S
-					if map[i - 1][j - 1] == 'M'
-						&& map[i + 1][j - 1] == 'M'
-						&& map[i - 1][j + 1] == 'S'
-						&& map[i + 1][j + 1] == 'S'
-					{
-						count += 1;
-					}
-					// M S
-					//  A
-					// M S
-					if map[i - 1][j - 1] == 'M'
-						&& map[i + 1][j - 1] == 'S'
-						&& map[i - 1][j + 1] == 'M'
-						&& map[i + 1][j + 1] == 'S'
-					{
-						count += 1;
-					}
-					// S S
-					//  A
-					// M M
-					if map[i - 1][j - 1] == 'S'
-						&& map[i + 1][j - 1] == 'S'
-						&& map[i - 1][j + 1] == 'M'
-						&& map[i + 1][j + 1] == 'M'
-					{
-						count += 1;
-					}
-					// S M
-					//  A
-					// S M
-					if map[i - 1][j - 1] == 'S'
-						&& map[i + 1][j - 1] == 'M'
-						&& map[i - 1][j + 1] == 'S'
-						&& map[i + 1][j + 1] == 'M'
-					{
-						count += 1;
-					}
-				}
-				_ => {}
+			if map[i][j] != 'A' {
+				continue;
+			}
+
+			// M M
+			//  A
+			// S S
+			if map[i - 1][j - 1] == 'M'
+				&& map[i + 1][j - 1] == 'M'
+				&& map[i - 1][j + 1] == 'S'
+				&& map[i + 1][j + 1] == 'S'
+			{
+				count += 1;
+			}
+			// M S
+			//  A
+			// M S
+			if map[i - 1][j - 1] == 'M'
+				&& map[i + 1][j - 1] == 'S'
+				&& map[i - 1][j + 1] == 'M'
+				&& map[i + 1][j + 1] == 'S'
+			{
+				count += 1;
+			}
+			// S S
+			//  A
+			// M M
+			if map[i - 1][j - 1] == 'S'
+				&& map[i + 1][j - 1] == 'S'
+				&& map[i - 1][j + 1] == 'M'
+				&& map[i + 1][j + 1] == 'M'
+			{
+				count += 1;
+			}
+			// S M
+			//  A
+			// S M
+			if map[i - 1][j - 1] == 'S'
+				&& map[i + 1][j - 1] == 'M'
+				&& map[i - 1][j + 1] == 'S'
+				&& map[i + 1][j + 1] == 'M'
+			{
+				count += 1;
 			}
 		}
 	}

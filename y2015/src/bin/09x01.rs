@@ -53,15 +53,15 @@ fn invoke(input: &str) -> String {
 		routes.push((vec![location.clone()], 0));
 	}
 	let routes = traverse(routes, route_map, 0);
-	let mut max_dist = routes[0].1;
+	let mut min_dist = routes[0].1;
 	for (route, dist) in routes {
-		if max_dist < dist {
-			println!("New Max Dist Route");
+		if min_dist > dist {
+			println!("New Min Dist Route");
 			println!("{:?}", route);
-			max_dist = dist;
+			min_dist = dist;
 		}
 	}
-	max_dist.to_string()
+	min_dist.to_string()
 }
 
 fn traverse(
@@ -103,7 +103,7 @@ fn traverse(
 }
 
 #[cfg(test)]
-mod tests_0902 {
+mod tests {
 	use super::invoke;
 
 	#[test]
@@ -114,6 +114,6 @@ London to Belfast = 518
 Dublin to Belfast = 141
 ",
 		);
-		assert_eq!(result, "982");
+		assert_eq!(result, "605");
 	}
 }

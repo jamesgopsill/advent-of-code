@@ -15,7 +15,6 @@ fn invoke(
 
 	let starting_stones: Vec<u64> = input
 		.split_whitespace()
-		.into_iter()
 		.map(|v| v.parse::<u64>().unwrap())
 		.collect();
 
@@ -81,7 +80,7 @@ fn invoke(
 }
 
 #[cfg(test)]
-mod tests_11x02 {
+mod tests {
 	use super::invoke;
 
 	#[test]

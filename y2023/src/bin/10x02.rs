@@ -90,7 +90,7 @@ impl Elf {
 		for (row, chars) in self.map.iter().enumerate() {
 			for (col, char) in chars.iter().enumerate() {
 				if *char == 'S' {
-					self.current_tile = Tile::new(row, col, char.clone());
+					self.current_tile = Tile::new(row, col, *char);
 				}
 			}
 		}
@@ -149,7 +149,7 @@ impl Elf {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'-' => {
 				if let Some(t) = self.tile_left() {
@@ -166,7 +166,7 @@ impl Elf {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'L' => {
 				if let Some(t) = self.tile_right() {
@@ -183,7 +183,7 @@ impl Elf {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'J' => {
 				if let Some(t) = self.tile_above() {
@@ -200,7 +200,7 @@ impl Elf {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'7' => {
 				if let Some(t) = self.tile_left() {
@@ -217,7 +217,7 @@ impl Elf {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'F' => {
 				if let Some(t) = self.tile_right() {
@@ -234,7 +234,7 @@ impl Elf {
 						return true;
 					}
 				}
-				return false;
+				false
 			}
 			'.' => {
 				panic!("No pipe here");
@@ -389,7 +389,7 @@ impl Elf {
 }
 
 #[cfg(test)]
-mod tests_1002 {
+mod tests {
 	use super::*;
 
 	#[test]

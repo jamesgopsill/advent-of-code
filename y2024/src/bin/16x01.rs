@@ -1,6 +1,6 @@
-use std::{u64, vec};
-
+#![allow(dead_code)]
 use std::fs;
+use std::vec;
 use utils::bench;
 
 fn main() {
@@ -28,18 +28,15 @@ fn invoke(input: &str) -> String {
 	for i in 0..row_max {
 		for j in 0..col_max {
 			let (obs, _score) = map.get(i, j);
-			match obs {
-				'S' => {
-					let r = Reindeer::new(i, j, Facing::East, 0);
-					deer.push(r);
-					map.0[i][j].1 = 0;
-				}
-				_ => {}
+			if obs == 'S' {
+				let r = Reindeer::new(i, j, Facing::East, 0);
+				deer.push(r);
+				map.0[i][j].1 = 0;
 			}
 		}
 	}
 
-	while deer.len() > 0 {
+	while deer.is_empty() {
 		let mut next_deer: Vec<Reindeer> = vec![];
 		while let Some(d) = deer.pop() {
 			let nd = d.next(&mut map);
@@ -55,12 +52,9 @@ fn invoke(input: &str) -> String {
 	for i in 0..row_max {
 		for j in 0..col_max {
 			let (obs, score) = map.get(i, j);
-			match obs {
-				'E' => {
-					println!("{} {}", obs, score);
-					ans = score;
-				}
-				_ => {}
+			if obs == 'E' {
+				println!("{} {}", obs, score);
+				ans = score;
 			}
 		}
 	}
@@ -104,7 +98,7 @@ impl Map {
 			for c in row {
 				print!("{}", c.0);
 			}
-			println!("");
+			println!();
 		}
 	}
 
@@ -117,7 +111,7 @@ impl Map {
 					print!("({})", c.1);
 				}
 			}
-			println!("");
+			println!();
 		}
 	}
 }
@@ -210,7 +204,7 @@ impl Reindeer {
 }
 
 #[cfg(test)]
-mod tests_16x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

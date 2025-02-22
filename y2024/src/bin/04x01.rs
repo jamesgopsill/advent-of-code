@@ -22,79 +22,71 @@ fn invoke(input: &str) -> String {
 	let col_count = map[0].len();
 	for i in 0..row_count {
 		for j in 0..col_count {
-			match map[i][j] {
-				'X' => {
-					//println!("X Found: {} {}", i, j);
-					// Can we check UP
-					if i >= 3 {
-						if map[i - 1][j] == 'M' && map[i - 2][j] == 'A' && map[i - 3][j] == 'S' {
-							//println!("XMAS UP");
-							count += 1;
-						}
-						// Check UP LEFT
-						if j >= 3 {
-							if map[i - 1][j - 1] == 'M'
-								&& map[i - 2][j - 2] == 'A'
-								&& map[i - 3][j - 3] == 'S'
-							{
-								//println!("XMAS UP LEFT");
-								count += 1;
-							}
-						}
-						// Check UP RIGHT
-						if j <= col_count - 4 {
-							if map[i - 1][j + 1] == 'M'
-								&& map[i - 2][j + 2] == 'A'
-								&& map[i - 3][j + 3] == 'S'
-							{
-								//println!("XMAS UP RIGHT");
-								count += 1;
-							}
-						}
+			if map[i][j] == 'X' {
+				// Can we check UP
+				if i >= 3 {
+					if map[i - 1][j] == 'M' && map[i - 2][j] == 'A' && map[i - 3][j] == 'S' {
+						//println!("XMAS UP");
+						count += 1;
 					}
-					// Can we check DOWN
-					if i <= row_count - 4 {
-						if map[i + 1][j] == 'M' && map[i + 2][j] == 'A' && map[i + 3][j] == 'S' {
-							//println!("XMAS UP DOWN");
-							count += 1;
-						}
-						// check DOWN LEFT
-						if j >= 3 {
-							if map[i + 1][j - 1] == 'M'
-								&& map[i + 2][j - 2] == 'A'
-								&& map[i + 3][j - 3] == 'S'
-							{
-								//println!("XMAS UP DOWN LEFT");
-								count += 1;
-							}
-						}
-						// check DOWN RIGHT
-						if j <= col_count - 4 {
-							if map[i + 1][j + 1] == 'M'
-								&& map[i + 2][j + 2] == 'A'
-								&& map[i + 3][j + 3] == 'S'
-							{
-								//println!("XMAS UP DOWN RIGHT");
-								count += 1;
-							}
-						}
+					// Check UP LEFT
+					if j >= 3
+						&& map[i - 1][j - 1] == 'M'
+						&& map[i - 2][j - 2] == 'A'
+						&& map[i - 3][j - 3] == 'S'
+					{
+						//println!("XMAS UP LEFT");
+						count += 1;
 					}
-					// Can we check left
-					if j >= 3 {
-						if map[i][j - 1] == 'M' && map[i][j - 2] == 'A' && map[i][j - 3] == 'S' {
-							//println!("XMAS LEFT");
-							count += 1;
-						}
-					}
-					// Can we check right
-					if j <= col_count - 4 {
-						if map[i][j + 1] == 'M' && map[i][j + 2] == 'A' && map[i][j + 3] == 'S' {
-							//println!("XMAS RIGHT");
-							count += 1;
-						}
+					// Check UP RIGHT
+					if j <= col_count - 4
+						&& map[i - 1][j + 1] == 'M'
+						&& map[i - 2][j + 2] == 'A'
+						&& map[i - 3][j + 3] == 'S'
+					{
+						//println!("XMAS UP RIGHT");
+						count += 1;
 					}
 				}
-				_ => {}
+				// Can we check DOWN
+				if i <= row_count - 4 {
+					if map[i + 1][j] == 'M' && map[i + 2][j] == 'A' && map[i + 3][j] == 'S' {
+						//println!("XMAS UP DOWN");
+						count += 1;
+					}
+					// check DOWN LEFT
+					if j >= 3
+						&& map[i + 1][j - 1] == 'M'
+						&& map[i + 2][j - 2] == 'A'
+						&& map[i + 3][j - 3] == 'S'
+					{
+						//println!("XMAS UP DOWN LEFT");
+						count += 1;
+					}
+					// check DOWN RIGHT
+					if j <= col_count - 4
+						&& map[i + 1][j + 1] == 'M'
+						&& map[i + 2][j + 2] == 'A'
+						&& map[i + 3][j + 3] == 'S'
+					{
+						//println!("XMAS UP DOWN RIGHT");
+						count += 1;
+					}
+				}
+				// Can we check left
+				if j >= 3 && map[i][j - 1] == 'M' && map[i][j - 2] == 'A' && map[i][j - 3] == 'S' {
+					//println!("XMAS LEFT");
+					count += 1;
+				}
+				// Can we check right
+				if j <= col_count - 4
+					&& map[i][j + 1] == 'M'
+					&& map[i][j + 2] == 'A'
+					&& map[i][j + 3] == 'S'
+				{
+					//println!("XMAS RIGHT");
+					count += 1;
+				}
 			}
 		}
 	}
@@ -102,7 +94,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_04x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

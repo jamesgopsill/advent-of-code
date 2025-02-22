@@ -62,7 +62,7 @@ fn decrypt_name(
 }
 
 #[cfg(test)]
-mod tests_0402 {
+mod tests {
 	use super::decrypt_name;
 
 	#[test]

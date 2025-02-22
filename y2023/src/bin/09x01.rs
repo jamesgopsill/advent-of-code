@@ -50,7 +50,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_0901 {
+mod tests {
 	use super::*;
 
 	#[test]

@@ -23,12 +23,12 @@ fn invoke(input: &str) -> String {
 	let numbers_re = Regex::new(r"\d+").unwrap();
 	let mut maps: Vec<Vec<MapRange>> = vec![];
 	let mut map: Vec<MapRange> = vec![];
-	for line in lines[2..].into_iter() {
+	for line in lines[2..].iter() {
 		if line.contains("map") {
 			map.clear();
 			continue;
 		}
-		if line.len() == 0 {
+		if line.is_empty() {
 			maps.push(map.clone());
 			continue;
 		}
@@ -56,7 +56,7 @@ fn invoke(input: &str) -> String {
 		let range = cap[2].parse::<u64>().unwrap();
 		dbg!(initial_seed, range);
 		for seed in initial_seed..initial_seed + range {
-			let mut location = seed.clone();
+			let mut location = seed;
 			for map in &maps {
 				for rng in map {
 					if rng.from_lower <= location && location <= rng.from_upper {

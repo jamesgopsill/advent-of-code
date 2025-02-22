@@ -9,12 +9,21 @@ fn main() {
 	bench(invoke, &input);
 }
 
-fn invoke(input: &str) -> String {
+pub fn invoke(input: &str) -> String {
 	let mut santa = Santa::new();
-	for c in input.chars() {
-		santa.step(c);
+	let mut robo_santa = Santa::new();
+	for (i, c) in input.chars().enumerate() {
+		if i % 2 == 0 {
+			santa.step(c);
+		} else {
+			robo_santa.step(c);
+		}
 	}
-	santa.unique_locations.len().to_string()
+	let houses: HashSet<_> = santa
+		.unique_locations
+		.union(&robo_santa.unique_locations)
+		.collect();
+	houses.len().to_string()
 }
 
 struct Santa {
@@ -49,24 +58,24 @@ impl Santa {
 }
 
 #[cfg(test)]
-mod tests_0301 {
+mod tests {
 	use super::invoke;
 
 	#[test]
 	fn test_a() {
-		let result = invoke(">");
-		assert_eq!(result, "2");
+		let result = invoke("^v");
+		assert_eq!(result, "3");
 	}
 
 	#[test]
 	fn test_b() {
 		let result = invoke("^>v<");
-		assert_eq!(result, "4");
+		assert_eq!(result, "3");
 	}
 
 	#[test]
 	fn test_c() {
 		let result = invoke("^v^v^v^v^v");
-		assert_eq!(result, "2");
+		assert_eq!(result, "11");
 	}
 }

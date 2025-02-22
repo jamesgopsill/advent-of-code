@@ -22,7 +22,8 @@ fn invoke(input: &str) -> String {
 		if ["AND", "XOR", "OR"].contains(&var) {
 			continue;
 		}
-		if let None = wires.get(var) {
+		//if wires.get(var).is_none() {
+		if !wires.contains_key(var) {
 			wires.insert(var, None);
 		}
 	}
@@ -110,12 +111,10 @@ fn invoke(input: &str) -> String {
 		let key = format!("z{:0>2}", i);
 		// println!("{}", key);
 		if let Some(v) = wires.get(key.as_str()) {
-			if let Some(v) = v {
-				match v {
-					0 => bits.push('0'),
-					1 => bits.push('1'),
-					_ => {}
-				}
+			match v {
+				Some(0) => bits.push('0'),
+				Some(1) => bits.push('1'),
+				_ => {}
 			}
 		}
 	}
@@ -127,7 +126,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_24x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

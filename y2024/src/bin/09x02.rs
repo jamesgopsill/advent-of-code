@@ -16,14 +16,14 @@ fn invoke(input: &str) -> String {
 		match i % 2 {
 			0 => {
 				let size = val.to_digit(10).unwrap() as u64;
-				let file = File::new(fid, size.clone());
-				let mut block = Block::new(size.clone());
+				let file = File::new(fid, size);
+				let mut block = Block::new(size);
 				block.add_file(file);
 				disk.push(block);
 				fid += 1;
 			}
 			_ => {
-				let block = Block::new(size.clone());
+				let block = Block::new(size);
 				disk.push(block);
 			}
 		}
@@ -99,7 +99,7 @@ impl Block {
 			self.files.push(file);
 			return true;
 		}
-		return false;
+		false
 	}
 
 	fn clear(&mut self) {

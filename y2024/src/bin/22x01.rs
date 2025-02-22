@@ -1,14 +1,10 @@
 use std::collections::HashMap;
-
-//use std::fs;
-//use utils::bench;
+use std::fs;
 
 fn main() {
-	todo!()
-	//let input = fs::read_to_string("puzzle_data/2024/22.txt").unwrap();
-	//let out = invoke(&input);
-	//println!("{}", out);
-	//bench(invoke, &input);
+	let input = fs::read_to_string("puzzle_data/2024/22.txt").unwrap();
+	let out = invoke(&input, 0);
+	println!("{}", out);
 }
 
 fn invoke(
@@ -21,7 +17,7 @@ fn invoke(
 		println!("{}", line);
 		let mut secret_number = line.parse::<u64>().unwrap();
 		for _i in 0..n {
-			let previous_number = secret_number.clone();
+			let previous_number = secret_number;
 			// Cache
 			if let Some(val) = cache.get(&previous_number) {
 				//println!("Using cache");
@@ -30,17 +26,17 @@ fn invoke(
 			}
 			// Step One
 			let a = secret_number * 64;
-			secret_number = secret_number ^ a;
-			secret_number = secret_number % 16_777_216;
-			// Step Two
+			secret_number ^= a; //= secret_number ^ a;
+			secret_number %= 16_777_216; // = secret_number % 16_777_216;
+								// Step Two
 			let b = secret_number / 32;
-			secret_number = secret_number ^ b;
-			secret_number = secret_number % 16_777_216;
-			// Step Three
+			secret_number ^= b; //= secret_number ^ b;
+			secret_number %= 16_777_216; //= secret_number % 16_777_216;
+								// Step Three
 			let c = secret_number * 2048;
-			secret_number = secret_number ^ c;
-			secret_number = secret_number % 16_777_216;
-			// Add to cache
+			secret_number ^= c; //= secret_number ^ c;
+			secret_number %= 16_777_216; //= secret_number % 16_777_216;
+								// Add to cache
 			cache.insert(previous_number, secret_number);
 			//println!("{}: {} -> {}", i + 1, previous_number, secret_number);
 		}
@@ -51,7 +47,7 @@ fn invoke(
 }
 
 #[cfg(test)]
-mod tests_22x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

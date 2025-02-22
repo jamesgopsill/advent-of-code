@@ -40,7 +40,7 @@ fn invoke(input: &str) -> String {
 	total.to_string()
 }
 
-fn is_safe(levels: &Vec<i32>) -> bool {
+fn is_safe(levels: &[i32]) -> bool {
 	let mut safe: bool = true;
 	let mut count: i32 = 0;
 	for win in levels.windows(2) {
@@ -60,11 +60,11 @@ fn is_safe(levels: &Vec<i32>) -> bool {
 	if safe && count == (levels.len() - 1) as i32 {
 		return true;
 	}
-	return false;
+	false
 }
 
 #[cfg(test)]
-mod tests_02x02 {
+mod tests {
 	use super::invoke;
 
 	#[test]

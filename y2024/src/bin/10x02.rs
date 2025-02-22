@@ -102,7 +102,7 @@ impl<'a> Trail<'a> {
 }
 
 #[cfg(test)]
-mod tests_10x02 {
+mod tests {
 	use super::invoke;
 
 	#[test]

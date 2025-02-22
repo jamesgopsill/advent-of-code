@@ -26,7 +26,7 @@ fn invoke(input: &str) -> String {
 			}
 			continue;
 		}
-		if line.len() > 0 {
+		if line.is_empty() {
 			let mut page: Vec<u32> = vec![];
 			for item in line.split(",") {
 				let item = item.parse::<u32>().unwrap();
@@ -61,7 +61,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_05x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

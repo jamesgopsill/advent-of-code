@@ -110,7 +110,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_12x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]

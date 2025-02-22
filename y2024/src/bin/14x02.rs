@@ -4,7 +4,6 @@ use std::{
 	fs::File,
 	io::{BufWriter, Write},
 	path::PathBuf,
-	u32,
 };
 
 use std::fs;
@@ -42,7 +41,7 @@ fn invoke(
 		}
 
 		let mut n: u32 = 1;
-		let mut map = vec![vec![0 as u32; x_max as usize]; y_max as usize];
+		let mut map = vec![vec![0; x_max as usize]; y_max as usize];
 		for r in robots.iter() {
 			map[r.y as usize][r.x as usize] = n;
 			n += 1;
@@ -119,7 +118,7 @@ fn invoke(
 }
 
 fn draw_map(
-	robots: &Vec<Robot>,
+	robots: &[Robot],
 	fpath: PathBuf,
 ) {
 	let file = File::create(fpath);

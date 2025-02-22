@@ -80,7 +80,7 @@ fn is_nice(
 }
 
 #[cfg(test)]
-mod tests_0502 {
+mod tests {
 	use super::*;
 
 	#[test]

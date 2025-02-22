@@ -1,5 +1,5 @@
+#![allow(dead_code)]
 //use rayon::prelude::*;
-
 // Knowing there is a better way but lets try brute. :D
 use std::fs;
 use utils::bench;
@@ -110,13 +110,13 @@ impl Computer {
 				let denominator = 2_u32.pow(combo_operand);
 				self.a = numerator / denominator;
 			}
-			1 => self.b = self.b ^ literal_operand,
+			1 => self.b ^= literal_operand, //= self.b ^ literal_operand,
 			2 => self.b = combo_operand % 8,
 			3 => match self.a {
 				0 => {}
 				_ => self.pointer = literal_operand as usize,
 			},
-			4 => self.b = self.b ^ self.c,
+			4 => self.b ^= self.c, // = self.b ^ self.c,
 			5 => self.out.push(combo_operand % 8),
 			6 => {
 				let numerator = self.a;
@@ -134,7 +134,7 @@ impl Computer {
 }
 
 #[cfg(test)]
-mod tests_17x02 {
+mod tests {
 	use super::invoke;
 
 	#[test]

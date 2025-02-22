@@ -135,7 +135,7 @@ impl Universe {
 }
 
 #[cfg(test)]
-mod tests_1102 {
+mod tests {
 	use super::*;
 
 	#[test]

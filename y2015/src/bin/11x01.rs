@@ -127,7 +127,7 @@ fn contains_two_pairs(s: &str) -> bool {
 }
 
 #[cfg(test)]
-mod tests_1101 {
+mod tests {
 	use super::*;
 
 	#[test]

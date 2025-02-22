@@ -17,14 +17,12 @@ fn invoke(input: &str) -> String {
 		let winning_numbers: Vec<i32> = card_numbers
 			.next()
 			.unwrap()
-			.trim()
 			.split_whitespace()
 			.map(|f| f.parse::<i32>().unwrap())
 			.collect();
 		let my_numbers: Vec<i32> = card_numbers
 			.next()
 			.unwrap()
-			.trim()
 			.split_whitespace()
 			.map(|f| f.parse::<i32>().unwrap())
 			.collect();
@@ -43,7 +41,7 @@ fn invoke(input: &str) -> String {
 			continue;
 		}
 		if count > 1 {
-			out += 2_u32.pow(count as u32 - 1);
+			out += 2_u32.pow(count - 1);
 			continue;
 		}
 	}

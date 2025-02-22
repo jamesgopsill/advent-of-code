@@ -21,7 +21,7 @@ fn invoke(input: &str) -> String {
 }
 
 #[cfg(test)]
-mod tests_1201 {
+mod tests {
 	use super::invoke;
 
 	#[test]

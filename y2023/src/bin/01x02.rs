@@ -45,7 +45,7 @@ fn convert_to_u32(value: &str) -> u32 {
 }
 
 #[cfg(test)]
-mod tests_0102 {
+mod tests {
 	use super::invoke;
 
 	#[test]

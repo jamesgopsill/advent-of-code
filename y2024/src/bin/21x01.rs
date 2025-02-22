@@ -353,7 +353,7 @@ fn dpad_cmds(cmds: Vec<char>) -> Vec<char> {
 */
 
 #[cfg(test)]
-mod tests_21x01 {
+mod tests {
 	use super::invoke;
 
 	#[test]
