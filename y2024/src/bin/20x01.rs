@@ -2,29 +2,29 @@
 use std::fs;
 
 fn main() {
-	let input = fs::read_to_string("puzzle_data/2024/20.txt").unwrap();
-	let out = invoke(&input, 0);
-	println!("{}", out);
+    let input = fs::read_to_string("puzzle_data/2024/20.txt").unwrap();
+    let out = invoke(&input, 0);
+    println!("{}", out);
 }
 
 fn invoke(
-	_input: &str,
-	_saving: i32,
+    _input: &str,
+    _saving: i32,
 ) -> String {
-	todo!()
+    todo!()
 }
 
 fn race(_input: &str) -> u32 {
-	todo!()
+    todo!()
 }
 
 #[cfg(test)]
 mod tests {
-	use super::*;
+    use super::*;
 
-	#[test]
-	fn test_a() {
-		let input = "###############
+    #[test]
+    fn test_a() {
+        let input = "###############
 #...#...12....#
 #.#.#.#.#.###.#
 #S#...#.#.#...#
@@ -39,7 +39,7 @@ mod tests {
 #.#.#.#.#.#.###
 #...#...#...###
 ###############";
-		let result = race(input);
-		assert_eq!(result, 72);
-	}
+        let result = race(input);
+        assert_eq!(result, 72);
+    }
 }

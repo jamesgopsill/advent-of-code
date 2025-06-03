@@ -4,134 +4,134 @@ use std::fs;
 use utils::bench;
 
 fn main() {
-	let input = fs::read_to_string("puzzle_data/2023/24.txt").unwrap();
-	let out = invoke(&input);
-	println!("{}", out);
-	bench(invoke, &input);
+    let input = fs::read_to_string("puzzle_data/2023/24.txt").unwrap();
+    let out = invoke(&input);
+    println!("{}", out);
+    bench(invoke, &input);
 }
 
 fn invoke(input: &str) -> String {
-	let mut wires: HashMap<&str, Option<u8>> = HashMap::new();
+    let mut wires: HashMap<&str, Option<u8>> = HashMap::new();
 
-	// Variables
-	let re = Regex::new(r"[\w]{2,10}").unwrap();
-	let caps = re.captures_iter(input);
-	for cap in caps {
-		let var = cap.get(0).unwrap().as_str();
-		println!("{}", var);
-		if ["AND", "XOR", "OR"].contains(&var) {
-			continue;
-		}
-		//if wires.get(var).is_none() {
-		if !wires.contains_key(var) {
-			wires.insert(var, None);
-		}
-	}
+    // Variables
+    let re = Regex::new(r"[\w]{2,10}").unwrap();
+    let caps = re.captures_iter(input);
+    for cap in caps {
+        let var = cap.get(0).unwrap().as_str();
+        println!("{}", var);
+        if ["AND", "XOR", "OR"].contains(&var) {
+            continue;
+        }
+        //if wires.get(var).is_none() {
+        if !wires.contains_key(var) {
+            wires.insert(var, None);
+        }
+    }
 
-	// Values
-	let re = Regex::new(r"(\w+):\s(\d)").unwrap();
-	let caps = re.captures_iter(input);
-	for cap in caps {
-		let var = cap.get(1).unwrap().as_str();
-		let val = cap.get(2).unwrap().as_str().parse::<u8>().unwrap();
-		println!("{} {}", var, val);
-		wires.insert(var, Some(val));
-	}
+    // Values
+    let re = Regex::new(r"(\w+):\s(\d)").unwrap();
+    let caps = re.captures_iter(input);
+    for cap in caps {
+        let var = cap.get(1).unwrap().as_str();
+        let val = cap.get(2).unwrap().as_str().parse::<u8>().unwrap();
+        println!("{} {}", var, val);
+        wires.insert(var, Some(val));
+    }
 
-	// Instructions
-	let mut instructions: Vec<(&str, &str, &str, &str)> = vec![];
+    // Instructions
+    let mut instructions: Vec<(&str, &str, &str, &str)> = vec![];
 
-	let re = Regex::new(r"(\w+)\s(AND|XOR|OR)\s(\w+)\s->\s(\w+)").unwrap();
-	let caps = re.captures_iter(input);
-	for cap in caps {
-		let lhs = cap.get(1).unwrap().as_str();
-		let op = cap.get(2).unwrap().as_str();
-		let rhs = cap.get(3).unwrap().as_str();
-		let out = cap.get(4).unwrap().as_str();
-		println!("{} {} {} {}", lhs, op, rhs, out);
-		instructions.push((lhs, op, rhs, out));
-	}
+    let re = Regex::new(r"(\w+)\s(AND|XOR|OR)\s(\w+)\s->\s(\w+)").unwrap();
+    let caps = re.captures_iter(input);
+    for cap in caps {
+        let lhs = cap.get(1).unwrap().as_str();
+        let op = cap.get(2).unwrap().as_str();
+        let rhs = cap.get(3).unwrap().as_str();
+        let out = cap.get(4).unwrap().as_str();
+        println!("{} {} {} {}", lhs, op, rhs, out);
+        instructions.push((lhs, op, rhs, out));
+    }
 
-	loop {
-		// Check if we have calculated all the values.
-		let mut flag = true;
-		for (_k, v) in wires.iter() {
-			if v.is_none() {
-				flag = false;
-				break;
-			}
-		}
-		if flag {
-			break;
-		}
-		// Find instructions we can operate on
-		for (lhs, op, rhs, out) in instructions.iter() {
-			// Continue if we have alread calculated the value
-			let out_val = wires.get(out).unwrap();
-			if out_val.is_some() {
-				continue;
-			}
-			let lhs = wires.get(lhs).unwrap();
-			let rhs = wires.get(rhs).unwrap();
-			if lhs.is_some() && rhs.is_some() {
-				let lhs = lhs.unwrap();
-				let rhs = rhs.unwrap();
-				match *op {
-					"AND" => {
-						if lhs == 1 && rhs == 1 {
-							wires.insert(out, Some(1));
-						} else {
-							wires.insert(out, Some(0));
-						}
-					}
-					"XOR" => {
-						if lhs != rhs {
-							wires.insert(out, Some(1));
-						} else {
-							wires.insert(out, Some(0));
-						}
-					}
-					"OR" => {
-						if lhs == 1 || rhs == 1 {
-							wires.insert(out, Some(1));
-						} else {
-							wires.insert(out, Some(0));
-						}
-					}
-					_ => {}
-				}
-			}
-		}
-	}
+    loop {
+        // Check if we have calculated all the values.
+        let mut flag = true;
+        for (_k, v) in wires.iter() {
+            if v.is_none() {
+                flag = false;
+                break;
+            }
+        }
+        if flag {
+            break;
+        }
+        // Find instructions we can operate on
+        for (lhs, op, rhs, out) in instructions.iter() {
+            // Continue if we have alread calculated the value
+            let out_val = wires.get(out).unwrap();
+            if out_val.is_some() {
+                continue;
+            }
+            let lhs = wires.get(lhs).unwrap();
+            let rhs = wires.get(rhs).unwrap();
+            if lhs.is_some() && rhs.is_some() {
+                let lhs = lhs.unwrap();
+                let rhs = rhs.unwrap();
+                match *op {
+                    "AND" => {
+                        if lhs == 1 && rhs == 1 {
+                            wires.insert(out, Some(1));
+                        } else {
+                            wires.insert(out, Some(0));
+                        }
+                    }
+                    "XOR" => {
+                        if lhs != rhs {
+                            wires.insert(out, Some(1));
+                        } else {
+                            wires.insert(out, Some(0));
+                        }
+                    }
+                    "OR" => {
+                        if lhs == 1 || rhs == 1 {
+                            wires.insert(out, Some(1));
+                        } else {
+                            wires.insert(out, Some(0));
+                        }
+                    }
+                    _ => {}
+                }
+            }
+        }
+    }
 
-	//println!("{:?}", wires);
+    //println!("{:?}", wires);
 
-	let mut bits = "".to_string();
-	for i in (0..99).rev() {
-		let key = format!("z{:0>2}", i);
-		// println!("{}", key);
-		if let Some(v) = wires.get(key.as_str()) {
-			match v {
-				Some(0) => bits.push('0'),
-				Some(1) => bits.push('1'),
-				_ => {}
-			}
-		}
-	}
-	println!("{}", bits);
-	let digit = isize::from_str_radix(bits.as_str(), 2).unwrap();
-	println!("{}", digit);
+    let mut bits = "".to_string();
+    for i in (0..99).rev() {
+        let key = format!("z{:0>2}", i);
+        // println!("{}", key);
+        if let Some(v) = wires.get(key.as_str()) {
+            match v {
+                Some(0) => bits.push('0'),
+                Some(1) => bits.push('1'),
+                _ => {}
+            }
+        }
+    }
+    println!("{}", bits);
+    let digit = isize::from_str_radix(bits.as_str(), 2).unwrap();
+    println!("{}", digit);
 
-	digit.to_string()
+    digit.to_string()
 }
 
 #[cfg(test)]
 mod tests {
-	use super::invoke;
+    use super::invoke;
 
-	#[test]
-	fn test_a() {
-		let input = "x00: 1
+    #[test]
+    fn test_a() {
+        let input = "x00: 1
 x01: 1
 x02: 1
 y00: 0
@@ -141,13 +141,13 @@ y02: 0
 x00 AND y00 -> z00
 x01 XOR y01 -> z01
 x02 OR y02 -> z02";
-		let result = invoke(input);
-		assert_eq!(result, "4");
-	}
+        let result = invoke(input);
+        assert_eq!(result, "4");
+    }
 
-	#[test]
-	fn test_b() {
-		let input = "x00: 1
+    #[test]
+    fn test_b() {
+        let input = "x00: 1
 x01: 0
 x02: 1
 x03: 1
@@ -194,7 +194,7 @@ y03 OR x01 -> nrd
 hwm AND bqk -> z03
 tgd XOR rvg -> z12
 tnw OR pbm -> gnj";
-		let result = invoke(input);
-		assert_eq!(result, "2024");
-	}
+        let result = invoke(input);
+        assert_eq!(result, "2024");
+    }
 }
