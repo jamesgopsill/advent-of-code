@@ -10,29 +10,38 @@ fn main() {
 }
 
 fn invoke(input: &str) -> String {
+    // define the regex to identify all the numbers on a line.
     let re = Regex::new(r"(\d+)").unwrap();
-    let mut m = Matrix::new(1_000, 1_000);
+    // create an instance of the sheet.
+    let mut sheet = Sheet::new(1_000, 1_000);
 
+    // for each line representing a claim
     for line in input.lines() {
+        // Capture all the values
         let caps: Vec<Captures<'_>> = re.captures_iter(line).collect();
+        // Parse them all.
         let id = caps[0].get(0).unwrap().as_str().parse::<u16>().unwrap();
         let row = caps[1].get(0).unwrap().as_str().parse::<usize>().unwrap();
         let col = caps[2].get(0).unwrap().as_str().parse::<usize>().unwrap();
         let width = caps[3].get(0).unwrap().as_str().parse::<usize>().unwrap();
         let height = caps[4].get(0).unwrap().as_str().parse::<usize>().unwrap();
-        m.add_claim(id, row, col, width, height);
+        // Add the claim to the sheet.
+        sheet.add_claim(id, row, col, width, height);
     }
 
-    let overlaps = m.overlaps();
+    // Identify the number of overlaps on the sheet.
+    let overlaps = sheet.overlaps();
     overlaps.to_string()
 }
 
-struct Matrix {
+/// A struct to represent the sheet of fabric (a matrix).
+struct Sheet {
     cells: Vec<Vec<u16>>,
     rows: usize,
 }
 
-impl Matrix {
+impl Sheet {
+    // Create a new instance of sheet
     pub fn new(
         rows: usize,
         cols: usize,
@@ -44,6 +53,7 @@ impl Matrix {
         Self { cells, rows }
     }
 
+    // Convert a 2D value into a 1D value.
     fn two_dim_to_one_dim(
         &self,
         row: usize,
@@ -52,6 +62,7 @@ impl Matrix {
         (row * self.rows) + col
     }
 
+    // Log a claim against the sheet.
     fn add_claim(
         &mut self,
         id: u16,
@@ -68,6 +79,7 @@ impl Matrix {
         }
     }
 
+    // Detect the overlaps by iterating over the cells and identifying ones with multiple claims.
     fn overlaps(&self) -> u32 {
         let mut overlaps: u32 = 0;
         for cell in &self.cells {
