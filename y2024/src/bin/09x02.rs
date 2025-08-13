@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/09.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -68,10 +68,7 @@ struct File {
 }
 
 impl File {
-    fn new(
-        fid: u64,
-        size: u64,
-    ) -> Self {
+    fn new(fid: u64, size: u64) -> Self {
         Self { fid, size }
     }
 }
@@ -90,10 +87,7 @@ impl Block {
         }
     }
 
-    fn add_file(
-        &mut self,
-        file: File,
-    ) -> bool {
+    fn add_file(&mut self, file: File) -> bool {
         if self.capacity_remaining >= file.size {
             self.capacity_remaining -= file.size;
             self.files.push(file);

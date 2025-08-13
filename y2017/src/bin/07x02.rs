@@ -26,10 +26,7 @@ pub struct Program<'a> {
 }
 
 impl<'a> Program<'a> {
-    pub fn new(
-        pid: &'a str,
-        weight: u32,
-    ) -> Self {
+    pub fn new(pid: &'a str, weight: u32) -> Self {
         Self {
             pid,
             weight,
@@ -39,11 +36,7 @@ impl<'a> Program<'a> {
         }
     }
 
-    pub fn add_child(
-        &mut self,
-        pid: &'a str,
-        weight: u32,
-    ) {
+    pub fn add_child(&mut self, pid: &'a str, weight: u32) {
         self.sum += weight;
         self.children.push(pid);
     }
@@ -55,20 +48,12 @@ pub struct Tower<'a> {
 }
 
 impl<'a> Tower<'a> {
-    pub fn add_program(
-        &mut self,
-        pid: &'a str,
-        weight: u32,
-    ) {
+    pub fn add_program(&mut self, pid: &'a str, weight: u32) {
         let program = Program::new(pid, weight);
         self.tower.insert(program.pid, program);
     }
 
-    pub fn associate(
-        &mut self,
-        parent_pid: &'a str,
-        child_pid: &'a str,
-    ) {
+    pub fn associate(&mut self, parent_pid: &'a str, child_pid: &'a str) {
         let weight: u32;
         {
             let child = self.tower.get_mut(child_pid).unwrap();
@@ -98,10 +83,7 @@ impl<'a> Tower<'a> {
         child_pids
     }
 
-    pub fn get_program_sum(
-        &mut self,
-        key: &str,
-    ) -> u32 {
+    pub fn get_program_sum(&mut self, key: &str) -> u32 {
         let p = self.tower.get_mut(key).unwrap();
         p.sum
     }

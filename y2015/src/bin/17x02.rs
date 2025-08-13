@@ -7,10 +7,7 @@ fn main() {
     println!("{}", out);
 }
 
-fn invoke(
-    input: &str,
-    liters: u32,
-) -> String {
+fn invoke(input: &str, liters: u32) -> String {
     let mut minimum_number: usize = 9_999;
     let mut variations: u32 = 0;
     let mut containers: Vec<u32> = vec![];

@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2023/01.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -22,7 +22,7 @@ fn invoke(input: &str) -> String {
         let first = convert_to_u32(first);
         let last = convert_to_u32(last);
 
-        let number = format!("{}{}", first, last).parse::<u32>().unwrap();
+        let number = format!("{first}{last}").parse::<u32>().unwrap();
         // dbg!(line, number);
         sum += number;
     }

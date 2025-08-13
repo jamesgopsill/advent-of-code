@@ -11,14 +11,10 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/14.txt").unwrap();
     let out = invoke(&input, 101, 103);
-    println!("{}", out);
+    println!("{out}");
 }
 
-fn invoke(
-    input: &str,
-    x_max: i32,
-    y_max: i32,
-) -> String {
+fn invoke(input: &str, x_max: i32, y_max: i32) -> String {
     let re = Regex::new(r"([-\d]+),([-\d]+)\sv=([-\d]+),([-\d]+)").unwrap();
     let caps = re.captures_iter(input);
     // Initialise the robots
@@ -117,10 +113,7 @@ fn invoke(
     "".to_string()
 }
 
-fn draw_map(
-    robots: &[Robot],
-    fpath: PathBuf,
-) {
+fn draw_map(robots: &[Robot], fpath: PathBuf) {
     let file = File::create(fpath);
     let file = file.unwrap();
     let mut writer = BufWriter::new(file);
@@ -149,14 +142,7 @@ struct Robot {
 }
 
 impl Robot {
-    fn new(
-        x: i32,
-        y: i32,
-        vx: i32,
-        vy: i32,
-        x_max: i32,
-        y_max: i32,
-    ) -> Self {
+    fn new(x: i32, y: i32, vx: i32, vy: i32, x_max: i32, y_max: i32) -> Self {
         Self {
             x,
             y,

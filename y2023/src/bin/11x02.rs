@@ -6,10 +6,7 @@ fn main() {
     println!("{}", out);
 }
 
-fn invoke(
-    input: &str,
-    expansion: u64,
-) -> String {
+fn invoke(input: &str, expansion: u64) -> String {
     // Convert the image as a Vec<Vec<char>>
     let lines: Vec<&str> = input.lines().collect();
     let mut image: Vec<Vec<char>> = vec![];

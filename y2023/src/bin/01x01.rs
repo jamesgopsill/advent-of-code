@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2023/01.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -15,7 +15,7 @@ fn invoke(input: &str) -> String {
         let digits: Vec<&str> = line.matches(char::is_numeric).collect();
         let first = digits.first().unwrap();
         let last = digits.last().unwrap();
-        let number = format!("{}{}", first, last).parse::<u32>().unwrap();
+        let number = format!("{first}{last}").parse::<u32>().unwrap();
 
         dbg!(line, number);
 

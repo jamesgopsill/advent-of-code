@@ -11,7 +11,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/21.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -89,10 +89,7 @@ fn invoke(input: &str) -> String {
     ans.to_string()
 }
 
-fn generate_cmd_options(
-    current: char,
-    next: char,
-) -> Vec<Vec<char>> {
+fn generate_cmd_options(current: char, next: char) -> Vec<Vec<char>> {
     // Combined keypad.
     // Move to a lazy init.
     let mut keypad: HashMap<char, (i32, i32)> = HashMap::new();

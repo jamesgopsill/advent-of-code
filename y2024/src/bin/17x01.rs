@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/17.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -65,12 +65,7 @@ struct Computer {
 }
 
 impl Computer {
-    fn new(
-        a: u32,
-        b: u32,
-        c: u32,
-        program: Vec<u32>,
-    ) -> Self {
+    fn new(a: u32, b: u32, c: u32, program: Vec<u32>) -> Self {
         Self {
             a,
             b,

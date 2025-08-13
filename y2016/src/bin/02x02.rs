@@ -60,10 +60,7 @@ impl PinPad {
         Self { pin: Pin::Five }
     }
 
-    fn step(
-        &mut self,
-        c: char,
-    ) {
+    fn step(&mut self, c: char) {
         match self.pin {
             Pin::One => match c {
                 'D' => self.pin = Pin::Three,

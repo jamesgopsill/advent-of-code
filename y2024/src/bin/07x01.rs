@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/07.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -32,10 +32,7 @@ fn invoke(input: &str) -> String {
     ans.to_string()
 }
 
-fn calculate(
-    past: Vec<u64>,
-    mut numbers: Vec<u64>,
-) -> Vec<u64> {
+fn calculate(past: Vec<u64>, mut numbers: Vec<u64>) -> Vec<u64> {
     let number = numbers.pop();
     if number.is_none() {
         return past;

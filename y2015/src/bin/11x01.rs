@@ -10,10 +10,7 @@ fn main() {
     bench_val(invoke, &input, 25);
 }
 
-fn invoke(
-    input: &str,
-    n: u64,
-) -> String {
+fn invoke(input: &str, n: u64) -> String {
     let n = n as u32;
     // reverse the string to ease the iteration
     let mut password = input.trim().to_string();
@@ -46,10 +43,7 @@ fn invoke(
     password
 }
 
-fn increment_char(
-    password: &mut String,
-    idx: usize,
-) -> bool {
+fn increment_char(password: &mut String, idx: usize) -> bool {
     let c = password.chars().nth(idx).unwrap();
     if c == 'z' {
         password.replace_range(idx..(idx + 1), "a");

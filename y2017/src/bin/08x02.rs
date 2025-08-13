@@ -104,19 +104,13 @@ impl TryFrom<&str> for Instruction {
 }
 
 impl Instruction {
-    fn execute(
-        &self,
-        memory: &mut HashMap<Box<str>, i64>,
-    ) {
+    fn execute(&self, memory: &mut HashMap<Box<str>, i64>) {
         if self.condition_satisified(memory) {
             self.operate(memory);
         };
     }
 
-    fn condition_satisified(
-        &self,
-        memory: &HashMap<Box<str>, i64>,
-    ) -> bool {
+    fn condition_satisified(&self, memory: &HashMap<Box<str>, i64>) -> bool {
         let regval: i64 = match memory.get(&self.coreg) {
             Some(v) => *v,
             None => 0,
@@ -131,10 +125,7 @@ impl Instruction {
         }
     }
 
-    fn operate(
-        &self,
-        memory: &mut HashMap<Box<str>, i64>,
-    ) {
+    fn operate(&self, memory: &mut HashMap<Box<str>, i64>) {
         let regval = memory.get_mut(&self.opreg);
         if let Some(val) = regval {
             match self.opkind {

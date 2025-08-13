@@ -7,10 +7,7 @@ fn main() {
     println!("{}", out);
 }
 
-fn invoke(
-    input: &str,
-    seconds: u32,
-) -> String {
+fn invoke(input: &str, seconds: u32) -> String {
     let re = Regex::new(r"(\d+)[a-z\s/]+(\d+)[a-z\s,]+(\d+)").unwrap();
     let captures = re.captures_iter(input.trim());
     let mut max_distance: u32 = 0;

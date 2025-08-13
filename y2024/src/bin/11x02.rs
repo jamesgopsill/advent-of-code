@@ -4,13 +4,10 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/11.txt").unwrap();
     let out = invoke(&input, 75);
-    println!("{}", out);
+    println!("{out}");
 }
 
-fn invoke(
-    input: &str,
-    blink: u64,
-) -> String {
+fn invoke(input: &str, blink: u64) -> String {
     // No Brute Force
 
     let starting_stones: Vec<u64> = input

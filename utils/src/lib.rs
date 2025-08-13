@@ -1,10 +1,6 @@
 use std::time::Instant;
 
-pub fn bench_val(
-    f: fn(&str, u64) -> String,
-    p: &str,
-    v: u64,
-) {
+pub fn bench_val(f: fn(&str, u64) -> String, p: &str, v: u64) {
     let mut trials: Vec<u128> = vec![];
     for i in 0..100 {
         if i % 10 == 0 {
@@ -20,10 +16,7 @@ pub fn bench_val(
     println!("Min: {:?}", trials.iter().min().unwrap());
 }
 
-pub fn bench(
-    f: fn(&str) -> String,
-    p: &str,
-) {
+pub fn bench(f: fn(&str) -> String, p: &str) {
     let mut trials: Vec<u128> = vec![];
     for i in 0..100 {
         if i % 10 == 0 {

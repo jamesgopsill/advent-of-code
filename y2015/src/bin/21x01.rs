@@ -87,10 +87,7 @@ fn invoke(_: &str) -> String {
     0.to_string()
 }
 
-fn fight(
-    p: &mut Player,
-    b: &mut Boss,
-) -> Option<u32> {
+fn fight(p: &mut Player, b: &mut Boss) -> Option<u32> {
     p.hp = 100;
     b.hp = 104;
     loop {
@@ -146,10 +143,7 @@ struct Player {
 }
 
 impl Player {
-    fn new(
-        weapon: Weapon,
-        hp: u32,
-    ) -> Self {
+    fn new(weapon: Weapon, hp: u32) -> Self {
         let mut s = Self {
             weapon,
             armor: Armor::None,
@@ -232,35 +226,23 @@ impl Player {
         }
     }
 
-    fn change_weapon(
-        &mut self,
-        weapon: Weapon,
-    ) {
+    fn change_weapon(&mut self, weapon: Weapon) {
         self.weapon = weapon;
         self.update_damage_stat();
     }
 
-    fn change_armor(
-        &mut self,
-        armor: Armor,
-    ) {
+    fn change_armor(&mut self, armor: Armor) {
         self.armor = armor;
         self.update_defence_stat();
     }
 
-    fn change_rings(
-        &mut self,
-        rings: Vec<Ring>,
-    ) {
+    fn change_rings(&mut self, rings: Vec<Ring>) {
         self.rings = rings;
         self.update_damage_stat();
         self.update_defence_stat();
     }
 
-    fn attack(
-        &self,
-        boss: &mut Boss,
-    ) {
+    fn attack(&self, boss: &mut Boss) {
         let damage = self.damage.checked_sub(boss.defence);
         match damage {
             Some(damage) => boss.take_damage(damage),
@@ -268,10 +250,7 @@ impl Player {
         }
     }
 
-    fn take_damage(
-        &mut self,
-        damage: u32,
-    ) {
+    fn take_damage(&mut self, damage: u32) {
         if damage > self.hp {
             self.hp = 0;
         } else {
@@ -287,11 +266,7 @@ struct Boss {
 }
 
 impl Boss {
-    fn new(
-        damage: u32,
-        defence: u32,
-        hp: u32,
-    ) -> Self {
+    fn new(damage: u32, defence: u32, hp: u32) -> Self {
         Self {
             damage,
             defence,
@@ -299,10 +274,7 @@ impl Boss {
         }
     }
 
-    fn take_damage(
-        &mut self,
-        damage: u32,
-    ) {
+    fn take_damage(&mut self, damage: u32) {
         if damage > self.hp {
             self.hp = 0;
         } else {
@@ -310,10 +282,7 @@ impl Boss {
         }
     }
 
-    fn attack(
-        &self,
-        player: &mut Player,
-    ) {
+    fn attack(&self, player: &mut Player) {
         let damage = self.damage.checked_sub(player.defence);
         match damage {
             Some(damage) => player.take_damage(damage),

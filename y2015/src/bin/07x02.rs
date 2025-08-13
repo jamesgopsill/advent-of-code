@@ -48,10 +48,7 @@ impl Wire {
         }
     }
 
-    fn update_cache(
-        &mut self,
-        value: Option<u16>,
-    ) {
+    fn update_cache(&mut self, value: Option<u16>) {
         self.cached_value = value;
     }
 }
@@ -61,10 +58,7 @@ static ACTION_RE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r"(\w+)\s(AND|OR|LSHIFT|RSHIFT)\s(\w+)").unwrap()
 });
 
-fn compute_value(
-    key: String,
-    wires: &mut WireMap,
-) -> u16 {
+fn compute_value(key: String, wires: &mut WireMap) -> u16 {
     let mut wire = wires.get(&key).cloned().unwrap();
     if wire.cached_value.is_some() {
         return wire.cached_value.unwrap();

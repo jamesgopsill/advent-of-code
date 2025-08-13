@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/19.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 

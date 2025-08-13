@@ -3,15 +3,10 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/18.txt").unwrap();
     let out = invoke(&input, 70, 70, 1024);
-    println!("{}", out);
+    println!("{out}");
 }
 
-fn invoke(
-    input: &str,
-    row_max: usize,
-    col_max: usize,
-    time: usize,
-) -> String {
+fn invoke(input: &str, row_max: usize, col_max: usize, time: usize) -> String {
     let mut map = Map::new(row_max, col_max);
     for (i, line) in input.lines().enumerate() {
         if time == i {
@@ -48,10 +43,7 @@ fn invoke(
 struct Map(Vec<Vec<u32>>);
 
 impl Map {
-    fn new(
-        row_max: usize,
-        col_max: usize,
-    ) -> Self {
+    fn new(row_max: usize, col_max: usize) -> Self {
         let mut map: Vec<Vec<u32>> = vec![];
         for _ in 0..=row_max {
             let mut row: Vec<u32> = vec![];
@@ -71,20 +63,11 @@ impl Map {
         self.0[0].len()
     }
 
-    fn get(
-        &self,
-        row: usize,
-        col: usize,
-    ) -> u32 {
+    fn get(&self, row: usize, col: usize) -> u32 {
         self.0[row][col]
     }
 
-    fn set(
-        &mut self,
-        row: usize,
-        col: usize,
-        val: u32,
-    ) {
+    fn set(&mut self, row: usize, col: usize, val: u32) {
         self.0[row][col] = val
     }
 
@@ -126,10 +109,7 @@ struct Historian {
 }
 
 impl Historian {
-    fn new(
-        row: usize,
-        col: usize,
-    ) -> Self {
+    fn new(row: usize, col: usize) -> Self {
         Self {
             row,
             col,
@@ -138,10 +118,7 @@ impl Historian {
         }
     }
 
-    fn walk(
-        &self,
-        map: &mut Map,
-    ) -> Vec<Historian> {
+    fn walk(&self, map: &mut Map) -> Vec<Historian> {
         let mut historians: Vec<Historian> = vec![];
         let new_score = self.score + 1;
         // top

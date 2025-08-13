@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/19.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -22,7 +22,7 @@ fn invoke(input: &str) -> String {
         .collect::<Vec<&str>>();
     //stripes.sort_by(|a, b| b.len().cmp(&a.len()));
     stripes.sort_by_key(|a| a.len());
-    println!("{:?}", stripes);
+    println!("{stripes:?}");
 
     // Filter the stripes for combinations of other stripes
     let mut filtered_stripes: Vec<&str> = vec![];
@@ -32,18 +32,18 @@ fn invoke(input: &str) -> String {
             continue;
         }
         let valid = depth_first_search(s, &stripes[(i + 1)..], 0);
-        println!("{}", valid);
+        println!("{valid}");
         if !valid {
             filtered_stripes.push(s);
         }
     }
-    println!("{:?}", filtered_stripes);
+    println!("{filtered_stripes:?}");
 
     // Check which towels we can make.
     lines.next(); // skip the empty line in the input
     let mut possible: Vec<&str> = vec![];
     for t in lines {
-        println!("Towel: {}", t);
+        println!("Towel: {t}");
         let valid = depth_first_search(t, &filtered_stripes, 0);
         if valid {
             println!("Possible");
@@ -56,9 +56,9 @@ fn invoke(input: &str) -> String {
     // now some up all the combinations for that towel
     let mut count: u32 = 0;
     for t in possible {
-        println!("Towel: {}", t);
+        println!("Towel: {t}");
         dfs_count(t, &stripes, 0, &mut count);
-        println!("{}", count);
+        println!("{count}");
     }
     count.to_string()
 }
@@ -83,12 +83,7 @@ fn depth_first_search(
     false
 }
 
-fn dfs_count(
-    towel: &str,
-    stripes: &[&str],
-    i: usize,
-    count: &mut u32,
-) {
+fn dfs_count(towel: &str, stripes: &[&str], i: usize, count: &mut u32) {
     if i == towel.len() {
         *count += 1;
         return;

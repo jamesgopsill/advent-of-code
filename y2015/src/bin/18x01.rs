@@ -7,10 +7,7 @@ fn main() {
     println!("{}", out);
 }
 
-fn invoke(
-    input: &str,
-    iterations: usize,
-) -> String {
+fn invoke(input: &str, iterations: usize) -> String {
     let lines: Vec<&str> = input.lines().collect();
     let n = lines.len();
     // Create a larger map with the outer values

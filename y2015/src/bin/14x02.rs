@@ -7,10 +7,7 @@ fn main() {
     println!("{}", out);
 }
 
-fn invoke(
-    input: &str,
-    seconds: usize,
-) -> String {
+fn invoke(input: &str, seconds: usize) -> String {
     let re = Regex::new(r"(\d+)[a-z\s/]+(\d+)[a-z\s,]+(\d+)").unwrap();
     let captures = re.captures_iter(input.trim());
     let mut distances: Vec<u32> = vec![0; seconds];

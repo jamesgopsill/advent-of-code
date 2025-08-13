@@ -6,10 +6,7 @@ fn main() {
     println!("{}", out);
 }
 
-fn invoke(
-    input: &str,
-    len: usize,
-) -> String {
+fn invoke(input: &str, len: usize) -> String {
     let mut hash: Vec<usize> = Vec::new();
     for i in 0..len {
         hash.push(i);
@@ -40,10 +37,7 @@ fn invoke(
     (hash[0] * hash[1]).to_string()
 }
 
-fn bounded_idx(
-    val: usize,
-    vlen: usize,
-) -> usize {
+fn bounded_idx(val: usize, vlen: usize) -> usize {
     if val == 0 || val == vlen - 1 {
         return val;
     }

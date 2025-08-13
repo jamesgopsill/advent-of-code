@@ -35,10 +35,7 @@ struct Matrix {
 }
 
 impl Matrix {
-    pub fn new(
-        rows: usize,
-        cols: usize,
-    ) -> Self {
+    pub fn new(rows: usize, cols: usize) -> Self {
         let mut cells: Vec<Vec<u16>> = Vec::with_capacity(rows * cols);
         for _ in 0..rows * cols {
             cells.push(Vec::new());
@@ -46,22 +43,11 @@ impl Matrix {
         Self { cells, rows }
     }
 
-    fn two_dim_to_one_dim(
-        &self,
-        row: usize,
-        col: usize,
-    ) -> usize {
+    fn two_dim_to_one_dim(&self, row: usize, col: usize) -> usize {
         (row * self.rows) + col
     }
 
-    fn add_claim(
-        &mut self,
-        id: u16,
-        row: usize,
-        col: usize,
-        width: usize,
-        height: usize,
-    ) {
+    fn add_claim(&mut self, id: u16, row: usize, col: usize, width: usize, height: usize) {
         for r in row..row + width {
             for c in col..col + height {
                 let idx = self.two_dim_to_one_dim(r, c);
@@ -70,10 +56,7 @@ impl Matrix {
         }
     }
 
-    fn no_overlap(
-        &self,
-        max_id: u16,
-    ) -> u16 {
+    fn no_overlap(&self, max_id: u16) -> u16 {
         let mut overlapping_ids: HashSet<u16> = HashSet::new();
         for cell in &self.cells {
             if cell.len() > 1 {

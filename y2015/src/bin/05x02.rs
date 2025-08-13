@@ -49,11 +49,7 @@ fn generate_regs() -> Vec<Regex> {
     regs
 }
 
-fn is_nice(
-    line: &str,
-    pairs: &Vec<String>,
-    regs: &Vec<Regex>,
-) -> bool {
+fn is_nice(line: &str, pairs: &Vec<String>, regs: &Vec<Regex>) -> bool {
     let mut contains_pair = false;
     for p in pairs {
         let m = line.matches(p);

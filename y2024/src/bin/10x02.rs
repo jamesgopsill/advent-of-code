@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/10.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -56,10 +56,7 @@ struct Trail<'a> {
 }
 
 impl<'a> Trail<'a> {
-    fn new(
-        start: [usize; 2],
-        map: &'a Vec<Vec<u32>>,
-    ) -> Self {
+    fn new(start: [usize; 2], map: &'a Vec<Vec<u32>>) -> Self {
         Self {
             start,
             map,

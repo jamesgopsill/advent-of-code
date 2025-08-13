@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/15.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -150,33 +150,19 @@ impl CharMat2 {
         Self(vec![])
     }
 
-    fn add_row(
-        &mut self,
-        row: Vec<char>,
-    ) {
+    fn add_row(&mut self, row: Vec<char>) {
         self.0.push(row);
     }
 
-    fn get_ref(
-        &self,
-        x: usize,
-        y: usize,
-    ) -> &char {
+    fn get_ref(&self, x: usize, y: usize) -> &char {
         &self.0[y][x]
     }
 
-    fn get_mut_ref(
-        &mut self,
-        x: usize,
-        y: usize,
-    ) -> &mut char {
+    fn get_mut_ref(&mut self, x: usize, y: usize) -> &mut char {
         &mut self.0[y][x]
     }
 
-    fn get_row_ref(
-        &self,
-        y: usize,
-    ) -> Vec<&char> {
+    fn get_row_ref(&self, y: usize) -> Vec<&char> {
         let mut v = vec![];
         for c in self.0[y].iter() {
             v.push(c);
@@ -184,10 +170,7 @@ impl CharMat2 {
         v
     }
 
-    fn get_mut_row_ref(
-        &mut self,
-        y: usize,
-    ) -> Vec<&mut char> {
+    fn get_mut_row_ref(&mut self, y: usize) -> Vec<&mut char> {
         let mut v: Vec<&mut char> = vec![];
         for c in self.0[y].iter_mut() {
             v.push(c);
@@ -195,10 +178,7 @@ impl CharMat2 {
         v
     }
 
-    fn get_col_ref(
-        &self,
-        x: usize,
-    ) -> Vec<&char> {
+    fn get_col_ref(&self, x: usize) -> Vec<&char> {
         let mut v = vec![];
         for c in self.0.iter() {
             v.push(&c[x]);
@@ -206,10 +186,7 @@ impl CharMat2 {
         v
     }
 
-    fn get_col_mut_ref(
-        &mut self,
-        x: usize,
-    ) -> Vec<&mut char> {
+    fn get_col_mut_ref(&mut self, x: usize) -> Vec<&mut char> {
         let mut v = vec![];
         for c in self.0.iter_mut() {
             v.push(&mut c[x]);

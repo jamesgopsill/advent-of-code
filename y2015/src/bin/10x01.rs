@@ -8,10 +8,7 @@ fn main() {
     bench_val(invoke, &input, 40);
 }
 
-fn invoke(
-    input: &str,
-    times: u64,
-) -> String {
+fn invoke(input: &str, times: u64) -> String {
     // Rust regex does not support backreferencing -> (\w)\1+
     // https://stackoverflow.com/questions/12258622/regular-expression-to-check-for-repeating-characters#12258829
     // Could use another package but I think we could group this ourselves.

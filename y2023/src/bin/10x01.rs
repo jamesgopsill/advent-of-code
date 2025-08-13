@@ -43,11 +43,7 @@ struct Tile {
 }
 
 impl Tile {
-    pub fn new(
-        row: usize,
-        col: usize,
-        char: char,
-    ) -> Self {
+    pub fn new(row: usize, col: usize, char: char) -> Self {
         Self { row, col, char }
     }
 }

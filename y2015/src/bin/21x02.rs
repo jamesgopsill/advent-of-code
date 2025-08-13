@@ -56,10 +56,7 @@ pub fn invoke(_: &str) -> String {
     0.to_string()
 }
 
-fn fight(
-    player: &mut Character,
-    boss: &mut Character,
-) -> Option<u32> {
+fn fight(player: &mut Character, boss: &mut Character) -> Option<u32> {
     player.current_hp = player.max_hp;
     boss.current_hp = boss.max_hp;
     //println!("Fight Started");
@@ -119,12 +116,7 @@ struct Character {
 }
 
 impl Character {
-    fn new(
-        weapon: Weapon,
-        armor: Armor,
-        rings: Vec<Ring>,
-        max_hp: u32,
-    ) -> Self {
+    fn new(weapon: Weapon, armor: Armor, rings: Vec<Ring>, max_hp: u32) -> Self {
         let mut s = Self {
             weapon,
             armor,
@@ -208,10 +200,7 @@ impl Character {
         }
     }
 
-    fn attack(
-        &self,
-        c: &mut Character,
-    ) {
+    fn attack(&self, c: &mut Character) {
         let damage = self.damage.checked_sub(c.defence);
         match damage {
             Some(damage) => {
@@ -225,10 +214,7 @@ impl Character {
         }
     }
 
-    fn take_damage(
-        &mut self,
-        damage: u32,
-    ) {
+    fn take_damage(&mut self, damage: u32) {
         if damage > self.current_hp {
             self.current_hp = 0;
         } else {

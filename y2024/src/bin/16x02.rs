@@ -7,7 +7,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/16.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -123,29 +123,15 @@ impl Map {
         self.0[0].len()
     }
 
-    fn get(
-        &self,
-        row: usize,
-        col: usize,
-    ) -> (char, u64) {
+    fn get(&self, row: usize, col: usize) -> (char, u64) {
         self.0[row][col]
     }
 
-    fn set_score(
-        &mut self,
-        row: usize,
-        col: usize,
-        score: u64,
-    ) {
+    fn set_score(&mut self, row: usize, col: usize, score: u64) {
         self.0[row][col].1 = score
     }
 
-    fn set_char(
-        &mut self,
-        row: usize,
-        col: usize,
-        c: char,
-    ) {
+    fn set_char(&mut self, row: usize, col: usize, c: char) {
         self.0[row][col].0 = c
     }
 
@@ -189,12 +175,7 @@ struct Reindeer {
 }
 
 impl Reindeer {
-    fn new(
-        row: usize,
-        col: usize,
-        facing: Facing,
-        score: u64,
-    ) -> Self {
+    fn new(row: usize, col: usize, facing: Facing, score: u64) -> Self {
         Self {
             row,
             col,
@@ -203,10 +184,7 @@ impl Reindeer {
         }
     }
 
-    fn next(
-        &self,
-        map: &mut Map,
-    ) -> Vec<Reindeer> {
+    fn next(&self, map: &mut Map) -> Vec<Reindeer> {
         // row, col, facing, score
         let mut moves: Vec<(usize, usize, Facing, u64)> = vec![];
         match self.facing {
@@ -258,10 +236,7 @@ impl Reindeer {
         deer
     }
 
-    fn prev(
-        &self,
-        map: &mut Map,
-    ) -> Vec<Reindeer> {
+    fn prev(&self, map: &mut Map) -> Vec<Reindeer> {
         // row, col, facing, score
         let mut moves: Vec<(usize, usize, Facing, u64)> = vec![];
         if let Some(s) = self.score.checked_sub(1) {

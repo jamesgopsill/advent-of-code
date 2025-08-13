@@ -71,10 +71,7 @@ fn invoke(input: &str) -> String {
     out.to_lowercase()
 }
 
-fn bounded_idx(
-    val: usize,
-    vlen: usize,
-) -> usize {
+fn bounded_idx(val: usize, vlen: usize) -> usize {
     if val == 0 || val == vlen - 1 {
         return val;
     }

@@ -42,10 +42,7 @@ impl Santa {
         }
     }
 
-    fn step(
-        &mut self,
-        direction: char,
-    ) {
+    fn step(&mut self, direction: char) {
         match direction {
             '^' => self.current_location[1] += 1,
             '>' => self.current_location[0] += 1,

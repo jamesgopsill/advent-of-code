@@ -55,10 +55,7 @@ impl Elf {
         }
     }
 
-    fn change_direction(
-        &mut self,
-        direction: &str,
-    ) {
+    fn change_direction(&mut self, direction: &str) {
         match self.facing {
             Direction::North => match direction {
                 "R" => self.facing = Direction::East,

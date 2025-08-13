@@ -21,10 +21,7 @@ fn invoke(input: &str) -> String {
     "".to_string()
 }
 
-fn diff(
-    a: &str,
-    b: &str,
-) -> (u32, String) {
+fn diff(a: &str, b: &str) -> (u32, String) {
     let mut common = String::new();
     let mut diff: u32 = 0;
     let a_chars = a.chars();

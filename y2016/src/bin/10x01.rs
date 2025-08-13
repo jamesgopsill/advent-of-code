@@ -9,11 +9,7 @@ fn main() {
     // bench(invoke, &input);
 }
 
-fn invoke(
-    input: &str,
-    low_chip: u32,
-    high_chip: u32,
-) -> String {
+fn invoke(input: &str, low_chip: u32, high_chip: u32) -> String {
     let bots_re = Regex::new(r"bot (\d+)").unwrap();
     let mut max_bot: usize = 0;
     for cap in bots_re.captures_iter(input) {

@@ -4,13 +4,10 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2024/22.txt").unwrap();
     let out = invoke(&input, 0);
-    println!("{}", out);
+    println!("{out}");
 }
 
-fn invoke(
-    input: &str,
-    n: u32,
-) -> String {
+fn invoke(input: &str, n: u32) -> String {
     let mut cache: HashMap<u64, u64> = HashMap::new();
     let mut ans: u64 = 0;
     for line in input.lines() {

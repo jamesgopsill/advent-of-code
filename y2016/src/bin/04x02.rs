@@ -41,10 +41,7 @@ fn invoke(input: &str) -> String {
     0.to_string()
 }
 
-fn decrypt_name(
-    code: &str,
-    number: &str,
-) {
+fn decrypt_name(code: &str, number: &str) {
     let number = number.parse::<u32>().unwrap();
     let a = 'a'.to_digit(36).unwrap();
     let mut val = String::new();

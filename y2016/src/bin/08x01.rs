@@ -7,11 +7,7 @@ fn main() {
     println!("{}", out);
 }
 
-fn invoke(
-    input: &str,
-    rows: usize,
-    cols: usize,
-) -> String {
+fn invoke(input: &str, rows: usize, cols: usize) -> String {
     let mut display = Display::new(rows, cols);
     let digits = Regex::new(r"\d+").unwrap();
     display.print();
@@ -75,10 +71,7 @@ fn invoke(
 struct Display(Vec<Vec<char>>);
 
 impl Display {
-    fn new(
-        rows: usize,
-        cols: usize,
-    ) -> Self {
+    fn new(rows: usize, cols: usize) -> Self {
         let mut mat = vec![];
         for _ in 0..rows {
             let mut row = vec![];
@@ -90,11 +83,7 @@ impl Display {
         Display(mat)
     }
 
-    fn rect(
-        &mut self,
-        rows: usize,
-        cols: usize,
-    ) {
+    fn rect(&mut self, rows: usize, cols: usize) {
         for row in 0..rows {
             for col in 0..cols {
                 self.0[row][col] = '#'
@@ -102,19 +91,11 @@ impl Display {
         }
     }
 
-    fn rotate_row(
-        &mut self,
-        row: usize,
-        n: usize,
-    ) {
+    fn rotate_row(&mut self, row: usize, n: usize) {
         self.0[row].rotate_right(n);
     }
 
-    fn rotate_col(
-        &mut self,
-        col: usize,
-        n: usize,
-    ) {
+    fn rotate_col(&mut self, col: usize, n: usize) {
         let mut tmp = vec![];
         for row in self.0.iter() {
             tmp.push(row[col]);

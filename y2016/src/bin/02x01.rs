@@ -31,10 +31,7 @@ impl PinPad {
         Self { value: 5 }
     }
 
-    fn step(
-        &mut self,
-        c: char,
-    ) {
+    fn step(&mut self, c: char) {
         match c {
             'U' => match self.value {
                 4..10 => self.value -= 3,

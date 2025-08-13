@@ -40,10 +40,7 @@ impl Elf {
         }
     }
 
-    fn walk(
-        &mut self,
-        instruction: &str,
-    ) {
+    fn walk(&mut self, instruction: &str) {
         let direction = &instruction[0..1];
         let distance = instruction[1..].parse::<i32>().unwrap();
 
