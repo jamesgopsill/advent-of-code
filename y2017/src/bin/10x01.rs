@@ -3,7 +3,7 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2017/10.txt").unwrap();
     let out = invoke(&input, 256);
-    println!("{}", out);
+    println!("{out}");
 }
 
 fn invoke(input: &str, len: usize) -> String {

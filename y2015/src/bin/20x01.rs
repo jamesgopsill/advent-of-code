@@ -4,13 +4,13 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/20.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
 fn invoke(input: &str) -> String {
     let presents = input.trim().parse::<u32>().unwrap();
-    println!("{}", presents);
+    println!("{presents}");
 
     let mut low: u32 = 1;
     let mut high: u32 = 10_000_000;
@@ -37,7 +37,7 @@ fn invoke(input: &str) -> String {
             println!("Too low");
             low = house_number;
         }
-        println!("{} {} {} {}", low, high, house_number, house_presents);
+        println!("{low} {high} {house_number} {house_presents}");
         if high == low + 2 {
             break;
         }
@@ -50,14 +50,14 @@ fn invoke(input: &str) -> String {
             low_presents += elf * 10;
         }
     }
-    println!("{} {}", low, low_presents);
+    println!("{low} {low_presents}");
     let mut high_presents = 0;
     for elf in 1..=high {
         if high % elf == 0 {
             high_presents += elf * 10;
         }
     }
-    println!("{} {}", high, high_presents);
+    println!("{high} {high_presents}");
     let mid = high - 1;
     let mut mid_presents = 0;
     for elf in 1..=mid {
@@ -65,7 +65,7 @@ fn invoke(input: &str) -> String {
             mid_presents += elf * 10;
         }
     }
-    println!("{} {}", mid, mid_presents);
+    println!("{mid} {mid_presents}");
 
     0.to_string()
 }

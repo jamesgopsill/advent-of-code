@@ -11,7 +11,7 @@ fn invoke(input: &str, n: u32) -> String {
     let mut cache: HashMap<u64, u64> = HashMap::new();
     let mut ans: u64 = 0;
     for line in input.lines() {
-        println!("{}", line);
+        println!("{line}");
         let mut secret_number = line.parse::<u64>().unwrap();
         for _i in 0..n {
             let previous_number = secret_number;

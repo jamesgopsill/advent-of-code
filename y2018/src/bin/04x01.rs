@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2018/04.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -60,7 +60,7 @@ fn invoke(input: &str) -> String {
             }
             continue;
         }
-        println!("{:?}", event);
+        println!("{event:?}");
         panic!("Should not get here.")
     }
 

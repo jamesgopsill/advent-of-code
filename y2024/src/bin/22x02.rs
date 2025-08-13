@@ -17,7 +17,7 @@ fn invoke(input: &str, n: u32) -> String {
     let mut cache: HashMap<u64, u64> = HashMap::new();
     let mut price_lists: Vec<Vec<(i8, i8)>> = vec![];
     for line in input.lines() {
-        println!("{}", line);
+        println!("{line}");
         let mut secret_number = line.parse::<u64>().unwrap();
         let mut price_list: Vec<(i8, i8)> = vec![];
         for _i in 0..n {
@@ -80,7 +80,7 @@ fn invoke(input: &str, n: u32) -> String {
     let haul = combinations
         .par_iter()
         .map(|(i, j, k, l)| {
-            println!("{} {} {} {}", i, j, k, l);
+            println!("{i} {j} {k} {l}");
             let mut bananas: u64 = 0;
             for price_list in price_lists.iter() {
                 for win in price_list.windows(4) {
@@ -96,7 +96,7 @@ fn invoke(input: &str, n: u32) -> String {
         })
         .max()
         .unwrap();
-    println!("Top Haul: {}", haul);
+    println!("Top Haul: {haul}");
     haul.to_string()
 }
 

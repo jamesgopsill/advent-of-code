@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/05.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -31,7 +31,7 @@ fn generate_pairs() -> Vec<String> {
         let a = a as char;
         for b in b'a'..=b'z' {
             let b = b as char;
-            let p = format!("{}{}", a, b);
+            let p = format!("{a}{b}");
             pairs.push(p);
         }
     }
@@ -42,7 +42,7 @@ fn generate_regs() -> Vec<Regex> {
     let mut regs = vec![];
     for a in b'a'..=b'z' {
         let a = a as char;
-        let p = format!("{}[a-z]{}", a, a);
+        let p = format!("{a}[a-z]{a}");
         let re = Regex::new(p.as_str()).unwrap();
         regs.push(re);
     }

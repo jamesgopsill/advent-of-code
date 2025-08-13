@@ -21,7 +21,7 @@ fn invoke(input: &str) -> String {
         .collect::<Vec<&str>>();
     //stripes.sort_by(|a, b| b.len().cmp(&a.len()));
     stripes.sort_by_key(|a| a.len());
-    println!("{:?}", stripes);
+    println!("{stripes:?}");
 
     // Filter the stripes for combinations of other stripes
     let mut filtered_stripes: Vec<&str> = vec![];
@@ -31,18 +31,18 @@ fn invoke(input: &str) -> String {
             continue;
         }
         let valid = depth_first_search(s, &stripes[(i + 1)..], 0);
-        println!("{}", valid);
+        println!("{valid}");
         if !valid {
             filtered_stripes.push(s);
         }
     }
-    println!("{:?}", filtered_stripes);
+    println!("{filtered_stripes:?}");
 
     // Check which towels we can make.
     lines.next(); // skip the empty line in the input
     let mut valid_count = 0;
     for t in lines {
-        println!("Towel: {}", t);
+        println!("Towel: {t}");
         let valid = depth_first_search(t, &filtered_stripes, 0);
         if valid {
             println!("Possible");

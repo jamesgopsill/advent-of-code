@@ -6,7 +6,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/15.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -25,7 +25,7 @@ fn invoke(input: &str) -> String {
         scores.pop();
         ingredient_stats.push(scores);
     }
-    println!("{:?}", ingredient_stats);
+    println!("{ingredient_stats:?}");
     // Now for the permutations of 100 into n buckets.
     let n_ingredients = ingredient_stats.len();
     let n_categories = ingredient_stats[0].len();

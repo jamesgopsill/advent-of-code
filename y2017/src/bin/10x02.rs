@@ -3,7 +3,7 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2017/10.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
 }
 
 fn invoke(input: &str) -> String {
@@ -62,7 +62,7 @@ fn invoke(input: &str) -> String {
     //println!("{:?}", dense);
 
     // Hexadecimal
-    let mut out = format!("{:02X?}", dense);
+    let mut out = format!("{dense:02X?}");
     //println!("{}", out);
     out = out.replace(" ", "");
     out = out.replace(",", "");

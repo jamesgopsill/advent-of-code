@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2023/07.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -94,7 +94,7 @@ fn invoke(input: &str) -> String {
     }
     println!("Unsorted");
     for bet in &bets {
-        println!("{:?}", bet);
+        println!("{bet:?}");
     }
 
     // Sort (in ascending order) by cards and their appearance
@@ -109,7 +109,7 @@ fn invoke(input: &str) -> String {
 
     println!("Sorted");
     for bet in &bets {
-        println!("{:?}", bet);
+        println!("{bet:?}");
     }
 
     for (i, bet) in bets.iter().enumerate() {

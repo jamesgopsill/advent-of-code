@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/04.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -15,9 +15,9 @@ fn invoke(input: &str) -> String {
         let secret = format!("{}{}", input.trim(), i);
         hasher.update(secret.as_bytes());
         let result = hasher.finalize_reset();
-        let hash = format!("{:x}", result);
+        let hash = format!("{result:x}");
         if hash.starts_with("00000") {
-            println!("{} {}", secret, hash);
+            println!("{secret} {hash}");
             return i.to_string();
         }
     }

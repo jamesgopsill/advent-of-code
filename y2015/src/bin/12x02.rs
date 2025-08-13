@@ -6,7 +6,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/12.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -55,7 +55,7 @@ fn invoke(input: &str) -> String {
             break;
         }
     }
-    println!("Reduced Json: {}", json);
+    println!("Reduced Json: {json}");
     json.trim().to_string()
 }
 

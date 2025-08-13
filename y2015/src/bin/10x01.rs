@@ -4,7 +4,7 @@ use utils::bench_val;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/10.txt").unwrap();
     let out = invoke(&input, 40);
-    println!("{}", out);
+    println!("{out}");
     bench_val(invoke, &input, 40);
 }
 
@@ -14,7 +14,7 @@ fn invoke(input: &str, times: u64) -> String {
     // Could use another package but I think we could group this ourselves.
 
     let mut sequence = input.trim().to_string();
-    println!("{}", sequence);
+    println!("{sequence}");
     for _ in 0..times {
         // Identify the groups
         let mut groups: Vec<(char, u32)> = vec![];
@@ -39,7 +39,7 @@ fn invoke(input: &str, times: u64) -> String {
         // Create the new sequence
         let mut new_sequence = String::new();
         for (char, count) in groups {
-            let count = format!("{}", count);
+            let count = format!("{count}");
             new_sequence.push_str(count.as_str());
             new_sequence.push(char);
         }

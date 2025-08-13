@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/05.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -43,7 +43,7 @@ fn is_nice(line: &str) -> bool {
 
     let mut double_char = false;
     for c in 'a'..='z' {
-        let double = format!("{}{}", c, c);
+        let double = format!("{c}{c}");
         if line.contains(double.as_str()) {
             double_char = true;
             break;

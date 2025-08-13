@@ -6,7 +6,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/09.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -57,7 +57,7 @@ fn invoke(input: &str) -> String {
     for (route, dist) in routes {
         if min_dist > dist {
             println!("New Min Dist Route");
-            println!("{:?}", route);
+            println!("{route:?}");
             min_dist = dist;
         }
     }

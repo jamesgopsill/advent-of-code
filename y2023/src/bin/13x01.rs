@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2023/13.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -26,7 +26,7 @@ fn invoke(input: &str) -> String {
     let pattern = Pattern::new(tmp.clone());
     patterns.push(pattern);
     tmp.clear();
-    println!("{:?}", patterns);
+    println!("{patterns:?}");
     for pattern in patterns {
         let mirror_index = pattern.row_reflection();
         match mirror_index {

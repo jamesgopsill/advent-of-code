@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2016/04.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -55,7 +55,7 @@ fn decrypt_name(code: &str, number: &str) {
         let c = char::from_digit(d, 36).unwrap();
         val.push(c);
     }
-    println!("{} {}", val, number);
+    println!("{val} {number}");
 }
 
 #[cfg(test)]
@@ -64,7 +64,7 @@ mod tests {
 
     #[test]
     fn test_a() {
-        let _ = decrypt_name("qzmt-zixmtkozy-ivhz-", "343");
+        decrypt_name("qzmt-zixmtkozy-ivhz-", "343");
         assert_eq!(true, true);
     }
 }

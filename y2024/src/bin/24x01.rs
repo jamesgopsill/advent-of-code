@@ -18,7 +18,7 @@ fn invoke(input: &str) -> String {
     let caps = re.captures_iter(input);
     for cap in caps {
         let var = cap.get(0).unwrap().as_str();
-        println!("{}", var);
+        println!("{var}");
         if ["AND", "XOR", "OR"].contains(&var) {
             continue;
         }
@@ -34,7 +34,7 @@ fn invoke(input: &str) -> String {
     for cap in caps {
         let var = cap.get(1).unwrap().as_str();
         let val = cap.get(2).unwrap().as_str().parse::<u8>().unwrap();
-        println!("{} {}", var, val);
+        println!("{var} {val}");
         wires.insert(var, Some(val));
     }
 
@@ -48,7 +48,7 @@ fn invoke(input: &str) -> String {
         let op = cap.get(2).unwrap().as_str();
         let rhs = cap.get(3).unwrap().as_str();
         let out = cap.get(4).unwrap().as_str();
-        println!("{} {} {} {}", lhs, op, rhs, out);
+        println!("{lhs} {op} {rhs} {out}");
         instructions.push((lhs, op, rhs, out));
     }
 
@@ -108,7 +108,7 @@ fn invoke(input: &str) -> String {
 
     let mut bits = "".to_string();
     for i in (0..99).rev() {
-        let key = format!("z{:0>2}", i);
+        let key = format!("z{i:0>2}");
         // println!("{}", key);
         if let Some(v) = wires.get(key.as_str()) {
             match v {
@@ -118,9 +118,9 @@ fn invoke(input: &str) -> String {
             }
         }
     }
-    println!("{}", bits);
+    println!("{bits}");
     let digit = isize::from_str_radix(bits.as_str(), 2).unwrap();
-    println!("{}", digit);
+    println!("{digit}");
 
     digit.to_string()
 }

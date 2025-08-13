@@ -2,7 +2,6 @@ use itertools::Itertools;
 use std::{
     collections::{HashMap, HashSet},
     fs,
-    thread::park,
 };
 //use utils::bench;
 
@@ -12,7 +11,7 @@ use std::{
 fn main() {
     let input = fs::read_to_string("puzzle_data/2017/07.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     //bench(invoke, &input);
 }
 
@@ -77,7 +76,7 @@ impl<'a> Tower<'a> {
         let mut child_pids = vec![];
         for (_, v) in self.tower.iter() {
             if v.children.is_empty() {
-                child_pids.push(v.pid.clone())
+                child_pids.push(v.pid)
             }
         }
         child_pids
@@ -149,8 +148,8 @@ fn invoke(input: &str) -> String {
             next_level_nodes.push(parent);
         }
         if sums.len() > 1 {
-            println!("Error Found At Level {}", level);
-            println!("{:?}", sums);
+            println!("Error Found At Level {level}");
+            println!("{sums:?}");
             break;
         } else {
             nodes = next_level_nodes;

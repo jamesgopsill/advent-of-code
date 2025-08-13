@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2016/01.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -23,7 +23,7 @@ fn invoke(input: &str) -> String {
             let v = format!("{}_{}", elf.x, elf.y);
             if visited.contains(&v) {
                 // visited twice
-                println!("Visited {} twice", v);
+                println!("Visited {v} twice");
                 return elf.distance().to_string();
             }
             visited.push(v);

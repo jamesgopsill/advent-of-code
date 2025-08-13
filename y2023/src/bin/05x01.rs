@@ -23,7 +23,7 @@ fn invoke(input: &str) -> String {
         .find_iter(lines[0])
         .map(|f| f.as_str().parse::<u64>().unwrap())
         .collect();
-    println!("Seeds: {:?}", seeds);
+    println!("Seeds: {seeds:?}");
 
     let mut maps: Vec<Vec<MapRange>> = vec![];
     let mut map: Vec<MapRange> = vec![];
@@ -40,15 +40,15 @@ fn invoke(input: &str) -> String {
             .find_iter(line)
             .map(|f| f.as_str().parse::<u64>().unwrap())
             .collect();
-        println!("{:?}", line);
-        println!("{:?}", range);
+        println!("{line:?}");
+        println!("{range:?}");
         let map_range = MapRange {
             from_lower: range[1],
             to_lower: range[0],
             from_upper: range[1] + range[2] - 1,
         };
         map.push(map_range);
-        println!("{}", line)
+        println!("{line}")
     }
     maps.push(map.clone());
 
@@ -64,7 +64,7 @@ fn invoke(input: &str) -> String {
                 }
             }
         }
-        println!("From: {}, To: {}", seed, location);
+        println!("From: {seed}, To: {location}");
         if location < loc {
             loc = location
         }

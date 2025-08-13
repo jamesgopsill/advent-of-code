@@ -19,7 +19,7 @@ fn invoke(input: &str, blink: u64) -> String {
                 new_stones.push(1);
                 continue;
             }
-            let s = format!("{}", stone);
+            let s = format!("{stone}");
             if s.len() % 2 == 0 {
                 let (left, right) = s.split_at(s.len() / 2);
                 new_stones.push(left.parse::<u64>().unwrap());

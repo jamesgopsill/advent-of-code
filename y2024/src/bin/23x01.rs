@@ -16,12 +16,12 @@ fn invoke(input: &str) -> String {
         links.push((right, left));
     }
 
-    println!("{:?}", links);
+    println!("{links:?}");
 
     let mut cliques = vec![];
     traverse(vec![], &links, &mut cliques);
     println!("Cliques: {}", cliques.len());
-    println!("{:?}", cliques);
+    println!("{cliques:?}");
 
     let mut ans: u32 = 0;
     for clique in cliques {
@@ -90,7 +90,7 @@ fn traverse<'a>(
                 let mut chain = chain.clone();
                 chain.push(left);
                 chain.push(right);
-                println!("Starting: {} {:?}", i, chain);
+                println!("Starting: {i} {chain:?}");
                 traverse(chain, links, cliques);
             }
         }

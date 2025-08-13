@@ -4,7 +4,7 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2016/08.txt").unwrap();
     let out = invoke(&input, 50, 6);
-    println!("{}", out);
+    println!("{out}");
 }
 
 fn invoke(input: &str, rows: usize, cols: usize) -> String {
@@ -102,16 +102,16 @@ impl Display {
         }
         tmp.rotate_right(n);
         for (i, c) in tmp.iter().enumerate() {
-            self.0[i][col] = c.clone();
+            self.0[i][col] = *c;
         }
     }
 
     fn print(&self) {
         for row in self.0.iter() {
             for c in row {
-                print!("{}", c);
+                print!("{c}");
             }
-            println!("");
+            println!();
         }
     }
 }

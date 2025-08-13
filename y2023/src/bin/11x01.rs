@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2023/11.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -62,7 +62,7 @@ impl Universe {
     pub fn print_image(&self) {
         for row in &self.image {
             for char in row {
-                print!("{}", char);
+                print!("{char}");
             }
             println!();
         }

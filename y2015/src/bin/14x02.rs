@@ -4,7 +4,7 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/14.txt").unwrap();
     let out = invoke(&input, 2503);
-    println!("{}", out);
+    println!("{out}");
 }
 
 fn invoke(input: &str, seconds: usize) -> String {
@@ -18,7 +18,7 @@ fn invoke(input: &str, seconds: usize) -> String {
         let speed = reindeer.get(1).unwrap().as_str().parse::<u32>().unwrap();
         let flying = reindeer.get(2).unwrap().as_str().parse::<u32>().unwrap();
         let resting = reindeer.get(3).unwrap().as_str().parse::<u32>().unwrap();
-        println!("{} {} {}", speed, flying, resting);
+        println!("{speed} {flying} {resting}");
 
         // TODO: Revise the scoring
         let mut distance = 0;
@@ -61,7 +61,7 @@ fn invoke(input: &str, seconds: usize) -> String {
             scores[leader] += 1;
         }
     }
-    println!("{:?}", scores);
+    println!("{scores:?}");
     scores.iter().max().unwrap().clone().to_string()
 }
 

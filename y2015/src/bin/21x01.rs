@@ -8,7 +8,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/21.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -62,7 +62,7 @@ fn invoke(_: &str) -> String {
         }
     }
 
-    println!("Cheapest Setup: {}", cost);
+    println!("Cheapest Setup: {cost}");
 
     /*
     let mut player = Player::new(Weapon::Shortsword, 8);

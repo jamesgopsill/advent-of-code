@@ -4,7 +4,7 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/17.txt").unwrap();
     let out = invoke(&input, 150);
-    println!("{}", out);
+    println!("{out}");
 }
 
 fn invoke(input: &str, liters: u32) -> String {

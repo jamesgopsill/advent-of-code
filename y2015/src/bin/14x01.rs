@@ -4,7 +4,7 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/14.txt").unwrap();
     let out = invoke(&input, 2503);
-    println!("{}", out);
+    println!("{out}");
 }
 
 fn invoke(input: &str, seconds: u32) -> String {
@@ -15,7 +15,7 @@ fn invoke(input: &str, seconds: u32) -> String {
         let speed = reindeer.get(1).unwrap().as_str().parse::<u32>().unwrap();
         let flying = reindeer.get(2).unwrap().as_str().parse::<u32>().unwrap();
         let resting = reindeer.get(3).unwrap().as_str().parse::<u32>().unwrap();
-        println!("{} {} {}", speed, flying, resting);
+        println!("{speed} {flying} {resting}");
 
         let mut action = Action::Flying;
         let mut time_remaining = seconds;
@@ -43,7 +43,7 @@ fn invoke(input: &str, seconds: u32) -> String {
                 }
             }
         }
-        println!("{}", distance);
+        println!("{distance}");
         if distance > max_distance {
             max_distance = distance;
         }

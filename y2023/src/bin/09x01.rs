@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2023/09.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -16,7 +16,7 @@ fn invoke(input: &str) -> String {
             .split_whitespace()
             .map(|v| v.parse::<i32>().unwrap())
             .collect();
-        let mut line_sum = current_values.last().unwrap().clone();
+        let mut line_sum = *current_values.last().unwrap();
         let mut next_values: Vec<i32> = vec![];
 
         // dbg!(&current_values);

@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2023/07.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -62,9 +62,9 @@ impl Bet {
                 }
             }
             map.insert(joker_should_be, occurrence + n_jokers);
-            modified_hand = modified_hand.replace("J", format!("{}", joker_should_be).as_str());
+            modified_hand = modified_hand.replace("J", format!("{joker_should_be}").as_str());
         }
-        println!("Modified Hand: {}", modified_hand);
+        println!("Modified Hand: {modified_hand}");
 
         // Work out the hand type.
         let mut hand_type: u32 = 0;

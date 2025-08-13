@@ -6,7 +6,7 @@ use utils::bench_val;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/11.txt").unwrap();
     let out = invoke(&input, 25);
-    println!("{}", out);
+    println!("{out}");
     bench_val(invoke, &input, 25);
 }
 
@@ -17,12 +17,12 @@ fn invoke(input: &str, n: u64) -> String {
     // Placing an arbitrary limit to exit
     let mut found: u32 = 0;
     let max_iter = 1_000_000;
-    println!("Finding {} passwords", n);
+    println!("Finding {n} passwords");
     for i in 0..max_iter {
         // println!("{}", password);
         let valid = is_valid_password(password.as_str());
         if valid {
-            println!("Next password: {} {}", i, password);
+            println!("Next password: {i} {password}");
             found += 1;
             if found == n {
                 break;
@@ -52,7 +52,7 @@ fn increment_char(password: &mut String, idx: usize) -> bool {
         let mut byte = c as u8;
         byte += 1;
         let new_c = byte as char;
-        let new_c = format!("{}", new_c);
+        let new_c = format!("{new_c}");
         password.replace_range(idx..(idx + 1), new_c.as_str());
         false
     }

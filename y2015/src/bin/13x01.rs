@@ -7,7 +7,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/13.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -36,7 +36,7 @@ fn invoke(input: &str) -> String {
         guests.push(*key);
     }
     let n_guests = guests.len();
-    println!("Guests: {}", n_guests);
+    println!("Guests: {n_guests}");
 
     // Calculate the scores for all the permutations
     let permutations = guests.into_iter().permutations(n_guests);
@@ -54,7 +54,7 @@ fn invoke(input: &str) -> String {
         happiness += relationships.get(a).unwrap().get(b).unwrap();
         happiness += relationships.get(b).unwrap().get(a).unwrap();
         if happiness > max_happiness {
-            println!("{:?} {}", permutation, happiness);
+            println!("{permutation:?} {happiness}");
             max_happiness = happiness;
         }
     }

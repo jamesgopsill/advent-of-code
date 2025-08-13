@@ -47,9 +47,9 @@ fn invoke(input: &str) -> String {
         .map(|f| f.trim().parse::<u32>().unwrap())
         .collect::<Vec<u32>>();
     let mut computer = Computer::new(register_a, register_b, register_c, program);
-    println!("{:?}", computer);
+    println!("{computer:?}");
     computer.run();
-    println!("{:?}", computer);
+    println!("{computer:?}");
     let joined = Itertools::join(&mut computer.out.iter(), ",");
     joined
 }

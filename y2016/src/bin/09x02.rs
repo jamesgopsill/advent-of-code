@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2016/09.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -43,7 +43,7 @@ fn decompressed_length(incoming: Vec<char>) -> u64 {
                     buffer.push(*iter.next().unwrap());
                 }
                 let l = decompressed_length(buffer.clone());
-                println!("return: {}", l);
+                println!("return: {l}");
                 for _ in 0..repeats {
                     len += l;
                 }
@@ -55,7 +55,7 @@ fn decompressed_length(incoming: Vec<char>) -> u64 {
             _ => {
                 buffer.push(*c);
                 len += 1;
-                println!("{} {}", c, len);
+                println!("{c} {len}");
             }
         }
     }

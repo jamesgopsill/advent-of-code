@@ -40,7 +40,7 @@ fn invoke(input: &str, blink: u64) -> String {
                 continue;
             }
             // Rule 2
-            let s = format!("{}", stone_number);
+            let s = format!("{stone_number}");
             if s.len() % 2 == 0 {
                 let (left, right) = s.split_at(s.len() / 2);
                 let left = left.parse::<u64>().unwrap();

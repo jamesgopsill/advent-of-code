@@ -47,10 +47,10 @@ fn invoke(input: &str) -> String {
                 }
             }
             if fit {
-                println!("{:?} {:?} Fit", lock, key);
+                println!("{lock:?} {key:?} Fit");
                 fits += 1;
             } else {
-                println!("{:?} {:?} Overlap", lock, key);
+                println!("{lock:?} {key:?} Overlap");
             }
         }
     }

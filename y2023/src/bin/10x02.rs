@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2023/10.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -377,7 +377,7 @@ impl Elf {
     pub fn print_map(&self) {
         for row in &self.map {
             for char in row {
-                print!("{}", char);
+                print!("{char}");
             }
             println!();
         }

@@ -53,7 +53,7 @@ fn invoke(input: &str) -> String {
         for j in 0..col_max {
             let (obs, score) = map.get(i, j);
             if obs == 'E' {
-                println!("{} {}", obs, score);
+                println!("{obs} {score}");
                 ans = score;
             }
         }

@@ -89,60 +89,60 @@ fn invoke(input: &str) -> String {
                 count += 1;
                 // top
                 if i == 0 {
-                    if horizontals.contains_key(&i) {
-                        horizontals.get_mut(&i).unwrap().push(j);
+                    if let std::collections::hash_map::Entry::Vacant(e) = horizontals.entry(i) {
+                        e.insert(vec![j]);
                     } else {
-                        horizontals.insert(i, vec![j]);
+                        horizontals.get_mut(&i).unwrap().push(j);
                     }
                 } else if garden[i - 1][j] != garden[i][j] {
-                    if horizontals.contains_key(&i) {
-                        horizontals.get_mut(&i).unwrap().push(j);
+                    if let std::collections::hash_map::Entry::Vacant(e) = horizontals.entry(i) {
+                        e.insert(vec![j]);
                     } else {
-                        horizontals.insert(i, vec![j]);
+                        horizontals.get_mut(&i).unwrap().push(j);
                     }
                 }
                 // bottom
                 let below = i + 1;
                 if i == rows_max - 1 {
-                    if horizontals.contains_key(&below) {
-                        horizontals.get_mut(&below).unwrap().push(j);
+                    if let std::collections::hash_map::Entry::Vacant(e) = horizontals.entry(below) {
+                        e.insert(vec![j]);
                     } else {
-                        horizontals.insert(below, vec![j]);
+                        horizontals.get_mut(&below).unwrap().push(j);
                     }
                 } else if garden[below][j] != garden[i][j] {
-                    if horizontals.contains_key(&below) {
-                        horizontals.get_mut(&below).unwrap().push(j);
+                    if let std::collections::hash_map::Entry::Vacant(e) = horizontals.entry(below) {
+                        e.insert(vec![j]);
                     } else {
-                        horizontals.insert(below, vec![j]);
+                        horizontals.get_mut(&below).unwrap().push(j);
                     }
                 }
                 // left
                 if j == 0 {
-                    if verticals.contains_key(&j) {
-                        verticals.get_mut(&j).unwrap().push(i);
+                    if let std::collections::hash_map::Entry::Vacant(e) = verticals.entry(j) {
+                        e.insert(vec![i]);
                     } else {
-                        verticals.insert(j, vec![i]);
+                        verticals.get_mut(&j).unwrap().push(i);
                     }
                 } else if garden[i][j - 1] != garden[i][j] {
-                    if verticals.contains_key(&j) {
-                        verticals.get_mut(&j).unwrap().push(i);
+                    if let std::collections::hash_map::Entry::Vacant(e) = verticals.entry(j) {
+                        e.insert(vec![i]);
                     } else {
-                        verticals.insert(j, vec![i]);
+                        verticals.get_mut(&j).unwrap().push(i);
                     }
                 }
                 // right
                 let right = j + 1;
                 if j == cols_max - 1 {
-                    if verticals.contains_key(&right) {
-                        verticals.get_mut(&right).unwrap().push(i);
+                    if let std::collections::hash_map::Entry::Vacant(e) = verticals.entry(right) {
+                        e.insert(vec![i]);
                     } else {
-                        verticals.insert(right, vec![i]);
+                        verticals.get_mut(&right).unwrap().push(i);
                     }
                 } else if garden[i][right] != garden[i][j] {
-                    if verticals.contains_key(&right) {
-                        verticals.get_mut(&right).unwrap().push(i);
+                    if let std::collections::hash_map::Entry::Vacant(e) = verticals.entry(right) {
+                        e.insert(vec![i]);
                     } else {
-                        verticals.insert(right, vec![i]);
+                        verticals.get_mut(&right).unwrap().push(i);
                     }
                 }
 

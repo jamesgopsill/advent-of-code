@@ -4,7 +4,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2016/02.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -62,10 +62,7 @@ impl PinPad {
 
     fn step(&mut self, c: char) {
         match self.pin {
-            Pin::One => match c {
-                'D' => self.pin = Pin::Three,
-                _ => {}
-            },
+            Pin::One => if c == 'D' { self.pin = Pin::Three },
             Pin::Two => match c {
                 'R' => self.pin = Pin::Three,
                 'D' => self.pin = Pin::Six,
@@ -83,10 +80,7 @@ impl PinPad {
                 'D' => self.pin = Pin::Eight,
                 _ => {}
             },
-            Pin::Five => match c {
-                'R' => self.pin = Pin::Six,
-                _ => {}
-            },
+            Pin::Five => if c == 'R' { self.pin = Pin::Six },
             Pin::Six => match c {
                 'R' => self.pin = Pin::Seven,
                 'L' => self.pin = Pin::Five,
@@ -108,10 +102,7 @@ impl PinPad {
                 'U' => self.pin = Pin::Four,
                 _ => {}
             },
-            Pin::Nine => match c {
-                'L' => self.pin = Pin::Eight,
-                _ => {}
-            },
+            Pin::Nine => if c == 'L' { self.pin = Pin::Eight },
             Pin::A => match c {
                 'R' => self.pin = Pin::B,
                 'U' => self.pin = Pin::Six,
@@ -129,10 +120,7 @@ impl PinPad {
                 'U' => self.pin = Pin::Eight,
                 _ => {}
             },
-            Pin::D => match c {
-                'U' => self.pin = Pin::B,
-                _ => {}
-            },
+            Pin::D => if c == 'U' { self.pin = Pin::B },
         };
     }
 }

@@ -33,7 +33,7 @@ fn invoke(input: &str) -> String {
         }
     }
 
-    println!("Robot Starting Location: {:?}", robot);
+    println!("Robot Starting Location: {robot:?}");
     let x_max = map.0[0].len();
     let y_max = map.0.len();
 
@@ -197,9 +197,9 @@ impl CharMat2 {
     fn print(&self) {
         for row in self.0.iter() {
             for c in row {
-                print!("{}", c);
+                print!("{c}");
             }
-            println!("");
+            println!();
         }
     }
 }

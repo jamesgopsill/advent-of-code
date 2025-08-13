@@ -30,7 +30,7 @@ fn invoke(input: &str, x_max: i32, y_max: i32) -> String {
 
     for i in 1..10_000 {
         if i % 1_000 == 0 {
-            println!("{}", i);
+            println!("{i}");
         }
         for r in robots.iter_mut() {
             r.walk();
@@ -103,7 +103,7 @@ fn invoke(input: &str, x_max: i32, y_max: i32) -> String {
             if v > 100 {
                 let mut path = PathBuf::new();
                 path.push("images");
-                path.push(format!("walk_{}.svg", i));
+                path.push(format!("walk_{i}.svg"));
                 draw_map(&robots, path);
             }
         }

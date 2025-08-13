@@ -5,7 +5,7 @@ use std::fs;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2016/10.txt").unwrap();
     let out = invoke(&input, 17, 61);
-    println!("{}", out);
+    println!("{out}");
     // bench(invoke, &input);
 }
 
@@ -19,7 +19,7 @@ fn invoke(input: &str, low_chip: u32, high_chip: u32) -> String {
         }
     }
 
-    println!("Max Bots: {}", max_bot);
+    println!("Max Bots: {max_bot}");
 
     let outputs_re = Regex::new(r"output (\d+)").unwrap();
     let mut max_output: usize = 0;
@@ -30,13 +30,13 @@ fn invoke(input: &str, low_chip: u32, high_chip: u32) -> String {
         }
     }
 
-    println!("Max Outputs: {}", max_output);
+    println!("Max Outputs: {max_output}");
 
     let mut outputs = vec![Output::default(); max_output + 1];
     let mut bots = vec![Bot::default(); max_bot + 1];
 
     for line in input.lines() {
-        println!("{}", line);
+        println!("{line}");
         if line.starts_with("b") {
             let tokens: Vec<&str> = line.split_whitespace().collect();
             let id = tokens[1].parse::<usize>().unwrap();
@@ -44,13 +44,13 @@ fn invoke(input: &str, low_chip: u32, high_chip: u32) -> String {
             match tokens[5] {
                 "output" => bot.low_kind = Kind::Output,
                 "bot" => bot.low_kind = Kind::Bot,
-                s => panic!("Whoops, got {}", s),
+                s => panic!("Whoops, got {s}"),
             };
             bot.low_idx = tokens[6].parse::<usize>().unwrap();
             match tokens[10] {
                 "output" => bot.high_kind = Kind::Output,
                 "bot" => bot.high_kind = Kind::Bot,
-                s => panic!("Whoops, got {}", s),
+                s => panic!("Whoops, got {s}"),
             };
             bot.high_idx = tokens[11].parse::<usize>().unwrap();
             continue;

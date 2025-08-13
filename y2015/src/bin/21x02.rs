@@ -8,7 +8,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/13.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -39,19 +39,19 @@ pub fn invoke(_: &str) -> String {
 
     let mut cost: u32 = 0;
     for (i, p) in players.iter_mut().enumerate() {
-        println!("{}", i);
+        println!("{i}");
         for b in bosses.iter_mut() {
             let c = fight(p, b);
             if c.is_some() {
                 let c = c.unwrap();
-                println!("I just spent £{}", c);
+                println!("I just spent £{c}");
                 if c > cost {
                     cost = c;
                 }
             }
         }
     }
-    println!("Most Expensive Fight: £{}", cost);
+    println!("Most Expensive Fight: £{cost}");
 
     0.to_string()
 }

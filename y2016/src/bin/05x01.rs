@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2016/05.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -13,13 +13,13 @@ fn invoke(input: &str) -> String {
     let mut password: String = String::new();
     let mut n: u32 = 0;
     let input = input.trim();
-    println!("{}", input);
+    println!("{input}");
     let mut hasher = Md5::new();
     for i in 0..9_999_999 {
-        let secret = format!("{}{}", input, i);
+        let secret = format!("{input}{i}");
         hasher.update(secret.as_bytes());
         let result = hasher.finalize_reset();
-        let hash = format!("{:x}", result);
+        let hash = format!("{result:x}");
         if hash.starts_with("00000") {
             println!("Found One");
             let letter = &hash[5..6];

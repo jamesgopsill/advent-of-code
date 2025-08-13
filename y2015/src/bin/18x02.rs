@@ -4,7 +4,7 @@ use std::mem::swap;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/18.txt").unwrap();
     let out = invoke(&input, 100);
-    println!("{}", out);
+    println!("{out}");
 }
 
 fn invoke(input: &str, iterations: usize) -> String {

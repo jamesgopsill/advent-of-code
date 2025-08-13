@@ -31,7 +31,7 @@ fn invoke(input: &str) -> String {
 
     let ans: u32 = 0;
     for (_num, code) in codes {
-        println!("{:?}", code);
+        println!("{code:?}");
 
         // Value
 
@@ -55,7 +55,7 @@ fn invoke(input: &str) -> String {
 
         //let cmds = keypad_cmds(code);
         println!("Options: {}", cmds.len());
-        println!("{:?}", cmds);
+        println!("{cmds:?}");
 
         // Robot one
         /*
@@ -141,7 +141,7 @@ fn generate_cmd_options(current: char, next: char) -> Vec<Vec<char>> {
     let combinations = cmd_set.iter().permutations(cmd_set.len());
     let mut valid_patterns: Vec<Vec<char>> = vec![];
     for combination in combinations {
-        let mut p = current.clone();
+        let mut p = *current;
         let mut valid = true;
         for c in combination.iter() {
             match c {

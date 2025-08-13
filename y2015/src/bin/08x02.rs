@@ -5,7 +5,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/08.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -17,17 +17,17 @@ fn invoke(input: &str) -> String {
     let quote = Regex::new(r#"""#).unwrap();
     for line in input.lines() {
         let literal = backslash.replace_all(line, "\\\\");
-        let literal = format!("{}", literal);
+        let literal = format!("{literal}");
         let literal = literal.as_str();
 
         let rep = r#"\""#;
         let literal = quote.replace_all(literal, rep);
-        let literal = format!("\"{}\"", literal);
+        let literal = format!("\"{literal}\"");
         let literal = literal.as_str();
 
         let original_chars = line.len() as u32;
         let encoded_chars = literal.len() as u32;
-        println!("{} {} {} {}", line, original_chars, literal, encoded_chars);
+        println!("{line} {original_chars} {literal} {encoded_chars}");
         encoded_total += encoded_chars;
         original_total += original_chars;
     }

@@ -6,7 +6,7 @@ use utils::bench;
 fn main() {
     let input = fs::read_to_string("puzzle_data/2015/19.txt").unwrap();
     let out = invoke(&input);
-    println!("{}", out);
+    println!("{out}");
     bench(invoke, &input);
 }
 
@@ -37,7 +37,7 @@ fn invoke(input: &str) -> String {
         //println!("{} {:?}", k, idxs);
         for idx in idxs {
             for r in v {
-                println!("{} {}", k, r);
+                println!("{k} {r}");
                 let mut m = molecule.clone();
                 m.replace_range(idx..idx + k.len(), r);
                 molecules.push(m);

@@ -115,7 +115,7 @@ impl Map {
                 } else if *c == u32::MAX - 1 {
                     print!("(!!)");
                 } else {
-                    print!("({})", c);
+                    print!("({c})");
                 }
             }
             println!();
