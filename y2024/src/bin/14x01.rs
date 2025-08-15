@@ -63,9 +63,7 @@ fn invoke(input: &str, x_max: i32, y_max: i32) -> String {
     }
 
     println!("----");
-    println!(
-        "{top_left} {top_right}\n{bottom_left} {bottom_right}"
-    );
+    println!("{top_left} {top_right}\n{bottom_left} {bottom_right}");
     let safety_factor = top_left * top_right * bottom_left * bottom_right;
     safety_factor.to_string()
 }

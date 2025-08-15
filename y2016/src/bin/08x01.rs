@@ -1,5 +1,5 @@
 use regex::Regex;
-use std::fs;
+use std::{fs, iter::repeat_n};
 
 fn main() {
     let input = fs::read_to_string("puzzle_data/2016/08.txt").unwrap();
@@ -75,9 +75,7 @@ impl Display {
         let mut mat = vec![];
         for _ in 0..rows {
             let mut row = vec![];
-            for _ in 0..cols {
-                row.push('.');
-            }
+            row.extend(repeat_n('.', cols));
             mat.push(row);
         }
         Display(mat)

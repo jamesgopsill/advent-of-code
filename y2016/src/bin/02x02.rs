@@ -62,7 +62,11 @@ impl PinPad {
 
     fn step(&mut self, c: char) {
         match self.pin {
-            Pin::One => if c == 'D' { self.pin = Pin::Three },
+            Pin::One => {
+                if c == 'D' {
+                    self.pin = Pin::Three
+                }
+            }
             Pin::Two => match c {
                 'R' => self.pin = Pin::Three,
                 'D' => self.pin = Pin::Six,
@@ -80,7 +84,11 @@ impl PinPad {
                 'D' => self.pin = Pin::Eight,
                 _ => {}
             },
-            Pin::Five => if c == 'R' { self.pin = Pin::Six },
+            Pin::Five => {
+                if c == 'R' {
+                    self.pin = Pin::Six
+                }
+            }
             Pin::Six => match c {
                 'R' => self.pin = Pin::Seven,
                 'L' => self.pin = Pin::Five,
@@ -102,7 +110,11 @@ impl PinPad {
                 'U' => self.pin = Pin::Four,
                 _ => {}
             },
-            Pin::Nine => if c == 'L' { self.pin = Pin::Eight },
+            Pin::Nine => {
+                if c == 'L' {
+                    self.pin = Pin::Eight
+                }
+            }
             Pin::A => match c {
                 'R' => self.pin = Pin::B,
                 'U' => self.pin = Pin::Six,
@@ -120,7 +132,11 @@ impl PinPad {
                 'U' => self.pin = Pin::Eight,
                 _ => {}
             },
-            Pin::D => if c == 'U' { self.pin = Pin::B },
+            Pin::D => {
+                if c == 'U' {
+                    self.pin = Pin::B
+                }
+            }
         };
     }
 }

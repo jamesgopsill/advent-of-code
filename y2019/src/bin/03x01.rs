@@ -1,9 +1,5 @@
-#![allow(unused)]
-use std::{
-    collections::{HashMap, HashSet},
-    fs,
-};
-use utils::bench;
+use std::collections::HashMap;
+//use utils::bench;
 
 fn main() {
     let input = include_str!("../../../puzzle_data/2019/03.txt");
@@ -13,12 +9,20 @@ fn main() {
 }
 
 fn invoke(input: &str) -> String {
-    let mut grid: HashMap<(i64, i64), HashSet<u64>> = HashMap::new();
+    let mut grid: HashMap<(i64, i64), [bool; 2]> = HashMap::new();
+
+    let mut update_grid = |loc: (i64, i64), id: usize| {
+        if let Some(cell) = grid.get_mut(&loc) {
+            cell[id] = true;
+        } else {
+            let mut cell = [false, false];
+            cell[id] = true;
+            grid.insert(loc, cell);
+        }
+    };
 
     let wires = input.lines();
-    let mut id = 0;
-    for wire in wires {
-        id += 1;
+    for (wid, wire) in wires.enumerate() {
         let path = wire.split(",");
         // Ignore indicating the first value as this is
         // where they start.
@@ -29,51 +33,27 @@ fn invoke(input: &str) -> String {
             let val: u64 = chars.as_str().parse().unwrap();
             match dir {
                 'U' => {
-                    for i in (1..=val) {
+                    for _i in 1..=val {
                         loc.1 += 1;
-                        if let Some(cell) = grid.get_mut(&loc) {
-                            cell.insert(id);
-                        } else {
-                            let mut set = HashSet::new();
-                            set.insert(id);
-                            grid.insert(loc, set);
-                        }
+                        update_grid(loc, wid);
                     }
                 }
                 'D' => {
-                    for i in (1..=val) {
+                    for _i in 1..=val {
                         loc.1 -= 1;
-                        if let Some(cell) = grid.get_mut(&loc) {
-                            cell.insert(id);
-                        } else {
-                            let mut set = HashSet::new();
-                            set.insert(id);
-                            grid.insert(loc, set);
-                        }
+                        update_grid(loc, wid);
                     }
                 }
                 'R' => {
-                    for i in (1..=val) {
+                    for _i in 1..=val {
                         loc.0 += 1;
-                        if let Some(cell) = grid.get_mut(&loc) {
-                            cell.insert(id);
-                        } else {
-                            let mut set = HashSet::new();
-                            set.insert(id);
-                            grid.insert(loc, set);
-                        }
+                        update_grid(loc, wid);
                     }
                 }
                 'L' => {
-                    for i in (1..=val) {
+                    for _i in 1..=val {
                         loc.0 -= 1;
-                        if let Some(cell) = grid.get_mut(&loc) {
-                            cell.insert(id);
-                        } else {
-                            let mut set = HashSet::new();
-                            set.insert(id);
-                            grid.insert(loc, set);
-                        }
+                        update_grid(loc, wid);
                     }
                 }
                 _ => {
@@ -85,8 +65,8 @@ fn invoke(input: &str) -> String {
 
     // Find the overlaps and compute the manhatten distance.
     let mut closest = u64::MAX;
-    for (loc, set) in grid.iter() {
-        if set.len() == 2 {
+    for (loc, cell) in grid.iter() {
+        if cell[0] && cell[1] {
             let manhatten = (loc.0.abs() + loc.1.abs()) as u64;
             if manhatten < closest {
                 closest = manhatten;

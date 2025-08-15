@@ -33,7 +33,11 @@ impl PinPad {
 
     fn step(&mut self, c: char) {
         match c {
-            'U' => if let 4..10 = self.value { self.value -= 3 },
+            'U' => {
+                if let 4..10 = self.value {
+                    self.value -= 3
+                }
+            }
             'R' => match self.value {
                 1..3 => self.value += 1,
                 3 => {}
@@ -42,7 +46,11 @@ impl PinPad {
                 7..9 => self.value += 1,
                 _ => {}
             },
-            'D' => if let 1..7 = self.value { self.value += 3 },
+            'D' => {
+                if let 1..7 = self.value {
+                    self.value += 3
+                }
+            }
             'L' => match self.value {
                 2..4 => self.value -= 1,
                 4 => {}
