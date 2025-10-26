@@ -5,3 +5,5 @@ edition = "2024"
 
 [dependencies]
 utils = { path = "../utils" }
+itertools = "0.13.0"
+tokio = { version = "1", features = ["full"] }
