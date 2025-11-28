@@ -1,5 +1,3 @@
-use std::usize;
-
 fn main() {
     let input = include_str!("../../../puzzle_data/2019/08.txt");
     let out = invoke(input);
