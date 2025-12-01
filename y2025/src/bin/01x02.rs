@@ -17,6 +17,9 @@ fn invoke(input: &str) -> String {
             'L' => {
                 for _ in 0..rotate {
                     position -= 1;
+                    if position == 0 {
+                        password += 1;
+                    }
                     if position == -1 {
                         position = 99;
                     }
@@ -26,14 +29,12 @@ fn invoke(input: &str) -> String {
                 for _ in 0..rotate {
                     position += 1;
                     if position == 100 {
-                        position = 0
+                        position = 0;
+                        password += 1;
                     }
                 }
             }
             _ => panic!("Should not get here."),
-        }
-        if position == 0 {
-            password += 1;
         }
     }
     password.to_string()
@@ -56,6 +57,6 @@ L99
 R14
 L82";
         let result = invoke(input);
-        assert_eq!(result, "3");
+        assert_eq!(result, "6");
     }
 }
