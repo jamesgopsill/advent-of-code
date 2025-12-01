@@ -8,36 +8,28 @@ fn main() {
 }
 
 fn invoke(input: &str) -> String {
-    let mut password = 0;
-    let mut position: i32 = 50;
+    let mut pwd: i32 = 0;
+    let mut pos: i32 = 50;
     let lines = input.trim().lines();
     for line in lines {
-        let rotate: i32 = line[1..].parse().unwrap();
+        let rot: i32 = line[1..].parse().unwrap();
+        let quo = rot.div_euclid(100).abs();
+        pwd += quo;
+        let rem = rot % 100;
         match line.chars().next().unwrap() {
-            'L' => {
-                for _ in 0..rotate {
-                    position -= 1;
-                    if position == 0 {
-                        password += 1;
-                    }
-                    if position == -1 {
-                        position = 99;
-                    }
-                }
-            }
-            'R' => {
-                for _ in 0..rotate {
-                    position += 1;
-                    if position == 100 {
-                        position = 0;
-                        password += 1;
-                    }
-                }
-            }
-            _ => panic!("Should not get here."),
+            'L' => pos += rem,
+            'R' => pos -= rem,
+            _ => panic!("Should not get here"),
+        }
+        if pos == 0 {
+            pwd += 1
+        } else {
+            let quo = pos.div_euclid(100).abs();
+            pwd += quo;
+            pos %= 100;
         }
     }
-    password.to_string()
+    pwd.to_string()
 }
 
 #[cfg(test)]
