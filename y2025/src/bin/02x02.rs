@@ -20,6 +20,10 @@ fn invoke(input: &str) -> String {
             if s.len() == 1 {
                 continue;
             }
+            // So we're going to start with an empty pattern.
+            // Increment it by one of the chars in the value.
+            // Then we check if this pattern makes up the rest
+            // of the string.
             let mut pat = String::new();
             for c in s.chars() {
                 pat.push(c);

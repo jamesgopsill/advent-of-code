@@ -8,17 +8,23 @@ fn main() {
 }
 
 fn invoke(input: &str) -> String {
+    // Parse the ranges from the string
     let ranges = input.split(',');
+    // Create a vec to store our invalid ids
     let mut invalid_ids: Vec<u64> = Vec::new();
     for range in ranges {
+        // Get the min, max in the range
         let (min, max) = range.split_once('-').unwrap();
         let min: u64 = min.parse().unwrap();
         let max: u64 = max.parse().unwrap();
-        for id in min..max + 1 {
+        for id in min..=max {
+            // Turn it into a string
             let s = id.to_string();
+            // Ignore if an odd length as we cannot repeat.
             if s.len() % 2 != 0 {
                 continue;
             }
+            // Split in the middle and check if they are equal
             let (left, right) = s.split_at(s.len() / 2);
             if left == right {
                 invalid_ids.push(id);
