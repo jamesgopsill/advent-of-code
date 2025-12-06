@@ -5,6 +5,7 @@ fn main() {
 }
 
 fn invoke(input: &str) -> String {
+    // Gather the ranges
     let lines = input.lines();
     let mut ranges: Vec<Range> = Vec::new();
     for line in lines {
@@ -14,31 +15,34 @@ fn invoke(input: &str) -> String {
         let (left, right) = line.split_once("-").unwrap();
         let left: u64 = left.parse().unwrap();
         let right: u64 = right.parse().unwrap();
-        /*
         if left >= right {
-            panic!("Left {left} >= Right {right}")
+            println!("Left {left} >= Right {right}")
         }
-        */
         ranges.push(Range::new(left, right));
     }
 
-    // Iterate and merge the ranges.
-    let mut count = ranges.len();
-    loop {
-        println!("{:?}", ranges);
-        ranges = merge(ranges);
-        // Check if the ranges could no longer be merged.
-        if count == ranges.len() {
-            break;
-        } else {
-            count = ranges.len();
-        }
-    }
+    // Sort the ranges
+    ranges.sort_by_key(|r| r.right);
+    ranges.sort_by_key(|r| r.left);
 
-    // count the ids
+    // Iterate through either extending or moving
+    // to the next range.
     let mut sum = 0;
+    let mut id = 0;
     for r in ranges {
-        sum += r.right - r.left + 1;
+        if r.right <= id {
+            // already passed it
+            continue;
+        }
+        // If we're jumping a gap
+        if r.left > id {
+            sum += r.right - r.left + 1;
+            id = r.right;
+        } else {
+            // we're extending the existing range.
+            sum += r.right - id;
+            id = r.right;
+        }
     }
 
     sum.to_string()
@@ -54,46 +58,6 @@ impl Range {
     fn new(left: u64, right: u64) -> Self {
         Self { left, right }
     }
-}
-
-fn merge(ranges: Vec<Range>) -> Vec<Range> {
-    let mut new_range: Vec<Range> = Vec::new();
-    for pri_range in ranges {
-        let mut merged = false;
-        // Checks if a prior range can be merged with another.
-        for cur_range in new_range.iter_mut() {
-            // If contained within another.
-            /*
-            if pri_range.left >= cur_range.left && pri_range.right <= cur_range.right {
-                consumed = true;
-                break;
-            }
-            */
-            // If the left is within a range and the right extends it.
-            if pri_range.left >= cur_range.left
-                && pri_range.left <= cur_range.right
-                && pri_range.right >= cur_range.right
-            {
-                cur_range.right = pri_range.right;
-                merged = true;
-                break;
-            }
-            // If the right is within a range and the left extends its.
-            if pri_range.right <= cur_range.right
-                && pri_range.right >= cur_range.left
-                && pri_range.left <= cur_range.left
-            {
-                cur_range.left = pri_range.left;
-                merged = true;
-                break;
-            }
-        }
-        // Added if not consumed.
-        if !merged {
-            new_range.push(pri_range);
-        }
-    }
-    new_range
 }
 
 #[cfg(test)]
