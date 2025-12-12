@@ -5,4 +5,5 @@ edition = "2024"
 
 [dependencies]
 regex = "1.10.6"
+itertools = "0.14.0"
 utils = { path = "../utils" }
